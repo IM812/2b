@@ -24,7 +24,7 @@ export async function generateMetadata({
   }
 }
 
-const CASE_IMAGES = ['/images/case-document-system.png', '/images/case-integration.png']
+const CASE_IMAGES = ['/images/editorial-documents.png', '/images/editorial-flight-ops.png', '/images/editorial-datacenter.png']
 
 export default async function ProjectDetailPage({
   params,
@@ -41,16 +41,16 @@ export default async function ProjectDetailPage({
 
   return (
     <>
-      <section className="border-b border-border bg-foreground py-20 text-background md:py-28">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="border-b border-border bg-background py-20 text-foreground md:py-32">
+        <div className="mx-auto max-w-[90rem] px-6">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 text-sm font-medium text-background/70 transition-colors hover:text-background"
+            className="inline-flex items-center gap-2 text-sm font-medium text-foreground/65 transition-colors hover:text-background"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
             Все проекты
           </Link>
-          <div className="mt-8 flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-wide text-background/60">
+          <div className="mt-8 flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-wide text-foreground/50">
             <span>{project.industry}</span>
             {project.contractValue && (
               <>
@@ -59,11 +59,11 @@ export default async function ProjectDetailPage({
               </>
             )}
           </div>
-          <h1 className="mt-5 max-w-4xl text-3xl font-semibold leading-tight text-balance md:text-5xl">
+          <h1 className="mt-7 max-w-6xl text-balance text-5xl font-semibold leading-[0.94] md:text-8xl">
             {project.title}
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-background/70">{project.summary}</p>
-          <p className="mt-8 text-sm font-medium text-background/80">{project.client}</p>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-foreground/65">{project.summary}</p>
+          <p className="mt-8 text-sm font-medium text-foreground/80">{project.client}</p>
         </div>
       </section>
 

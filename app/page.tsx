@@ -4,10 +4,7 @@ import { Competencies } from '@/components/home/competencies'
 import { FlagshipProjects } from '@/components/home/flagship-projects'
 import { Stats } from '@/components/home/stats'
 import { Process } from '@/components/home/process'
-import { TechExpertise } from '@/components/home/tech-expertise'
 import { Industries } from '@/components/home/industries'
-import { WhyUs } from '@/components/home/why-us'
-import { Legacy } from '@/components/home/legacy'
 import { AboutPreview } from '@/components/home/about-preview'
 import { ContactCta } from '@/components/home/contact-cta'
 
@@ -20,10 +17,7 @@ export default function HomePage() {
       <FlagshipProjects />
       <Stats />
       <Process />
-      <TechExpertise />
       <Industries />
-      <WhyUs />
-      <Legacy />
       <AboutPreview />
       <ContactCta />
     </>

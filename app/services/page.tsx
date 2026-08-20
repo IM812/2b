@@ -17,8 +17,9 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="Решения и услуги"
-        title="Комплексные ИТ-проекты для крупных организаций"
+        title="Система целиком. Не набор подрядчиков."
         description="От обследования бизнес-процессов и проектирования решения до внедрения, интеграции, технической поддержки и развития системы."
+        image="/images/editorial-engineer.png"
       />
 
       <section className="border-b border-border bg-background">
@@ -42,7 +43,7 @@ export default function ServicesPage() {
                 </div>
                 <ul className="grid gap-3 sm:grid-cols-2">
                   {item.details.map((detail) => (
-                    <li key={detail} className="flex items-start gap-3 rounded-md border border-border p-4">
+                    <li key={detail} className="flex items-start gap-3 border-t border-border py-4">
                       <Check className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
                       <span className="text-sm leading-relaxed text-foreground">{detail}</span>
                     </li>

@@ -1,19 +1,18 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Unbounded, Inter, IBM_Plex_Mono } from 'next/font/google'
+import { Manrope, Literata, IBM_Plex_Mono } from 'next/font/google'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import './globals.css'
 
-const _unbounded = Unbounded({
+const _manrope = Manrope({
   subsets: ['latin', 'cyrillic'],
-  weight: ['500', '600', '700', '800'],
-  variable: '--font-unbounded',
+  variable: '--font-manrope',
 })
 
-const _inter = Inter({
+const _literata = Literata({
   subsets: ['latin', 'cyrillic'],
-  variable: '--font-inter',
+  variable: '--font-literata',
 })
 
 const _plexMono = IBM_Plex_Mono({
@@ -60,7 +59,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${_unbounded.variable} ${_inter.variable} ${_plexMono.variable} bg-background`}
+      className={`${_manrope.variable} ${_literata.variable} ${_plexMono.variable} bg-background`}
     >
       <body className="antialiased font-sans">
         <SiteHeader />

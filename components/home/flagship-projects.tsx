@@ -2,66 +2,43 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { PROJECTS } from '@/lib/content'
-import { SectionHeading } from '@/components/section-heading'
 
 export function FlagshipProjects() {
-  const featured = PROJECTS.slice(0, 2)
-
   return (
-    <section className="bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <SectionHeading
-            eyebrow="Проекты"
-            title="Реализуем проекты федерального масштаба"
-            className="md:mr-8"
-          />
-          <Link
-            href="/projects"
-            className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-foreground hover:text-primary"
-          >
-            Все проекты
-            <ArrowUpRight className="size-4" aria-hidden="true" />
+    <section className="overflow-hidden bg-background py-24 md:py-36">
+      <div className="mx-auto max-w-[90rem] px-4 md:px-8">
+        <div className="flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">Избранные проекты</p>
+            <h2 className="mt-5 max-w-4xl text-balance text-5xl font-semibold leading-[0.92] md:text-8xl">
+              Результат виден
+              <span className="block font-serif font-normal italic text-foreground/48">в масштабе.</span>
+            </h2>
+          </div>
+          <Link href="/projects" className="group inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.12em]">
+            Все кейсы <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {featured.map((project) => (
+        <div className="mt-16 flex snap-x gap-5 overflow-x-auto pb-6 [scrollbar-width:none] md:gap-8">
+          {PROJECTS.map((project, index) => (
             <Link
               key={project.slug}
               href={`/projects/${project.slug}`}
-              className="group relative flex min-h-[26rem] flex-col justify-end overflow-hidden"
+              className="group min-w-[86vw] snap-start md:min-w-[42rem]"
             >
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/75 to-background/10" />
-              <div className="relative flex flex-col p-7">
-                <p className="font-mono text-xs uppercase tracking-wider text-primary">
-                  {project.industry}
-                </p>
-                <h3 className="mt-3 text-2xl font-semibold leading-tight text-foreground">
-                  {project.clientShort}
-                </h3>
-                <p className="mt-2 text-base font-medium text-foreground/90">{project.title}</p>
-                <div className="mt-6 flex items-center justify-between border-t border-foreground/15 pt-4">
-                  {project.contractValue ? (
-                    <span className="text-sm font-semibold text-primary">
-                      Стоимость договора — {project.contractValue}
-                    </span>
-                  ) : (
-                    <span className="text-sm font-semibold text-muted-foreground">
-                      Действующий договор
-                    </span>
-                  )}
-                  <ArrowUpRight
-                    className="size-4 text-muted-foreground transition-colors group-hover:text-primary"
-                    aria-hidden="true"
-                  />
+              <div className={`relative overflow-hidden ${index % 2 === 0 ? 'aspect-[4/3]' : 'aspect-[3/2] md:mt-20'}`}>
+                <Image src={index === 0 ? '/images/editorial-documents.png' : index === 1 ? '/images/editorial-flight-ops.png' : '/images/editorial-datacenter.png'} alt={project.title} fill sizes="(min-width: 768px) 42rem, 86vw" className="object-cover grayscale-[12%] transition-transform duration-700 group-hover:scale-[1.035]" />
+                <div className="film-grain absolute inset-0" />
+                <span className="absolute left-5 top-5 bg-background/85 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] backdrop-blur">{project.industry}</span>
+                {project.contractValue && <span className="absolute bottom-5 right-5 font-serif text-3xl italic text-primary md:text-5xl">{project.contractValue}</span>}
+              </div>
+              <div className="flex items-start justify-between gap-5 border-t border-foreground/18 pt-5">
+                <div>
+                  <p className="text-sm text-foreground/52">{project.clientShort}</p>
+                  <h3 className="mt-2 max-w-xl text-balance text-xl font-semibold leading-tight md:text-3xl">{project.title}</h3>
                 </div>
+                <ArrowUpRight className="mt-1 size-5 shrink-0 text-primary transition-transform group-hover:rotate-45" />
               </div>
             </Link>
           ))}

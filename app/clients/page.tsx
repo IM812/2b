@@ -28,6 +28,7 @@ export default function ClientsPage() {
         eyebrow="Клиенты"
         title="Доверие крупнейших авиационных компаний страны"
         description="Мы работаем с организациями, для которых непрерывность корпоративных систем — часть непрерывности всего бизнеса."
+        image="/images/editorial-flight-ops.png"
       />
 
       <section className="border-b border-border bg-background py-20 md:py-28">

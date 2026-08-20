@@ -14,6 +14,7 @@ export default function ContactsPage() {
         eyebrow="Контакты"
         title="Обсудим ваш проект"
         description="Расскажите о задаче — мы вернемся с предложением по подходу, срокам и составу команды."
+        image="/images/editorial-documents.png"
       />
 
       <section className="border-b border-border bg-background py-20 md:py-28">

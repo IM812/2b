@@ -29,6 +29,7 @@ export default function CareersPage() {
         eyebrow="Карьера"
         title="Работайте над системами, которые нельзя остановить"
         description="Мы собираем команду инженеров, аналитиков и руководителей проектов для работы с корпоративными информационными системами крупнейших организаций страны."
+        image="/images/editorial-workshop.png"
       />
 
       <section className="border-b border-border bg-background py-20 md:py-28">

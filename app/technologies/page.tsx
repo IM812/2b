@@ -16,6 +16,7 @@ export default function TechnologiesPage() {
         eyebrow="Технологии и экспертиза"
         title="Технологическая база для устойчивых корпоративных систем"
         description="Компетенции, накопленные на проектах для крупнейших авиационных и транспортных заказчиков страны — от документооборота до отказоустойчивой интеграционной архитектуры."
+        image="/images/editorial-datacenter.png"
       />
 
       <section className="border-b border-border bg-background py-20 md:py-28">
@@ -54,7 +55,7 @@ export default function TechnologiesPage() {
         <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="relative aspect-[4/3] overflow-hidden border border-border bg-card">
             <Image
-              src="/images/case-integration.png"
+              src="/images/editorial-datacenter.png"
               alt="Схема интеграционной архитектуры корпоративных систем"
               fill
               className="object-cover"

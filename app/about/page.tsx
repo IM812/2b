@@ -35,6 +35,7 @@ export default function AboutPage() {
         eyebrow="О компании"
         title="Технологический партнер для комплексных корпоративных ИТ-проектов"
         description="2В Сервис — российская компания, специализирующаяся на внедрении, развитии и технической поддержке корпоративных информационных систем для крупных организаций."
+        image="/images/editorial-workshop.png"
       />
 
       <section className="border-b border-border bg-background py-20 md:py-28">
@@ -57,7 +58,7 @@ export default function AboutPage() {
           </div>
           <div className="relative aspect-[4/3] overflow-hidden border border-border bg-card">
             <Image
-              src="/images/about-architecture.png"
+              src="/images/editorial-engineer.png"
               alt="Схема многоуровневой архитектуры корпоративных систем"
               fill
               className="object-cover"

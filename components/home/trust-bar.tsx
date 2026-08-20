@@ -1,21 +1,16 @@
-const CLIENTS = ['ПАО «Аэрофлот»', 'АО «Авиакомпания «Россия»']
+const ITEMS = ['Аэрофлот', 'Авиакомпания «Россия»', '326,4 млн ₽', 'Enterprise-системы', 'Поддержка 24/7']
 
 export function TrustBar() {
+  const repeated = [...ITEMS, ...ITEMS]
   return (
-    <section className="bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
-        <div className="flex flex-col gap-5 border-t border-foreground/10 pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground">
-            Нам доверяют реализацию критичных ИТ-проектов
-          </p>
-          <ul className="flex flex-wrap gap-x-10 gap-y-3">
-            {CLIENTS.map((client) => (
-              <li key={client} className="font-heading text-lg font-medium text-foreground md:text-xl">
-                {client}
-              </li>
-            ))}
-          </ul>
-        </div>
+    <section className="overflow-hidden border-y border-foreground/15 bg-primary py-4 text-primary-foreground" aria-label="Ключевые факты">
+      <div className="marquee-track flex w-max items-center">
+        {repeated.map((item, index) => (
+          <div key={`${item}-${index}`} className="flex items-center">
+            <span className="px-8 font-serif text-2xl italic md:px-14 md:text-4xl">{item}</span>
+            <span className="size-1.5 rounded-full bg-primary-foreground" aria-hidden="true" />
+          </div>
+        ))}
       </div>
     </section>
   )
