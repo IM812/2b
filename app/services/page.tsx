@@ -19,7 +19,6 @@ export default function ServicesPage() {
         eyebrow="Решения и услуги"
         title="Система целиком. Не набор подрядчиков."
         description="От обследования бизнес-процессов и проектирования решения до внедрения, интеграции, технической поддержки и развития системы."
-        image="/images/editorial-engineer.png"
       />
 
       <section className="border-b border-border bg-background">

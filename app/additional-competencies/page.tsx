@@ -15,7 +15,6 @@ export default function AdditionalCompetenciesPage() {
         eyebrow="Дополнительные компетенции"
         title="Сервисы, накопленные за годы работы с корпоративными заказчиками"
         description="Помимо основной специализации на корпоративных информационных системах, мы сохраняем и развиваем компетенции, сформированные на предыдущих этапах работы компании."
-        image="/images/editorial-documents.png"
       />
 
       <section className="border-b border-border bg-background py-20 md:py-28">

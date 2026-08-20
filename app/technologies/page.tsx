@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import { PageHero } from '@/components/page-hero'
+import { SystemVisual } from '@/components/system-visual'
 import { SectionHeading } from '@/components/section-heading'
 import { TECH_AREAS, INDUSTRIES, PROCESS_STEPS } from '@/lib/content'
 
@@ -16,7 +16,6 @@ export default function TechnologiesPage() {
         eyebrow="Технологии и экспертиза"
         title="Технологическая база для устойчивых корпоративных систем"
         description="Компетенции, накопленные на проектах для крупнейших авиационных и транспортных заказчиков страны — от документооборота до отказоустойчивой интеграционной архитектуры."
-        image="/images/editorial-datacenter.png"
       />
 
       <section className="border-b border-border bg-background py-20 md:py-28">
@@ -53,14 +52,7 @@ export default function TechnologiesPage() {
 
       <section className="border-b border-border bg-secondary py-20 md:py-28">
         <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div className="relative aspect-[4/3] overflow-hidden border border-border bg-card">
-            <Image
-              src="/images/editorial-datacenter.png"
-              alt="Схема интеграционной архитектуры корпоративных систем"
-              fill
-              className="object-cover"
-            />
-          </div>
+          <SystemVisual light className="min-h-[28rem]" />
           <div>
             <SectionHeading eyebrow="Отрасли" title="Отрасли, в которых мы работаем" align="left" />
             <div className="mt-10 grid gap-8 sm:grid-cols-2">

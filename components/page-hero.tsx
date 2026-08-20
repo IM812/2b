@@ -1,27 +1,26 @@
-import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { SystemVisual } from '@/components/system-visual'
 
 type PageHeroProps = {
   eyebrow: string
   title: string
   description?: string
   className?: string
-  image?: string
 }
 
-export function PageHero({ eyebrow, title, description, className, image = '/images/editorial-datacenter.png' }: PageHeroProps) {
+export function PageHero({ eyebrow, title, description, className }: PageHeroProps) {
   return (
     <section className={cn('overflow-hidden bg-background', className)}>
-      <div className="mx-auto grid max-w-[90rem] gap-8 px-4 py-10 md:px-8 md:py-16 lg:grid-cols-[1.15fr_.85fr] lg:items-end">
-        <div className="pb-4 pt-10 lg:pb-12 lg:pt-20">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">{eyebrow}</p>
-          <h1 className="mt-7 max-w-5xl text-balance text-[clamp(3.2rem,7vw,7rem)] font-semibold leading-[0.88]">{title}</h1>
-          {description && <p className="mt-8 max-w-2xl border-t border-foreground/20 pt-6 text-base leading-relaxed text-foreground/62 md:text-lg">{description}</p>}
+      <div className="mx-auto grid max-w-[90rem] gap-10 px-4 py-12 md:px-8 md:py-20 lg:grid-cols-[1.1fr_.9fr] lg:items-end">
+        <div className="pb-5 pt-10 lg:pb-14 lg:pt-20">
+          <div className="flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            <span className="h-px w-10 bg-primary" aria-hidden="true" />
+            {eyebrow}
+          </div>
+          <h1 className="mt-8 max-w-5xl text-balance text-[clamp(3rem,7vw,6.8rem)] font-semibold leading-[0.9]">{title}</h1>
+          {description && <p className="mt-8 max-w-2xl border-t border-foreground/16 pt-6 text-base leading-relaxed text-foreground/62 md:text-lg">{description}</p>}
         </div>
-        <div className="relative aspect-[4/3] overflow-hidden lg:aspect-[3/4]">
-          <Image src={image} alt="" fill priority sizes="(min-width: 1024px) 40vw, 100vw" className="reveal-image object-cover grayscale-[15%]" />
-          <div className="film-grain absolute inset-0" />
-        </div>
+        <SystemVisual className="reveal-image lg:min-h-[32rem]" />
       </div>
     </section>
   )

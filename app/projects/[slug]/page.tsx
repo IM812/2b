@@ -24,7 +24,7 @@ export async function generateMetadata({
   }
 }
 
-const CASE_IMAGES = ['/images/editorial-documents.png', '/images/editorial-flight-ops.png', '/images/editorial-datacenter.png']
+const CASE_IMAGE = '/images/editorial-documents.png'
 
 export default async function ProjectDetailPage({
   params,
@@ -37,7 +37,7 @@ export default async function ProjectDetailPage({
   if (!project) notFound()
 
   const next = PROJECTS[(index + 1) % PROJECTS.length]
-  const image = CASE_IMAGES[index % CASE_IMAGES.length]
+  const image = CASE_IMAGE
 
   return (
     <>
