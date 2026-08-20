@@ -16,10 +16,10 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:h-20 md:px-8">
         <Link
           href="/"
-          className="flex items-center gap-2 font-sans text-base font-bold tracking-tight text-foreground md:text-lg"
+          className="flex items-center gap-2.5 font-heading text-base font-medium tracking-tight text-foreground md:text-lg"
           onClick={() => setOpen(false)}
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-foreground font-mono text-xs font-medium text-background">
+          <span className="flex h-8 w-8 items-center justify-center bg-primary font-mono text-xs font-medium text-primary-foreground">
             2В
           </span>
           <span className="hidden sm:inline">{COMPANY_NAME}</span>
@@ -43,7 +43,7 @@ export function SiteHeader() {
         <div className="hidden items-center lg:flex">
           <Link
             href="/contacts"
-            className="inline-flex items-center gap-1.5 rounded-sm bg-accent px-4 py-2.5 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+            className="inline-flex items-center gap-1.5 bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
           >
             Обсудить проект
             <ArrowUpRight className="size-4" aria-hidden="true" />
@@ -85,7 +85,7 @@ export function SiteHeader() {
           <Link
             href="/contacts"
             onClick={() => setOpen(false)}
-            className="mt-4 flex items-center justify-center gap-1.5 rounded-sm bg-accent px-4 py-3 text-sm font-semibold text-accent-foreground"
+            className="mt-4 flex items-center justify-center gap-1.5 bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
           >
             Обсудить проект
             <ArrowUpRight className="size-4" aria-hidden="true" />

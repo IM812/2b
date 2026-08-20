@@ -27,16 +27,16 @@ export function SectionHeading({
     >
       <p
         className={cn(
-          'font-mono text-xs uppercase tracking-wider',
-          invert ? 'text-accent' : 'text-accent',
+          'font-mono text-xs uppercase tracking-[0.15em]',
+          invert ? 'text-[oklch(0.45_0.19_253)]' : 'text-primary',
         )}
       >
         {eyebrow}
       </p>
       <h2
         className={cn(
-          'mt-3 max-w-2xl text-balance text-3xl font-bold leading-tight tracking-tight md:text-4xl',
-          invert ? 'text-background' : 'text-foreground',
+          'mt-3 max-w-2xl text-balance text-3xl font-semibold leading-[1.05] tracking-tight md:text-5xl',
+          invert ? 'text-surface-foreground' : 'text-foreground',
         )}
       >
         {title}
@@ -45,7 +45,7 @@ export function SectionHeading({
         <p
           className={cn(
             'mt-4 max-w-2xl text-pretty text-base leading-relaxed',
-            invert ? 'text-background/70' : 'text-muted-foreground',
+            invert ? 'text-surface-foreground/70' : 'text-muted-foreground',
           )}
         >
           {description}

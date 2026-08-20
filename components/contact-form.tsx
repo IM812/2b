@@ -19,11 +19,11 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="flex flex-col items-start gap-3 rounded-md border border-border bg-background p-8">
-        <span className="flex size-10 items-center justify-center rounded-full bg-accent text-accent-foreground">
+      <div className="flex flex-col items-start gap-3 bg-secondary p-8">
+        <span className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
           <Check className="size-5" aria-hidden="true" />
         </span>
-        <h3 className="text-lg font-semibold text-foreground">Заявка отправлена</h3>
+        <h3 className="font-heading text-lg font-medium text-foreground">Заявка отправлена</h3>
         <p className="text-sm leading-relaxed text-muted-foreground">
           Спасибо! Мы свяжемся с вами в ближайшее время для обсуждения проекта.
         </p>
@@ -32,7 +32,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-md border border-border bg-background p-8">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 bg-secondary p-8">
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-1.5">
           <label htmlFor="name" className="text-sm font-medium text-foreground">
@@ -105,7 +105,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-sm bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
+        className="mt-2 inline-flex items-center justify-center gap-1.5 bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
       >
         {pending ? 'Отправка…' : 'Отправить заявку'}
         {!pending && <ArrowUpRight className="size-4" aria-hidden="true" />}

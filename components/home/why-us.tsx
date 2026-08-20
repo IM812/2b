@@ -23,16 +23,18 @@ const REASONS = [
 
 export function WhyUs() {
   return (
-    <section className="border-b border-border bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-24">
+    <section className="bg-background">
+      <div className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28">
         <SectionHeading eyebrow="Почему 2В Сервис" title="Надёжность вместо рекламного креатива" />
 
-        <div className="mt-12 grid gap-x-10 gap-y-10 md:grid-cols-2">
+        <div className="mt-14 grid gap-x-10 gap-y-10 md:grid-cols-2">
           {REASONS.map((reason) => (
             <div key={reason.title} className="flex gap-5">
-              <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+              <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-primary" aria-hidden="true" />
               <div>
-                <h3 className="text-base font-semibold leading-snug text-foreground">{reason.title}</h3>
+                <h3 className="font-heading text-base font-medium leading-snug text-foreground">
+                  {reason.title}
+                </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{reason.description}</p>
               </div>
             </div>
