@@ -1,10 +1,25 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { Manrope, IBM_Plex_Mono } from 'next/font/google'
+import { SiteHeader } from '@/components/site-header'
+import { SiteFooter } from '@/components/site-footer'
 import './globals.css'
 
+const _manrope = Manrope({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-manrope',
+})
+
+const _plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-plex-mono',
+})
+
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: '2В Сервис — Корпоративные информационные системы',
+  description:
+    '2В Сервис — российская технологическая компания, специализирующаяся на внедрении, развитии и сопровождении корпоративных информационных систем для крупных организаций.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -27,9 +42,10 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'light dark',
+  userScalable: true,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f1115' },
   ],
 }
 
@@ -39,9 +55,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
-        {children}
+    <html lang="ru" className={`${_manrope.variable} ${_plexMono.variable} bg-background`}>
+      <body className="antialiased font-sans">
+        <SiteHeader />
+        <main>{children}</main>
+        <SiteFooter />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
