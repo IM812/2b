@@ -3,8 +3,8 @@ import { NAV_ITEMS, COMPANY_NAME } from '@/lib/nav'
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-foreground/10 bg-[oklch(0.11_0.012_262)] text-foreground">
-      <div className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
+    <footer className="border-t border-surface-foreground/15 bg-surface text-surface-foreground">
+      <div className="mx-auto max-w-[90rem] px-4 py-14 md:px-8 md:py-20">
         <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
           <div>
             <Link href="/" className="flex items-center gap-2.5 font-heading text-lg font-medium tracking-tight">

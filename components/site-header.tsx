@@ -12,14 +12,14 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 border-b border-foreground/10 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-[90rem] items-center justify-between px-4 md:h-20 md:px-8">
+    <header className="sticky top-0 z-50 border-b border-foreground/20 bg-background/90 backdrop-blur-xl">
+      <div className="mx-auto flex h-14 max-w-[90rem] items-center justify-between px-4 md:h-16 md:px-8">
         <Link
           href="/"
           className="flex items-center gap-3 text-foreground"
           onClick={() => setOpen(false)}
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-foreground/30 font-mono text-[11px] font-medium">
+          <span className="flex h-8 w-8 items-center justify-center bg-foreground font-mono text-[10px] font-medium text-background">
             2В
           </span>
           <span className="hidden text-sm font-semibold uppercase tracking-[0.16em] sm:inline">{COMPANY_NAME}</span>
@@ -31,7 +31,7 @@ export function SiteHeader() {
               key={item.href}
               href={item.href}
               className={cn(
-                'text-sm font-medium text-muted-foreground transition-colors hover:text-foreground',
+                'font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-foreground',
                 pathname === item.href && 'text-foreground',
               )}
             >
@@ -43,7 +43,7 @@ export function SiteHeader() {
         <div className="hidden items-center lg:flex">
           <Link
             href="/contacts"
-            className="inline-flex items-center gap-1.5 bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+            className="inline-flex items-center gap-2 bg-primary px-4 py-2.5 font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:bg-foreground"
           >
             Обсудить проект
             <ArrowUpRight className="size-4" aria-hidden="true" />
