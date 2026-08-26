@@ -1,28 +1,32 @@
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { CORE_COMPETENCIES } from '@/lib/content'
 
 export function Competencies() {
   return (
-    <section id="capabilities" className="bg-background py-20 md:py-28">
-      <div className="mx-auto max-w-[90rem] px-4 md:px-8">
-        <div className="grid gap-8 border-b border-border pb-10 lg:grid-cols-[.7fr_1.3fr]">
-          <p className="text-sm font-semibold text-primary">Направления работы</p>
+    <section id="capabilities" className="section-pad bg-background">
+      <div className="section-shell">
+        <div className="grid gap-8 lg:grid-cols-[.45fr_1fr] lg:gap-20">
           <div>
-            <h2 className="max-w-4xl text-balance text-4xl font-semibold leading-tight md:text-6xl">От инфраструктуры до корпоративных систем</h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">Одна команда отвечает за проектирование, внедрение, эксплуатацию и развитие ИТ-среды.</p>
+            <p className="eyebrow text-primary">Экспертиза</p>
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">Единая ответственность за все уровни цифровой среды.</p>
+          </div>
+          <div>
+            <h2 className="section-title max-w-4xl">Технологии должны работать на бизнес, а не требовать внимания.</h2>
+            <div className="mt-14 grid gap-px overflow-hidden rounded-md bg-border md:grid-cols-2">
+              {CORE_COMPETENCIES.slice(0, 6).map((item) => (
+                <article key={item.title} className="group min-h-64 bg-card p-7 transition-colors hover:bg-secondary md:p-9">
+                  <div className="flex items-start justify-between gap-6">
+                    <h3 className="max-w-sm text-2xl font-semibold leading-tight tracking-[-0.03em]">{item.title}</h3>
+                    <ArrowUpRight className="size-5 shrink-0 text-primary transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" aria-hidden="true" />
+                  </div>
+                  <p className="mt-8 max-w-md text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                </article>
+              ))}
+            </div>
+            <Link href="/services" className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-foreground">Все направления <ArrowUpRight className="size-4" /></Link>
           </div>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3">
-          {CORE_COMPETENCIES.map((item, index) => (
-            <article key={item.title} className="border-b border-border p-6 first:pl-0 md:border-r md:p-8 md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0">
-              <span className="text-xs font-semibold text-primary">{String(index + 1).padStart(2, '0')}</span>
-              <h3 className="mt-8 text-2xl font-semibold leading-tight">{item.title}</h3>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-            </article>
-          ))}
-        </div>
-        <Link href="/services" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-foreground">Все услуги <ArrowRight className="size-4" /></Link>
       </div>
     </section>
   )

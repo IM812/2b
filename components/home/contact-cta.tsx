@@ -1,12 +1,15 @@
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 
 export function ContactCta() {
   return (
-    <section className="border-t border-border bg-primary text-primary-foreground">
-      <div className="mx-auto flex max-w-[90rem] flex-col gap-10 px-4 py-20 md:px-8 md:py-28 lg:flex-row lg:items-end lg:justify-between">
-        <div><p className="text-sm font-semibold text-primary-foreground/70">Обсудить проект</p><h2 className="mt-5 max-w-4xl text-balance text-4xl font-semibold leading-tight md:text-6xl">Найдём решение для вашей ИТ-задачи</h2><p className="mt-5 max-w-2xl text-lg leading-relaxed text-primary-foreground/75">Опишите контекст — предложим подход, состав команды и следующий шаг.</p></div>
-        <Link href="/contacts" className="inline-flex shrink-0 items-center justify-center gap-3 bg-background px-6 py-4 text-sm font-semibold text-foreground transition-colors hover:bg-foreground hover:text-background">Связаться с нами <ArrowRight className="size-4" /></Link>
+    <section className="bg-primary text-primary-foreground">
+      <div className="section-shell section-pad">
+        <p className="eyebrow text-primary-foreground/65">Начать разговор</p>
+        <div className="mt-6 flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
+          <div><h2 className="section-title max-w-5xl">Ваша инфраструктура может работать спокойнее.</h2><p className="text-lead mt-7 max-w-2xl text-primary-foreground/72">Расскажите о задаче. Мы соберём нужную экспертизу и предложим следующий практический шаг.</p></div>
+          <Link href="/contacts" className="inline-flex shrink-0 items-center justify-center gap-3 rounded-md bg-accent px-7 py-4 text-sm font-bold text-accent-foreground transition-transform hover:-translate-y-0.5">Обсудить проект <ArrowUpRight className="size-4" /></Link>
+        </div>
       </div>
     </section>
   )
