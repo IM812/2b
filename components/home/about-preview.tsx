@@ -1,23 +1,18 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 export function AboutPreview() {
   return (
-    <section className="bg-surface text-surface-foreground">
-      <div className="mx-auto max-w-[90rem] px-4 py-24 md:px-8 md:py-36">
-        <div className="grid gap-8 lg:grid-cols-[1.15fr_.85fr] lg:items-end">
-          <div className="relative aspect-[3/2] overflow-hidden">
-            <Image src="/images/editorial-engineer.png" alt="Инженер 2В Сервис в дата-центре" fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover object-center grayscale-[15%]" />
+    <section className="bg-background py-20 md:py-28">
+      <div className="mx-auto grid max-w-[90rem] gap-10 px-4 md:px-8 lg:grid-cols-[.7fr_1.3fr]">
+        <p className="text-sm font-semibold text-primary">О компании</p>
+        <div>
+          <h2 className="max-w-5xl text-balance text-4xl font-semibold leading-tight md:text-6xl">Одна команда на всём жизненном цикле системы</h2>
+          <div className="mt-8 grid gap-6 border-t border-border pt-8 md:grid-cols-2">
+            <p className="text-lg leading-relaxed text-muted-foreground">Аналитики, архитекторы, разработчики и инженеры поддержки работают в едином контуре ответственности.</p>
+            <p className="text-lg leading-relaxed text-muted-foreground">Мы остаёмся рядом после запуска — когда система становится частью ежедневной работы бизнеса.</p>
           </div>
-          <div className="lg:-ml-24 lg:pb-10">
-            <div className="relative bg-surface p-7 md:p-12">
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-surface-foreground/48">О компании</p>
-              <blockquote className="mt-6 font-serif text-3xl font-normal italic leading-[1.15] md:text-5xl">«Мы остаёмся рядом после запуска — когда система становится частью ежедневной работы бизнеса».</blockquote>
-              <p className="mt-7 max-w-lg text-base leading-relaxed text-surface-foreground/62">Аналитики, архитекторы, разработчики и инженеры поддержки работают как одна проектная команда — от обследования до развития решения.</p>
-              <Link href="/about" className="group mt-9 inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.12em]">О команде <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></Link>
-            </div>
-          </div>
+          <Link href="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-foreground">Подробнее о компании <ArrowRight className="size-4" /></Link>
         </div>
       </div>
     </section>
