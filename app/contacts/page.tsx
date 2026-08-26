@@ -27,17 +27,17 @@ export default function ContactsPage() {
             </div>
             <div>
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Телефон</p>
-              <a href="tel:+74951234567" className="mt-1 block text-lg font-medium text-foreground">
-                +7 (495) 123-45-67
+              <a href="tel:+74957875615" className="mt-1 block text-lg font-medium text-foreground">
+                +7 (495) 787-56-15
               </a>
             </div>
             <div>
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Адрес</p>
-              <p className="mt-1 text-lg font-medium text-foreground text-pretty">г. Москва, Пресненская наб., 10</p>
+              <p className="mt-1 text-lg font-medium text-foreground text-pretty">г. Москва, ул. 1-я Миусская, д. 20, стр. 5</p>
             </div>
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Часы работы</p>
-              <p className="mt-1 text-lg font-medium text-foreground">Пн–Пт, 9:00–18:00</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Техническая поддержка</p>
+              <p className="mt-1 text-lg font-medium text-foreground">Круглосуточно, 24/7</p>
             </div>
           </div>
 
