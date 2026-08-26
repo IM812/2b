@@ -1,61 +1,68 @@
-'use client'
-
-import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowDown, ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
+
+const LEDGER = [
+  ['8 500', 'пользователей на поддержке'],
+  ['1 000+', 'серверов под управлением'],
+  ['15 мин', 'норматив реакции'],
+  ['24/7', 'мониторинг и поддержка'],
+]
 
 export function Hero() {
   return (
-    <section className="relative min-h-svh overflow-hidden bg-surface text-surface-foreground">
-      <Image
-        src="/images/hero-command-center.png"
-        alt="Центр управления ИТ-инфраструктурой"
-        fill
-        priority
-        className="media-grade object-cover object-[68%_center]"
-      />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.095_0.018_258/.98)_0%,oklch(0.095_0.018_258/.88)_40%,oklch(0.095_0.018_258/.25)_76%,oklch(0.095_0.018_258/.08)_100%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-surface to-transparent" />
+    <section className="relative overflow-hidden bg-surface text-surface-foreground">
+      <div className="spine pointer-events-none absolute inset-0 hidden text-surface-foreground/70 lg:block" aria-hidden />
 
       <div className="section-shell relative flex min-h-svh flex-col pt-28 md:pt-32">
-        <div className="flex items-center justify-between border-b border-surface-foreground/20 pb-5">
-          <p className="eyebrow text-accent">Mission-critical IT operations</p>
-          <p className="eyebrow hidden text-surface-foreground/50 md:block">Москва · с 2010 года</p>
+        <div className="flex items-center justify-between border-b rule-ink pb-4">
+          <p className="eyebrow text-surface-foreground/55">2В Сервис · Москва · с 2010</p>
+          <p className="eyebrow hidden text-surface-foreground/40 md:block">Критичная ИТ-инфраструктура</p>
         </div>
 
-        <div className="flex flex-1 flex-col justify-center py-16 md:py-24">
-          <p className="reveal-up mb-8 max-w-sm text-sm leading-relaxed text-surface-foreground/65 md:ml-[42%]">
-            Инфраструктура, корпоративные системы и поддержка для организаций, где остановка невозможна.
-          </p>
-          <h1 className="reveal-up text-balance text-[clamp(4rem,10vw,10rem)] font-medium leading-[.82] tracking-[-.07em]">
-            Системы<br />держат <span className="text-accent">курс.</span>
+        <div className="flex flex-1 flex-col justify-center py-14 md:py-20">
+          <h1 className="display-title reveal-up max-w-[68rem]">
+            Инфраструктура,
+            <br />
+            которой доверяют
+            <br />
+            <span className="text-surface-foreground/45">полёты и документы.</span>
           </h1>
-          <div className="mt-10 flex flex-wrap items-center gap-4 md:ml-[42%]">
-            <Link href="/contacts" className="inline-flex items-center gap-3 bg-accent px-7 py-4 text-sm font-bold text-accent-foreground transition-colors hover:bg-surface-foreground">
-              Обсудить задачу <ArrowUpRight className="size-4" />
-            </Link>
-            <Link href="/projects" className="inline-flex items-center gap-3 border border-surface-foreground/35 px-7 py-4 text-sm font-bold transition-colors hover:bg-surface-foreground hover:text-surface">
-              Смотреть проекты <ArrowUpRight className="size-4" />
-            </Link>
+
+          <div className="draw-rule mt-10 h-0.5 w-full bg-[linear-gradient(90deg,var(--primary)_0%,var(--primary)_18%,color-mix(in_oklab,var(--surface-foreground)_18%,transparent)_18%)] md:mt-14" />
+
+          <div className="mt-10 grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
+            <p className="reveal-up reveal-1 max-w-xl text-pretty text-base leading-relaxed text-surface-foreground/65 md:text-lg">
+              Обслуживаем ИТ-ландшафт, внедряем корпоративные системы и держим их в работе круглосуточно — для авиации,
+              госсектора и промышленности.
+            </p>
+            <div className="reveal-up reveal-2 flex flex-wrap gap-3">
+              <Link
+                href="/contacts"
+                className="inline-flex items-center gap-3 bg-surface-foreground px-6 py-4 text-sm font-bold text-surface transition-opacity hover:opacity-85"
+              >
+                Обсудить задачу <ArrowUpRight className="size-4" />
+              </Link>
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-3 border rule-ink px-6 py-4 text-sm font-bold transition-colors hover:bg-surface-foreground/10"
+              >
+                Проекты <ArrowUpRight className="size-4" />
+              </Link>
+            </div>
           </div>
         </div>
 
-        <div className="grid border-t border-surface-foreground/20 md:grid-cols-[1fr_auto] md:items-center">
-          <div className="grid grid-cols-2 md:grid-cols-4">
-            {[
-              ['8 500', 'пользователей'],
-              ['1 000+', 'серверов'],
-              ['15 мин', 'реакция'],
-              ['24/7', 'поддержка'],
-            ].map(([value, label]) => (
-              <div key={label} className="border-r border-surface-foreground/15 py-5 pr-5">
-                <p className="text-2xl font-medium tracking-[-.04em]">{value}</p>
-                <p className="mt-1 text-xs text-surface-foreground/50">{label}</p>
-              </div>
-            ))}
-          </div>
-          <ArrowDown className="m-6 hidden size-5 text-accent md:block" />
-        </div>
+        <dl className="grid border-t rule-ink sm:grid-cols-2 lg:grid-cols-4">
+          {LEDGER.map(([value, label], i) => (
+            <div key={label} className="border-b rule-ink py-6 lg:border-b-0 lg:border-r lg:last:border-r-0 lg:pr-8">
+              <dt className="num text-3xl md:text-4xl">{value}</dt>
+              <dd className="mt-2 flex items-baseline gap-3 text-xs text-surface-foreground/50">
+                <span className="font-mono">0{i + 1}</span>
+                {label}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   )

@@ -1,7 +1,49 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 
+const PRINCIPLES = [
+  {
+    title: 'Ответственность за результат',
+    text: 'Мы отвечаем не за отдельный этап, а за то, чтобы система работала в промышленной эксплуатации.',
+  },
+  {
+    title: 'Инженерная преемственность',
+    text: 'Те же специалисты, что проектировали и внедряли решение, сопровождают его дальше.',
+  },
+  {
+    title: 'Работа по регламентам',
+    text: 'Строгие SLA, формализованные процессы и прозрачная отчётность перед заказчиком.',
+  },
+]
+
 export function AboutPreview() {
-  return <section className="section-pad bg-background"><div className="section-shell"><div className="grid gap-12 lg:grid-cols-[1.1fr_.9fr] lg:items-end lg:gap-20"><div><p className="eyebrow text-primary">2В Сервис</p><h2 className="section-title mt-6 max-w-5xl">Не поставщик.<br /><span className="text-muted-foreground">Часть вашей команды.</span></h2></div><p className="text-lead max-w-xl text-muted-foreground">Архитекторы, инженеры и специалисты поддержки работают в едином контуре ответственности — от первой схемы до круглосуточной эксплуатации.</p></div><div className="premium-shadow relative mt-16 min-h-[34rem] overflow-hidden"><Image src="/images/editorial-engineer.png" alt="Инженер 2В Сервис за работой" fill className="media-grade object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent" /><div className="absolute right-0 bottom-0 left-0 flex flex-col gap-6 p-7 text-surface-foreground md:flex-row md:items-end md:justify-between md:p-10"><p className="max-w-xl text-xl font-medium md:text-2xl">Одна команда. Единые SLA. Ответственность за конечный результат.</p><Link href="/about" className="inline-flex items-center gap-2 text-sm font-bold text-accent">О компании <ArrowUpRight className="size-4" /></Link></div></div></div></section>
+  return (
+    <section className="section-pad bg-background">
+      <div className="section-shell grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-24">
+        <div>
+          <p className="eyebrow text-primary">О компании</p>
+          <h2 className="section-title mt-5 max-w-2xl">Не поставщик услуг, а часть вашей команды.</h2>
+          <p className="text-lead mt-8 max-w-xl text-muted-foreground">
+            С 2010 года 2В Сервис работает с организациями, где ИТ-среда напрямую влияет на операционную деятельность:
+            авиаперевозки, госсектор, транспорт и промышленность.
+          </p>
+          <Link href="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-primary">
+            Подробнее о компании <ArrowUpRight className="size-4" />
+          </Link>
+        </div>
+
+        <div className="rule-top">
+          {PRINCIPLES.map((item, index) => (
+            <article key={item.title} className="index-row border-b border-border md:grid-cols-[3rem_minmax(0,1fr)]">
+              <p className="font-mono text-xs text-muted-foreground">{String(index + 1).padStart(2, '0')}</p>
+              <div>
+                <h3 className="text-lg font-semibold tracking-[-0.03em] md:text-xl">{item.title}</h3>
+                <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }

@@ -12,7 +12,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="glass-nav fixed inset-x-0 top-0 z-50 border-b border-foreground/10 backdrop-blur-2xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background/80 backdrop-blur-xl">
       <div className="section-shell flex h-18 items-center justify-between">
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)} aria-label="2В Сервис — на главную">
           <span className="flex size-9 items-center justify-center bg-foreground text-xs font-bold text-background">2В</span>

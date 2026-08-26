@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { PROJECTS } from '@/lib/content'
@@ -24,8 +23,6 @@ export async function generateMetadata({
   }
 }
 
-const CASE_IMAGE = '/images/editorial-documents.png'
-
 export default async function ProjectDetailPage({
   params,
 }: {
@@ -37,7 +34,6 @@ export default async function ProjectDetailPage({
   if (!project) notFound()
 
   const next = PROJECTS[(index + 1) % PROJECTS.length]
-  const image = CASE_IMAGE
 
   return (
     <>
@@ -89,14 +85,6 @@ export default async function ProjectDetailPage({
           </div>
 
           <div className="flex flex-col gap-6">
-            <div className="relative aspect-[4/3] overflow-hidden border border-border bg-card">
-              <Image
-                src={image || '/placeholder.svg'}
-                alt={`Схема решения: ${project.title}`}
-                fill
-                className="object-cover"
-              />
-            </div>
             <div className="border border-border bg-card p-6">
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Сроки</p>
               <p className="mt-1 text-sm font-medium text-foreground">{project.timeline}</p>
