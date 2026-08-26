@@ -1,90 +1,12 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { PageHero } from '@/components/page-hero'
-import { SystemVisual } from '@/components/system-visual'
-import { SectionHeading } from '@/components/section-heading'
 import { STATS } from '@/lib/content'
 
-export const metadata: Metadata = {
-  title: 'О компании — 2В Сервис',
-  description: '2В Сервис — российская технологическая компания, специализирующаяся на внедрении и сопровождении корпоративных информационных систем.',
-}
+export const metadata: Metadata = { title: 'О компании — 2В Сервис', description: '2В Сервис — единый ИТ-партнёр крупных организаций.' }
+const PRINCIPLES = [['Отвечаем за результат','Ведём проект от постановки задачи до промышленной эксплуатации и отвечаем за работу системы.'],['Работаем на длинной дистанции','Многолетние договоры позволяют глубоко понимать процессы и развивать решения вместе с заказчиком.'],['Понимаем масштаб enterprise','Работаем с системами, где тысячи пользователей и простой недопустим.'],['Инженерный подход','Проектируем на основе архитектуры, процессов и измеримых требований.']]
 
-const PRINCIPLES = [
-  {
-    title: 'Отвечаем за результат',
-    description: 'Ведем проект от постановки задачи до промышленной эксплуатации и берем на себя ответственность за работу системы.',
-  },
-  {
-    title: 'Работаем на длинной дистанции',
-    description: 'Большинство наших проектов — многолетние договоры с непрерывным сопровождением и развитием систем.',
-  },
-  {
-    title: 'Понимаем масштаб enterprise',
-    description: 'Опыт работы с крупнейшими авиационными компаниями страны — системами с тысячами пользователей и критичными требованиями к непрерывности.',
-  },
-  {
-    title: 'Инженерный, а не маркетинговый подход',
-    description: 'Решения проектируются исходя из архитектуры и процессов заказчика, а не из шаблонных внедрений.',
-  },
-]
-
-export default function AboutPage() {
-  return (
-    <>
-      <PageHero
-        eyebrow="О компании"
-        title="Технологический партнер для комплексных корпоративных ИТ-проектов"
-        description="2В Сервис — российская компания, специализирующаяся на внедрении, развитии и технической поддержке корпоративных информационных систем для крупных организаций."
-      />
-
-      <section className="border-b border-border bg-background py-20 md:py-28">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
-          <div>
-            <SectionHeading
-              eyebrow="Кто мы"
-              title="Работаем там, где ошибка стоит дорого"
-            />
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground text-pretty">
-              Мы специализируемся на корпоративных информационных системах, от которых напрямую зависит непрерывность
-              бизнеса заказчика — документообороте, интеграционных решениях и учетных системах. Наши клиенты —
-              крупнейшие авиационные и транспортные компании страны, для которых простой систем недопустим.
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground text-pretty">
-              Компания ведет действующие договоры по внедрению, интеграции и технической поддержке систем на
-              многолетней основе, что позволяет нам глубоко понимать процессы заказчика и предлагать решения,
-              выдерживающие проверку временем.
-            </p>
-          </div>
-          <SystemVisual className="min-h-[28rem]" />
-        </div>
-      </section>
-
-      <section className="border-b border-border bg-foreground py-20 text-background md:py-28">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {STATS.map((stat) => (
-              <div key={stat.label} className="flex flex-col gap-2">
-                <span className="text-3xl font-bold tracking-tight text-background md:text-4xl">{stat.value}</span>
-                <span className="text-sm leading-relaxed text-background/60">{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-background py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-6">
-          <SectionHeading eyebrow="Принципы" title="Как мы работаем с заказчиками" />
-          <div className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2">
-            {PRINCIPLES.map((principle) => (
-              <div key={principle.title} className="border-t border-border pt-5">
-                <h3 className="text-base font-semibold leading-snug text-foreground">{principle.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{principle.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
-  )
-}
+export default function AboutPage() { return <><PageHero eyebrow="О компании" title="Рядом, когда система становится частью бизнеса." description="Российская технологическая компания с единой ответственностью за инфраструктуру, корпоративные системы и их круглосуточную эксплуатацию." />
+<section className="section-pad bg-background"><div className="section-shell grid gap-14 lg:grid-cols-[.8fr_1.2fr] lg:items-end"><div><p className="eyebrow text-primary">Кто мы</p><h2 className="section-title mt-6">Работаем там, где ошибка стоит дорого.</h2></div><div><p className="text-lead text-muted-foreground">С 2010 года мы проектируем, внедряем и поддерживаем ИТ-среду крупных государственных и коммерческих организаций.</p><p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">Наша команда объединяет архитекторов, инженеров, аналитиков и поддержку. Заказчик получает не набор подрядчиков, а один центр ответственности за конечный результат.</p></div></div><div className="premium-shadow relative mt-16 min-h-[30rem] overflow-hidden"><Image src="/images/editorial-engineer.png" alt="Команда 2В Сервис" fill className="media-grade object-cover" /></div></section>
+<section className="bg-primary text-primary-foreground"><div className="section-shell section-pad"><p className="eyebrow text-primary-foreground/60">В цифрах</p><dl className="mt-12 grid grid-cols-2 lg:grid-cols-4">{STATS.map(stat=><div key={stat.label} className="border-l border-primary-foreground/20 p-6"><dt className="text-4xl font-medium tracking-[-.05em] md:text-5xl">{stat.value}</dt><dd className="mt-3 text-sm text-primary-foreground/60">{stat.label}</dd></div>)}</dl></div></section>
+<section className="section-pad bg-background"><div className="section-shell"><p className="eyebrow text-primary">Принципы</p><h2 className="section-title mt-6">Как мы работаем.</h2><div className="mt-16 grid gap-px bg-border md:grid-cols-2">{PRINCIPLES.map(([title,description],i)=><article key={title} className="bg-card p-8 md:p-12"><p className="font-mono text-xs text-primary">0{i+1}</p><h3 className="mt-10 text-2xl font-medium">{title}</h3><p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground">{description}</p></article>)}</div></div></section></> }

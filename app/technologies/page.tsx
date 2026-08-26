@@ -1,71 +1,9 @@
 import type { Metadata } from 'next'
 import { PageHero } from '@/components/page-hero'
-import { SystemVisual } from '@/components/system-visual'
-import { SectionHeading } from '@/components/section-heading'
 import { TECH_AREAS, INDUSTRIES, PROCESS_STEPS } from '@/lib/content'
 
-export const metadata: Metadata = {
-  title: 'Технологии и экспертиза — 2В Сервис',
-  description: 'Технологическая экспертиза 2В Сервис: документооборот, интеграция, BPM, отказоустойчивость и информационная безопасность.',
-}
-
-export default function TechnologiesPage() {
-  return (
-    <>
-      <PageHero
-        eyebrow="Технологии и экспертиза"
-        title="Технологическая база для устойчивых корпоративных систем"
-        description="Компетенции, накопленные на проектах для крупнейших авиационных и транспортных заказчиков страны — от документооборота до отказоустойчивой интеграционной архитектуры."
-      />
-
-      <section className="border-b border-border bg-background py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-6">
-          <SectionHeading eyebrow="Экспертиза" title="Направления технологической экспертизы" />
-          <div className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {TECH_AREAS.map((area) => (
-              <div key={area.title} className="border-t border-border pt-5">
-                <h3 className="text-base font-semibold leading-snug text-foreground">{area.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{area.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-border bg-foreground py-20 text-background md:py-28">
-        <div className="mx-auto max-w-6xl px-6">
-          <SectionHeading
-            eyebrow="Подход"
-            title="Полный цикл работы с корпоративной системой"
-            invert
-          />
-          <div className="mt-12 grid gap-px overflow-hidden border border-background/15 bg-background/15 sm:grid-cols-2 lg:grid-cols-4">
-            {PROCESS_STEPS.map((step) => (
-              <div key={step.title} className="bg-foreground p-6">
-                <h3 className="text-sm font-semibold leading-snug text-background">{step.title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-background/60">{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-border bg-secondary py-20 md:py-28">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <SystemVisual light className="min-h-[28rem]" />
-          <div>
-            <SectionHeading eyebrow="Отрасли" title="Отрасли, в которых мы работаем" align="left" />
-            <div className="mt-10 grid gap-8 sm:grid-cols-2">
-              {INDUSTRIES.map((industry) => (
-                <div key={industry.title}>
-                  <h3 className="text-base font-semibold leading-snug text-foreground">{industry.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{industry.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  )
-}
+export const metadata: Metadata = { title: 'Технологии и экспертиза — 2В Сервис', description: 'Технологическая экспертиза 2В Сервис.' }
+export default function TechnologiesPage(){return <><PageHero eyebrow="Технологии" title="Архитектура, рассчитанная на реальную нагрузку." description="Проектируем технологическую основу, которая сохраняет устойчивость при росте, изменениях и критичных нагрузках." />
+<section className="section-pad bg-background"><div className="section-shell"><div className="grid gap-10 lg:grid-cols-[.4fr_1fr]"><p className="eyebrow text-primary">Экспертиза</p><h2 className="section-title">От платформы до промышленной эксплуатации.</h2></div><div className="mt-16 border-t border-border">{TECH_AREAS.map((area,i)=><article key={area.title} className="grid gap-5 border-b border-border py-8 md:grid-cols-[5rem_1fr_1fr]"><span className="font-mono text-xs text-primary">0{i+1}</span><h3 className="text-xl font-medium">{area.title}</h3><p className="text-sm leading-relaxed text-muted-foreground">{area.description}</p></article>)}</div></div></section>
+<section className="section-pad bg-surface text-surface-foreground"><div className="section-shell"><p className="eyebrow text-accent">Полный цикл</p><h2 className="section-title mt-6 max-w-4xl">От обследования до развития системы.</h2><div className="mt-16 grid gap-px bg-surface-foreground/15 md:grid-cols-2 lg:grid-cols-4">{PROCESS_STEPS.map((step,i)=><article key={step.title} className="min-h-64 bg-surface p-8"><p className="font-mono text-xs text-accent">0{i+1}</p><h3 className="mt-12 text-xl font-medium">{step.title}</h3><p className="mt-4 text-sm leading-relaxed text-surface-foreground/55">{step.description}</p></article>)}</div></div></section>
+<section className="section-pad bg-secondary"><div className="section-shell"><p className="eyebrow text-primary">Отрасли</p><div className="mt-10 grid gap-px bg-border md:grid-cols-2">{INDUSTRIES.map(industry=><article key={industry.title} className="bg-background p-8 md:p-12"><h3 className="text-2xl font-medium">{industry.title}</h3><p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground">{industry.description}</p></article>)}</div></div></section></>}

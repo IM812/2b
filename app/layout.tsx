@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Manrope, Literata, IBM_Plex_Mono } from 'next/font/google'
+import { Manrope, IBM_Plex_Mono } from 'next/font/google'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import './globals.css'
@@ -8,11 +8,6 @@ import './globals.css'
 const _manrope = Manrope({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-manrope',
-})
-
-const _literata = Literata({
-  subsets: ['latin', 'cyrillic'],
-  variable: '--font-literata',
 })
 
 const _plexMono = IBM_Plex_Mono({
@@ -48,7 +43,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   colorScheme: 'light',
   userScalable: true,
-  themeColor: '#e7e4dd',
+  themeColor: '#10182b',
 }
 
 export default function RootLayout({
@@ -59,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${_manrope.variable} ${_literata.variable} ${_plexMono.variable} bg-background`}
+      className={`${_manrope.variable} ${_plexMono.variable} bg-background`}
     >
       <body className="antialiased font-sans">
         <SiteHeader />
