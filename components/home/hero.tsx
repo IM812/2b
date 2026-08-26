@@ -1,13 +1,6 @@
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 
-const LEDGER = [
-  ['8 500', 'пользователей на поддержке'],
-  ['1 000+', 'серверов под управлением'],
-  ['15 мин', 'норматив реакции'],
-  ['24/7', 'мониторинг и поддержка'],
-]
-
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-surface text-surface-foreground">
@@ -52,17 +45,12 @@ export function Hero() {
           </div>
         </div>
 
-        <dl className="grid border-t rule-ink sm:grid-cols-2 lg:grid-cols-4">
-          {LEDGER.map(([value, label], i) => (
-            <div key={label} className="border-b rule-ink py-6 lg:border-b-0 lg:border-r lg:last:border-r-0 lg:pr-8">
-              <dt className="num text-3xl md:text-4xl">{value}</dt>
-              <dd className="mt-2 flex items-baseline gap-3 text-xs text-surface-foreground/50">
-                <span className="font-mono">0{i + 1}</span>
-                {label}
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t rule-ink py-6">
+          <p className="eyebrow text-surface-foreground/45">
+            ИТ-аутсорсинг · Инфраструктура · Корпоративные системы · Документооборот
+          </p>
+          <p className="font-mono text-[11px] text-surface-foreground/35">15 лет непрерывной эксплуатации</p>
+        </div>
       </div>
     </section>
   )

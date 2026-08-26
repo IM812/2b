@@ -9,7 +9,7 @@ export function Stats() {
           <p className="eyebrow text-muted-foreground">Подтверждённые показатели</p>
         </div>
         <dl className="grid sm:grid-cols-2 lg:grid-cols-4">
-          {STATS.map((stat) => (
+          {STATS.slice(0, 4).map((stat) => (
             <div
               key={stat.label}
               className="border-b border-foreground/12 py-8 pr-6 lg:border-r lg:[&:nth-child(4n)]:border-r-0"
