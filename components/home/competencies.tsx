@@ -6,32 +6,28 @@ export function Competencies() {
   return (
     <section id="capabilities" className="section-pad overflow-hidden bg-background">
       <div className="section-shell">
-        <div className="grid gap-8 border-b border-border pb-10 md:pb-14 lg:grid-cols-[.7fr_1.3fr] lg:items-end">
+        <div className="grid gap-8 lg:grid-cols-[.7fr_1.3fr] lg:items-end">
           <div>
             <p className="eyebrow text-primary">Что держим в работе</p>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">Один центр ответственности за весь ИТ-ландшафт.</p>
+            <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">Не разрозненные подрядчики, а один центр ответственности за весь ИТ-ландшафт.</p>
           </div>
           <h2 className="section-title">От первого обращения до критичного контура.</h2>
         </div>
-
-        <div className="divide-y divide-border">
+        <div className="mt-14 grid gap-4 lg:grid-cols-12 lg:grid-rows-2">
           {CORE_COMPETENCIES.slice(0, 6).map((item, index) => (
-            <article key={item.title} className="group grid min-w-0 gap-5 py-7 sm:py-9 md:grid-cols-[4rem_.75fr_1fr_auto] md:items-start md:gap-8">
-              <span className="font-mono text-[10px] text-muted-foreground">0{index + 1} / 06</span>
-              <h3 className="max-w-md text-[1.65rem] font-semibold leading-[1.02] tracking-[-0.045em] sm:text-3xl md:text-4xl">{item.title}</h3>
-              <p className="max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">{item.description}</p>
-              <span className="flex size-10 items-center justify-center rounded-full border border-border transition-colors group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground" aria-hidden="true">
-                <ArrowUpRight className="size-4" />
-              </span>
+            <article key={item.title} className={`group relative min-h-56 overflow-hidden rounded-[1.5rem] p-5 sm:min-h-64 sm:rounded-[2rem] sm:p-7 md:p-9 ${index === 0 ? 'bg-primary text-primary-foreground lg:col-span-7 lg:row-span-2' : index === 1 ? 'bg-accent text-accent-foreground lg:col-span-5' : index === 2 ? 'bg-surface text-surface-foreground lg:col-span-5' : 'border border-border bg-card lg:col-span-4'}`}>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs opacity-55">0{index + 1}</span>
+                <ArrowUpRight className="size-5 opacity-50 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+              </div>
+              <div className={index === 0 ? 'mt-14 sm:mt-24 md:mt-40' : 'mt-10 sm:mt-14'}>
+                <h3 className={index === 0 ? 'max-w-xl text-[2rem] font-semibold leading-none tracking-[-0.055em] sm:text-4xl md:text-6xl' : 'text-2xl font-semibold leading-tight tracking-[-0.04em]'}>{item.title}</h3>
+                <p className="mt-5 max-w-lg text-sm leading-relaxed opacity-65">{item.description}</p>
+              </div>
             </article>
           ))}
         </div>
-
-        <div className="flex justify-end border-t border-border pt-7">
-          <Link href="/services" className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-foreground px-6 text-sm font-bold text-background sm:w-auto">
-            Все направления <ArrowRight className="size-4" />
-          </Link>
-        </div>
+        <Link href="/services" className="mt-8 inline-flex items-center gap-3 rounded-full border border-border bg-card px-6 py-3.5 text-sm font-bold">Все направления <ArrowRight className="size-4" /></Link>
       </div>
     </section>
   )
