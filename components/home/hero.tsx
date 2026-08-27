@@ -1,51 +1,63 @@
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
+import { SignalPulse } from '@/components/signal-pulse'
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-surface text-surface-foreground">
-      <div className="spine pointer-events-none absolute inset-0 hidden text-surface-foreground/70 lg:block" aria-hidden />
-
-      <div className="section-shell relative flex min-h-svh flex-col pt-28 md:pt-32">
-        <div className="flex items-center justify-between border-b rule-ink pb-4">
-          <p className="eyebrow text-surface-foreground/55">2В Сервис · Москва · с 2010</p>
-          <p className="eyebrow hidden text-surface-foreground/40 md:block">Критичная ИТ-инфраструктура</p>
+      <div className="section-shell relative pb-24 pt-32 md:pb-32 md:pt-40">
+        <div className="flex items-center gap-3">
+          <span className="signal-dot" />
+          <p className="eyebrow text-surface-foreground/55">2В Сервис · Москва · с 2010 · система работает</p>
         </div>
 
-        <div className="flex flex-1 flex-col justify-center py-14 md:py-20">
-          <h1 className="display-title reveal-up max-w-[68rem]">
+        <div className="mt-10 grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start lg:gap-8">
+          <h1 className="display-title reveal-up max-w-[46rem]">
             Инфраструктура,
             <br />
             которой доверяют
             <br />
-            <span className="text-surface-foreground/45">полёты и документы.</span>
+            <span className="text-primary">полёты и документы.</span>
           </h1>
 
-          <div className="draw-rule mt-10 h-0.5 w-full bg-[linear-gradient(90deg,var(--primary)_0%,var(--primary)_18%,color-mix(in_oklab,var(--surface-foreground)_18%,transparent)_18%)] md:mt-14" />
-
-          <div className="mt-10 grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
-            <p className="reveal-up reveal-1 max-w-xl text-pretty text-base leading-relaxed text-surface-foreground/65 md:text-lg">
-              Обслуживаем ИТ-ландшафт, внедряем корпоративные системы и держим их в работе круглосуточно — для авиации,
-              госсектора и промышленности.
-            </p>
-            <div className="reveal-up reveal-2 flex flex-wrap gap-3">
-              <Link
-                href="/contacts"
-                className="inline-flex items-center gap-3 bg-surface-foreground px-6 py-4 text-sm font-bold text-surface transition-opacity hover:opacity-85"
-              >
-                Обсудить задачу <ArrowUpRight className="size-4" />
-              </Link>
-              <Link
-                href="/projects"
-                className="inline-flex items-center gap-3 border rule-ink px-6 py-4 text-sm font-bold transition-colors hover:bg-surface-foreground/10"
-              >
-                Проекты <ArrowUpRight className="size-4" />
-              </Link>
-            </div>
+          {/* Сигнатурная плавающая панель статуса — асимметричный акцент композиции */}
+          <div className="panel-ink reveal-up reveal-2 relative -mt-2 hidden overflow-hidden p-6 lg:block">
+            <p className="eyebrow text-surface-foreground/45">Мониторинг сейчас</p>
+            <SignalPulse className="mt-5 h-10 text-primary" />
+            <dl className="mt-5 flex items-end justify-between border-t border-white/10 pt-4">
+              <div>
+                <dt className="eyebrow text-surface-foreground/40">Аптайм</dt>
+                <dd className="num mt-1 text-3xl">99.98%</dd>
+              </div>
+              <div className="text-right">
+                <dt className="eyebrow text-surface-foreground/40">Реакция</dt>
+                <dd className="num mt-1 text-3xl">15 мин</dd>
+              </div>
+            </dl>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t rule-ink py-6">
+        <p className="reveal-up reveal-1 mt-10 max-w-xl text-pretty text-base leading-relaxed text-surface-foreground/65 md:text-lg">
+          Обслуживаем ИТ-ландшафт, внедряем корпоративные системы и держим их в работе круглосуточно — для авиации,
+          госсектора и промышленности.
+        </p>
+
+        <div className="reveal-up reveal-2 mt-9 flex flex-wrap gap-3">
+          <Link
+            href="/contacts"
+            className="inline-flex items-center gap-3 rounded-full bg-primary px-6 py-4 text-sm font-bold text-primary-foreground transition-opacity hover:opacity-85"
+          >
+            Обсудить задачу <ArrowUpRight className="size-4" />
+          </Link>
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-3 rounded-full border border-white/15 px-6 py-4 text-sm font-bold transition-colors hover:bg-white/10"
+          >
+            Проекты <ArrowUpRight className="size-4" />
+          </Link>
+        </div>
+
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6">
           <p className="eyebrow text-surface-foreground/45">
             ИТ-аутсорсинг · Инфраструктура · Корпоративные системы · Документооборот
           </p>

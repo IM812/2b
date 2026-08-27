@@ -10,23 +10,23 @@ export function ContactCta() {
           <h2 className="display-title max-w-4xl">Расскажите о задаче.</h2>
           <Link
             href="/contacts"
-            className="inline-flex shrink-0 items-center gap-3 bg-surface-foreground px-7 py-5 text-sm font-bold text-surface transition-opacity hover:opacity-85"
+            className="inline-flex shrink-0 items-center gap-3 rounded-full bg-primary px-7 py-5 text-sm font-bold text-primary-foreground transition-opacity hover:opacity-85"
           >
             Связаться <ArrowUpRight className="size-4" />
           </Link>
         </div>
-        <div className="mt-14 grid gap-8 border-t rule-ink pt-8 sm:grid-cols-3">
-          <div>
+        <div className="mt-14 grid gap-4 sm:grid-cols-3">
+          <div className="panel-ink p-6">
             <p className="eyebrow text-surface-foreground/45">Телефон</p>
             <a href="tel:+74957875615" className="mt-2 block text-lg font-semibold">
               +7 (495) 787-56-15
             </a>
           </div>
-          <div>
+          <div className="panel-ink p-6">
             <p className="eyebrow text-surface-foreground/45">Адрес</p>
             <p className="mt-2 text-lg font-semibold">Москва, 1-я Миусская, 20с5</p>
           </div>
-          <div>
+          <div className="panel-ink p-6">
             <p className="eyebrow text-surface-foreground/45">Поддержка</p>
             <p className="mt-2 text-lg font-semibold">Круглосуточно, 24/7</p>
           </div>

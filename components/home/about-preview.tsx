@@ -19,7 +19,7 @@ const PRINCIPLES = [
 export function AboutPreview() {
   return (
     <section className="section-pad bg-background">
-      <div className="section-shell grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-24">
+      <div className="section-shell grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
         <div>
           <p className="eyebrow text-primary">О компании</p>
           <h2 className="section-title mt-5 max-w-2xl">Не поставщик услуг, а часть вашей команды.</h2>
@@ -32,12 +32,12 @@ export function AboutPreview() {
           </Link>
         </div>
 
-        <div className="rule-top">
+        <div className="flex flex-col gap-4">
           {PRINCIPLES.map((item, index) => (
-            <article key={item.title} className="index-row border-b border-border md:grid-cols-[3rem_minmax(0,1fr)]">
-              <p className="font-mono text-xs text-muted-foreground">{String(index + 1).padStart(2, '0')}</p>
+            <article key={item.title} className="panel flex gap-5 p-6">
+              <span className="index-badge">{String(index + 1).padStart(2, '0')}</span>
               <div>
-                <h3 className="text-lg font-semibold tracking-[-0.03em] md:text-xl">{item.title}</h3>
+                <h3 className="text-lg font-semibold tracking-[-0.02em] md:text-xl">{item.title}</h3>
                 <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">{item.text}</p>
               </div>
             </article>

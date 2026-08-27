@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div className="grid gap-10 md:grid-cols-[1.2fr_2fr]">
           <div>
             <Link href="/" className="inline-flex items-center gap-3">
-              <span className="flex size-9 items-center justify-center bg-foreground text-xs font-bold text-background">
+              <span className="flex size-9 items-center justify-center rounded-xl bg-foreground text-xs font-bold text-background">
                 2В
               </span>
               <span className="text-sm font-bold">2В Сервис</span>

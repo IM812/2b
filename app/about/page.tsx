@@ -42,17 +42,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-primary text-primary-foreground">
+      <section className="bg-surface text-surface-foreground">
         <div className="section-shell section-pad">
-          <p className="eyebrow text-primary-foreground/60">В цифрах</p>
-          <dl className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4">
+          <p className="eyebrow text-surface-foreground/50">В цифрах</p>
+          <dl className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {STATS.map((stat) => (
-              <div
-                key={stat.label}
-                className="border-b border-primary-foreground/20 py-8 pr-6 lg:border-r lg:[&:nth-child(4n)]:border-r-0"
-              >
-                <dt className="num text-4xl md:text-5xl">{stat.value}</dt>
-                <dd className="mt-3 max-w-[15rem] text-sm leading-relaxed text-primary-foreground/70">{stat.label}</dd>
+              <div key={stat.label} className="panel-ink p-7">
+                <dt className="num text-4xl text-primary md:text-5xl">{stat.value}</dt>
+                <dd className="mt-3 max-w-[15rem] text-sm leading-relaxed text-surface-foreground/65">{stat.label}</dd>
               </div>
             ))}
           </dl>
@@ -63,12 +60,14 @@ export default function AboutPage() {
         <div className="section-shell">
           <p className="eyebrow text-primary">Принципы</p>
           <h2 className="section-title mt-5">Как мы работаем.</h2>
-          <div className="mt-14 rule-top">
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
             {PRINCIPLES.map(([title, description], i) => (
-              <article key={title} className="index-row border-b border-border md:grid-cols-[4rem_minmax(0,20rem)_minmax(0,1fr)]">
-                <p className="font-mono text-xs text-muted-foreground">{String(i + 1).padStart(2, '0')}</p>
-                <h3 className="text-xl font-semibold tracking-[-0.035em] md:text-2xl">{title}</h3>
-                <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">{description}</p>
+              <article key={title} className="panel flex gap-5 p-7">
+                <span className="index-badge">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3 className="text-xl font-semibold tracking-[-0.03em]">{title}</h3>
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">{description}</p>
+                </div>
               </article>
             ))}
           </div>
