@@ -3,126 +3,16 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { PROJECTS } from '@/lib/content'
-import { Button } from '@/components/ui/button'
 
-export function generateStaticParams() {
-  return PROJECTS.map((project) => ({ slug: project.slug }))
-}
+export function generateStaticParams(){return PROJECTS.map(project=>({slug:project.slug}))}
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const project=PROJECTS.find(p=>p.slug===slug);return project?{title:`${project.title} — 2В Сервис`,description:project.summary}:{}}
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}): Promise<Metadata> {
-  const { slug } = await params
-  const project = PROJECTS.find((p) => p.slug === slug)
-  if (!project) return {}
-  return {
-    title: `${project.title} — 2В Сервис`,
-    description: project.summary,
-  }
-}
-
-export default async function ProjectDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const { slug } = await params
-  const index = PROJECTS.findIndex((p) => p.slug === slug)
-  const project = PROJECTS[index]
-  if (!project) notFound()
-
-  const next = PROJECTS[(index + 1) % PROJECTS.length]
-
-  return (
-    <>
-      <section className="border-b border-border bg-background py-20 text-foreground md:py-32">
-        <div className="mx-auto max-w-[90rem] px-6">
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 text-sm font-medium text-foreground/65 transition-colors hover:text-background"
-          >
-            <ArrowLeft className="size-4" aria-hidden="true" />
-            Все проекты
-          </Link>
-          <div className="mt-8 flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-wide text-foreground/50">
-            <span>{project.industry}</span>
-            {project.contractValue && (
-              <>
-                <span aria-hidden="true">·</span>
-                <span className="text-accent">{project.contractValue}</span>
-              </>
-            )}
-          </div>
-          <h1 className="mt-7 max-w-6xl text-balance text-5xl font-semibold leading-[0.94] md:text-8xl">
-            {project.title}
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-foreground/65">{project.summary}</p>
-          <p className="mt-8 text-sm font-medium text-foreground/80">{project.client}</p>
-        </div>
-      </section>
-
-      <section className="border-b border-border bg-background py-20 md:py-28">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-          <div className="flex flex-col gap-10">
-            <div>
-              <h2 className="text-sm font-medium uppercase tracking-wide text-accent">Задача</h2>
-              <p className="mt-3 text-lg leading-relaxed text-foreground text-pretty">{project.task}</p>
-            </div>
-            <div>
-              <h2 className="text-sm font-medium uppercase tracking-wide text-accent">Решение</h2>
-              <p className="mt-3 text-lg leading-relaxed text-foreground text-pretty">{project.solution}</p>
-            </div>
-            <div>
-              <h2 className="text-sm font-medium uppercase tracking-wide text-accent">Масштаб</h2>
-              <p className="mt-3 text-base leading-relaxed text-muted-foreground text-pretty">{project.scale}</p>
-            </div>
-            <div>
-              <h2 className="text-sm font-medium uppercase tracking-wide text-accent">Результат</h2>
-              <p className="mt-3 text-base leading-relaxed text-muted-foreground text-pretty">{project.result}</p>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <div className="border border-border bg-card p-6">
-              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Сроки</p>
-              <p className="mt-1 text-sm font-medium text-foreground">{project.timeline}</p>
-              <div className="mt-5 h-px w-full bg-border" />
-              <p className="mt-5 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                Технологии и решения
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {project.stack.map((item) => (
-                  <span key={item} className="border border-border px-3 py-1 text-xs font-medium text-foreground">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-secondary py-16">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-6 md:flex-row md:items-center">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Следующий проект</p>
-            <h3 className="mt-2 text-xl font-semibold leading-snug text-foreground text-balance">{next.title}</h3>
-          </div>
-          <Button
-            size="lg"
-            className="shrink-0"
-            nativeButton={false}
-            render={
-              <Link href={`/projects/${next.slug}`}>
-                Смотреть проект
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
-            }
-          />
-        </div>
-      </section>
-    </>
-  )
+export default async function ProjectDetailPage({params}:{params:Promise<{slug:string}>}){
+ const {slug}=await params;const index=PROJECTS.findIndex(p=>p.slug===slug);const project=PROJECTS[index];if(!project)notFound();const next=PROJECTS[(index+1)%PROJECTS.length]
+ return <>
+  <section className="relative overflow-hidden bg-surface pb-20 pt-36 text-surface-foreground md:pb-28 md:pt-44"><div className="section-shell relative"><Link href="/projects" className="inline-flex items-center gap-2 text-sm text-surface-foreground/55 hover:text-primary"><ArrowLeft className="size-4"/> Все проекты</Link><div className="mt-12 flex flex-wrap gap-3"><span className="rounded-full bg-primary px-4 py-2 text-xs font-bold text-primary-foreground">{project.industry}</span>{project.tags.map(t=><span key={t} className="rounded-full border border-white/20 px-4 py-2 text-xs">{t}</span>)}</div><h1 className="mt-8 max-w-6xl text-balance text-5xl font-black leading-[.9] tracking-[-.07em] md:text-8xl">{project.title}</h1><div className="mt-12 flex flex-col gap-6 border-t border-white/15 pt-7 md:flex-row md:justify-between"><p className="font-bold">{project.client}</p><p className="max-w-2xl leading-relaxed text-surface-foreground/60">{project.summary}</p></div></div></section>
+  {project.contractValue&&<section className="bg-accent py-10 text-accent-foreground"><div className="section-shell flex flex-col gap-2 md:flex-row md:items-end md:justify-between"><p className="eyebrow">Контракт</p><p className="text-6xl font-black tracking-[-.07em] md:text-8xl">{project.contractValue}</p></div></section>}
+  <section className="section-pad bg-background"><div className="section-shell grid gap-12 lg:grid-cols-[.7fr_1.3fr]"><div className="lg:sticky lg:top-28 lg:self-start"><p className="eyebrow text-primary">Проектный контур</p><p className="mt-5 text-3xl font-black tracking-tight">{project.timeline}</p><div className="mt-8 flex flex-wrap gap-2">{project.stack.map(s=><span key={s} className="rounded-full bg-secondary px-4 py-2 text-xs font-bold">{s}</span>)}</div></div><div className="flex flex-col gap-5">{[['Задача',project.task],['Решение',project.solution],['Масштаб',project.scale],['Результат',project.result]].map(([title,text],i)=><article key={title} className={`rounded-[2rem] p-8 md:p-10 ${i===1?'bg-primary text-primary-foreground':i===3?'bg-surface text-surface-foreground':'bg-secondary'}`}><span className="text-xs font-bold uppercase tracking-widest opacity-50">0{i+1} / {title}</span><p className="mt-8 text-pretty text-xl font-medium leading-relaxed md:text-2xl">{text}</p></article>)}</div></div></section>
+  <section className="bg-primary py-16 text-primary-foreground"><Link href={`/projects/${next.slug}`} className="section-shell group flex flex-col gap-8 md:flex-row md:items-end md:justify-between"><div><p className="eyebrow opacity-60">Следующий проект</p><h2 className="mt-5 max-w-4xl text-3xl font-black tracking-[-.04em] md:text-5xl">{next.title}</h2></div><ArrowRight className="size-12 shrink-0 transition-transform group-hover:translate-x-2"/></Link></section>
+ </>
 }
