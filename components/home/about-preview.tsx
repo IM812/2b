@@ -11,7 +11,7 @@ export function AboutPreview() {
           <div>
             <p className="eyebrow text-primary">2В Сервис · с 2010 года</p>
             <h2 className="section-title mt-5 max-w-4xl">Встраиваемся в бизнес. Остаёмся рядом после запуска.</h2>
-            <p className="text-lead mt-8 max-w-2xl text-muted-foreground">Работаем там, где ИТ напрямую влияет на рейсы, производство, документы и тысячи рабочих мест.</p>
+            <p className="text-lead mt-8 max-w-2xl text-muted-foreground">Работаем по России — от отдельного офиса до федеральной инфраструктуры, где ИТ напрямую влияет на рейсы, производство и тысячи рабочих мест.</p>
           </div>
           <div className="rounded-[2rem] bg-secondary p-8 md:p-10">
             <p className="eyebrow text-muted-foreground">Наш подход</p>

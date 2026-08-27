@@ -17,8 +17,8 @@ export function SiteFooter() {
               ИТ-аутсорсинг, инфраструктура и корпоративные системы для организаций федерального масштаба.
             </p>
             <div className="mt-6 flex flex-col gap-1 text-sm font-semibold">
-              <a href="mailto:info@2v-service.ru" className="hover:text-primary">
-                info@2v-service.ru
+              <a href="mailto:info@2bservice.ru" className="hover:text-primary">
+                info@2bservice.ru
               </a>
               <a href="tel:+74957875615" className="hover:text-primary">
                 +7 (495) 787-56-15
