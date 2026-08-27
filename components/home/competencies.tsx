@@ -15,13 +15,13 @@ export function Competencies() {
         </div>
         <div className="mt-14 grid gap-4 lg:grid-cols-12 lg:grid-rows-2">
           {CORE_COMPETENCIES.slice(0, 6).map((item, index) => (
-            <article key={item.title} className={`group relative min-h-64 overflow-hidden rounded-[2rem] p-7 md:p-9 ${index === 0 ? 'bg-primary text-primary-foreground lg:col-span-7 lg:row-span-2' : index === 1 ? 'bg-accent text-accent-foreground lg:col-span-5' : index === 2 ? 'bg-surface text-surface-foreground lg:col-span-5' : 'border border-border bg-card lg:col-span-4'}`}>
+            <article key={item.title} className={`group relative min-h-56 overflow-hidden rounded-[1.5rem] p-5 sm:min-h-64 sm:rounded-[2rem] sm:p-7 md:p-9 ${index === 0 ? 'bg-primary text-primary-foreground lg:col-span-7 lg:row-span-2' : index === 1 ? 'bg-accent text-accent-foreground lg:col-span-5' : index === 2 ? 'bg-surface text-surface-foreground lg:col-span-5' : 'border border-border bg-card lg:col-span-4'}`}>
               <div className="flex items-center justify-between">
                 <span className="font-mono text-xs opacity-55">0{index + 1}</span>
                 <ArrowUpRight className="size-5 opacity-50 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
               </div>
-              <div className={index === 0 ? 'mt-24 md:mt-40' : 'mt-14'}>
-                <h3 className={index === 0 ? 'max-w-xl text-4xl font-semibold leading-none tracking-[-0.055em] md:text-6xl' : 'text-2xl font-semibold leading-tight tracking-[-0.04em]'}>{item.title}</h3>
+              <div className={index === 0 ? 'mt-14 sm:mt-24 md:mt-40' : 'mt-10 sm:mt-14'}>
+                <h3 className={index === 0 ? 'max-w-xl text-[2rem] font-semibold leading-none tracking-[-0.055em] sm:text-4xl md:text-6xl' : 'text-2xl font-semibold leading-tight tracking-[-0.04em]'}>{item.title}</h3>
                 <p className="mt-5 max-w-lg text-sm leading-relaxed opacity-65">{item.description}</p>
               </div>
             </article>

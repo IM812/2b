@@ -2,12 +2,12 @@ import { INDUSTRIES } from '@/lib/content'
 
 export function Industries() {
   return (
-    <section className="overflow-hidden bg-surface py-24 text-surface-foreground md:py-36">
+    <section className="overflow-hidden bg-surface py-14 text-surface-foreground sm:py-24 md:py-36">
       <div className="mx-auto max-w-[90rem] px-4 md:px-8">
         <div className="grid gap-14 lg:grid-cols-[.8fr_1.2fr]">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-surface-foreground/50">Критические отрасли</p>
-            <h2 className="mt-6 max-w-xl text-balance text-5xl font-semibold leading-[0.92] md:text-7xl">Цена простоя <span className="font-serif font-normal italic text-[oklch(0.42_0.09_125)]">измерима.</span></h2>
+            <h2 className="mt-5 max-w-xl text-pretty text-[2.4rem] font-semibold leading-[0.94] sm:mt-6 sm:text-5xl md:text-7xl">Цена простоя <span className="font-serif font-normal italic text-[oklch(0.42_0.09_125)]">измерима.</span></h2>
             <p className="mt-8 max-w-md text-base leading-relaxed text-surface-foreground/60">Проектируем для сред, где архитектурное решение напрямую влияет на непрерывность бизнеса.</p>
           </div>
           <div className="border-t border-surface-foreground/20">

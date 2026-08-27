@@ -3,11 +3,11 @@ import { SystemVisual } from '@/components/system-visual'
 
 export function Process() {
   return (
-    <section className="bg-background py-24 md:py-36">
+    <section className="bg-background py-14 sm:py-24 md:py-36">
       <div className="mx-auto grid max-w-[90rem] gap-14 px-4 md:px-8 lg:grid-cols-[.9fr_1.1fr]">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">Контур реализации</p>
-          <h2 className="mt-6 max-w-xl text-balance text-5xl font-semibold leading-[0.94] md:text-7xl">Одна архитектура. <span className="font-serif font-normal italic text-foreground/45">Одна ответственность.</span></h2>
+          <h2 className="mt-5 max-w-xl text-pretty text-[2.35rem] font-semibold leading-[0.96] sm:mt-6 sm:text-5xl md:text-7xl">Одна архитектура. <span className="font-serif font-normal italic text-foreground/45">Одна ответственность.</span></h2>
           <SystemVisual className="mt-10" />
         </div>
         <ol className="flex flex-col">

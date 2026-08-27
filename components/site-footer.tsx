@@ -4,7 +4,7 @@ import { NAV_ITEMS } from '@/lib/nav'
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-background">
-      <div className="section-shell py-14">
+      <div className="section-shell py-10 sm:py-14">
         <div className="grid gap-10 md:grid-cols-[1.2fr_2fr]">
           <div>
             <Link href="/" className="inline-flex items-center gap-3">

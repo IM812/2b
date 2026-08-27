@@ -9,7 +9,7 @@ export function Stats() {
           <dl className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4 lg:pt-20">
             {[STATS[0], STATS[1], STATS[2], STATS[5], STATS[6]].map((stat, index) => (
               <div key={stat.label} className={index === 0 ? 'col-span-2 md:col-span-4' : ''}>
-                <dt className={`num ${index === 0 ? 'text-[clamp(5rem,13vw,11rem)] leading-[.75]' : 'text-4xl md:text-5xl'}`}>{stat.value}</dt>
+                <dt className={`num ${index === 0 ? 'text-[4.35rem] leading-[.78] sm:text-[clamp(5rem,13vw,11rem)]' : 'text-4xl md:text-5xl'}`}>{stat.value}</dt>
                 <dd className="mt-4 max-w-56 text-sm leading-relaxed opacity-65">{stat.label}</dd>
               </div>
             ))}

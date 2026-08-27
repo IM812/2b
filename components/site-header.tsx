@@ -13,9 +13,9 @@ export function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background/80 backdrop-blur-xl">
-      <div className="section-shell flex h-18 items-center justify-between">
-        <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)} aria-label="2В Сервис — на главную">
-          <span className="flex size-9 items-center justify-center rounded-xl bg-foreground text-xs font-bold text-background">
+      <div className="section-shell flex h-16 items-center justify-between md:h-18">
+        <Link href="/" className="flex items-center gap-2.5 sm:gap-3" onClick={() => setOpen(false)} aria-label="2В Сервис — на главную">
+          <span className="flex size-9 items-center justify-center rounded-full bg-foreground text-xs font-bold text-background sm:rounded-xl">
             2В
           </span>
           <span className="text-sm font-bold tracking-[-0.02em]">Сервис</span>

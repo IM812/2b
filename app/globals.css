@@ -28,18 +28,20 @@
 @layer base {
   * { @apply border-border outline-ring/50; }
   html { @apply bg-background; scroll-behavior: smooth; }
-  body { @apply overflow-x-hidden bg-background font-sans text-foreground antialiased; }
+  body { @apply overflow-x-clip bg-background font-sans text-foreground antialiased; }
+  main, section, article, div { min-width: 0; }
+  h1, h2, h3, p { overflow-wrap: break-word; }
   a, button { @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary; }
   ::selection { @apply bg-primary text-primary-foreground; }
 }
 
 @layer utilities {
-  .section-shell { @apply mx-auto w-full max-w-[88rem] px-5 md:px-10 lg:px-14; }
-  .section-pad { @apply py-20 md:py-28 lg:py-36; }
-  .eyebrow { @apply font-mono text-[10px] font-semibold uppercase tracking-[0.2em]; }
-  .display-title { @apply text-balance text-[clamp(3.3rem,8vw,8rem)] font-semibold leading-[0.88] tracking-[-0.07em]; }
-  .section-title { @apply text-balance text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[0.94] tracking-[-0.06em]; }
-  .text-lead { @apply text-pretty text-lg leading-relaxed md:text-xl; }
+  .section-shell { @apply mx-auto w-full max-w-[88rem] px-4 sm:px-5 md:px-10 lg:px-14; }
+  .section-pad { @apply py-14 sm:py-20 md:py-28 lg:py-36; }
+  .eyebrow { @apply font-mono text-[9px] font-semibold uppercase tracking-[0.16em] sm:text-[10px] sm:tracking-[0.2em]; }
+  .display-title { @apply text-balance text-[2.8rem] font-semibold leading-[0.9] tracking-[-0.065em] sm:text-[3.3rem] md:text-[clamp(3.3rem,8vw,8rem)]; }
+  .section-title { @apply text-balance text-[2.25rem] font-semibold leading-[0.96] tracking-[-0.055em] sm:text-[2.5rem] md:text-[clamp(2.5rem,5vw,5rem)]; }
+  .text-lead { @apply text-pretty text-base leading-relaxed sm:text-lg md:text-xl; }
   .num { @apply font-semibold tabular-nums tracking-[-0.055em]; }
   .panel { @apply rounded-[1.25rem] border border-border bg-card shadow-[0_24px_70px_-45px_rgba(13,30,70,0.35)]; }
   .panel-dark { @apply rounded-[1.25rem] border border-white/10 bg-white/[0.055] text-surface-foreground; }
@@ -56,5 +58,6 @@
 .pulse-node,.pulse-halo { animation: pulse-node 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 .route-line { stroke-dasharray: 9 12; animation: route-flow 4s linear infinite; }
 .route-line-delay { animation-delay: -1.8s; }
-.marquee { width: max-content; animation: marquee-flow 24s linear infinite; }
+.marquee { width: max-content; max-width: none; animation: marquee-flow 24s linear infinite; will-change: transform; }
+@media (max-width: 359px) { .marquee { animation-duration: 32s; } }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; } }

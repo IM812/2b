@@ -11,10 +11,10 @@ const nodes = [
 
 export function SignalPulse({ className }: { className?: string; tone?: 'ink' | 'light' }) {
   return (
-    <div className={cn('route-grid relative min-h-[25rem] overflow-hidden rounded-[2rem] bg-surface text-surface-foreground', className)} aria-label="Схема управляемой ИТ-инфраструктуры">
-      <div className="absolute inset-x-5 top-5 z-10 flex items-center justify-between">
-        <span className="rounded-full bg-white/10 px-4 py-2 font-mono text-[10px] uppercase tracking-[.18em]">Инфраструктура в реальном времени</span>
-        <span className="flex items-center gap-2 text-xs text-white/55"><i className="signal-dot" />Все системы работают</span>
+    <div className={cn('route-grid relative min-h-[19rem] overflow-hidden rounded-[1.5rem] bg-surface text-surface-foreground sm:min-h-[25rem] sm:rounded-[2rem]', className)} aria-label="Схема управляемой ИТ-инфраструктуры">
+      <div className="absolute inset-x-4 top-4 z-10 flex items-center justify-between gap-2 sm:inset-x-5 sm:top-5">
+        <span className="rounded-full bg-white/10 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[.14em] sm:px-4 sm:py-2 sm:text-[10px] sm:tracking-[.18em]">Инфраструктура в реальном времени</span>
+        <span className="hidden items-center gap-2 text-xs text-white/55 min-[420px]:flex"><i className="signal-dot" />Все системы работают</span>
       </div>
       <svg viewBox="0 0 760 440" className="absolute inset-0 size-full" aria-hidden="true">
         <path className="route-line" d="M92 119 C180 119 250 202 372 202 S510 92 548 92" fill="none" stroke="var(--primary)" strokeWidth="2" />
@@ -27,11 +27,11 @@ export function SignalPulse({ className }: { className?: string; tone?: 'ink' | 
       </svg>
       {nodes.filter((node) => node.tone !== 'core').map((node) => (
         <div key={node.label} className="absolute z-10 -translate-x-1/2 -translate-y-1/2" style={{ left: `${node.x}%`, top: `${node.y}%` }}>
-          <span className={cn('mx-auto block size-3 rounded-full ring-8 ring-white/5', node.tone === 'accent' ? 'bg-accent' : 'bg-primary')} />
-          <span className="mt-3 block whitespace-nowrap text-center text-[10px] font-semibold text-white/55">{node.label}</span>
+          <span className={cn('mx-auto block size-2.5 rounded-full ring-4 ring-white/5 sm:size-3 sm:ring-8', node.tone === 'accent' ? 'bg-accent' : 'bg-primary')} />
+          <span className="mt-2 block whitespace-nowrap text-center text-[8px] font-semibold text-white/55 sm:mt-3 sm:text-[10px]">{node.label}</span>
         </div>
       ))}
-      <div className="absolute bottom-5 left-5 right-5 grid grid-cols-3 gap-2 border-t border-white/10 pt-4 font-mono text-[10px] text-white/45">
+      <div className="absolute bottom-4 left-4 right-4 grid grid-cols-3 gap-2 border-t border-white/10 pt-3 font-mono text-[8px] text-white/45 sm:bottom-5 sm:left-5 sm:right-5 sm:pt-4 sm:text-[10px]">
         <span>1 000+ серверов</span><span className="text-center">24/7 контроль</span><span className="text-right">15 мин реакция</span>
       </div>
     </div>
