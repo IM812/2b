@@ -1,36 +1,33 @@
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { CORE_COMPETENCIES } from '@/lib/content'
 
 export function Competencies() {
   return (
-    <section id="capabilities" className="section-pad bg-background">
+    <section id="capabilities" className="section-pad overflow-hidden bg-background">
       <div className="section-shell">
-        <div className="grid gap-8 pb-12 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="grid gap-8 lg:grid-cols-[.7fr_1.3fr] lg:items-end">
           <div>
-            <p className="eyebrow text-primary">Направления</p>
-            <h2 className="section-title mt-5 max-w-4xl">Одна команда отвечает за всю цифровую среду.</h2>
+            <p className="eyebrow text-primary">Что держим в работе</p>
+            <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">Не разрозненные подрядчики, а один центр ответственности за весь ИТ-ландшафт.</p>
           </div>
-          <Link href="/services" className="inline-flex items-center gap-2 text-sm font-bold text-primary">
-            Все услуги <ArrowUpRight className="size-4" />
-          </Link>
+          <h2 className="section-title">От первого обращения до критичного контура.</h2>
         </div>
-
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-4 lg:grid-cols-12 lg:grid-rows-2">
           {CORE_COMPETENCIES.slice(0, 6).map((item, index) => (
-            <article
-              key={item.title}
-              className="panel group flex flex-col gap-5 p-7 transition-transform duration-300 hover:-translate-y-1"
-            >
+            <article key={item.title} className={`group relative min-h-64 overflow-hidden rounded-[2rem] p-7 md:p-9 ${index === 0 ? 'bg-primary text-primary-foreground lg:col-span-7 lg:row-span-2' : index === 1 ? 'bg-accent text-accent-foreground lg:col-span-5' : index === 2 ? 'bg-surface text-surface-foreground lg:col-span-5' : 'border border-border bg-card lg:col-span-4'}`}>
               <div className="flex items-center justify-between">
-                <span className="index-badge">{String(index + 1).padStart(2, '0')}</span>
-                <ArrowUpRight className="size-4 text-muted-foreground/50 transition-colors group-hover:text-primary" />
+                <span className="font-mono text-xs opacity-55">0{index + 1}</span>
+                <ArrowUpRight className="size-5 opacity-50 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
               </div>
-              <h3 className="text-xl font-semibold leading-tight tracking-[-0.03em]">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+              <div className={index === 0 ? 'mt-24 md:mt-40' : 'mt-14'}>
+                <h3 className={index === 0 ? 'max-w-xl text-4xl font-semibold leading-none tracking-[-0.055em] md:text-6xl' : 'text-2xl font-semibold leading-tight tracking-[-0.04em]'}>{item.title}</h3>
+                <p className="mt-5 max-w-lg text-sm leading-relaxed opacity-65">{item.description}</p>
+              </div>
             </article>
           ))}
         </div>
+        <Link href="/services" className="mt-8 inline-flex items-center gap-3 rounded-full border border-border bg-card px-6 py-3.5 text-sm font-bold">Все направления <ArrowRight className="size-4" /></Link>
       </div>
     </section>
   )
