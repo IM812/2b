@@ -14,13 +14,8 @@ export function LeadFormProvider() {
     const openForm = () => setOpen(true)
     window.addEventListener(OPEN_LEAD_FORM_EVENT, openForm)
 
-    const dismissed = sessionStorage.getItem('lead-popup-dismissed') === 'true'
-    const sent = sessionStorage.getItem('lead-form-sent') === 'true'
-    const timer = !dismissed && !sent ? window.setTimeout(() => setOpen(true), 35_000) : undefined
-
     return () => {
       window.removeEventListener(OPEN_LEAD_FORM_EVENT, openForm)
-      if (timer) window.clearTimeout(timer)
     }
   }, [])
 
@@ -44,7 +39,7 @@ export function LeadFormProvider() {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-surface/80 p-0 sm:items-center sm:bg-surface/75 sm:p-5 sm:backdrop-blur-sm" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && close()}>
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-surface/80 p-0 sm:items-center sm:bg-surface/75 sm:p-5" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && close()}>
       <section className="max-h-[calc(100dvh-env(safe-area-inset-top))] w-full overscroll-contain overflow-y-auto rounded-t-[1.5rem] bg-background p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:max-h-[92dvh] sm:max-w-xl sm:rounded-[2rem] sm:p-6 sm:shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="lead-form-title" onKeyDown={(event) => event.key === 'Escape' && close()}>
         <div className="mb-4 flex items-start justify-between gap-4 px-1 pt-1 sm:mb-6">
           <div>

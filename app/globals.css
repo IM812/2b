@@ -27,8 +27,8 @@
 
 @layer base {
   * { @apply border-border outline-ring/50; }
-  html { @apply bg-background; scroll-behavior: smooth; }
-  body { @apply overflow-x-clip bg-background font-sans text-foreground antialiased; }
+  html { @apply bg-background; scroll-behavior: auto; }
+  body { @apply overflow-x-hidden bg-background font-sans text-foreground antialiased; }
   main, section, article, div { min-width: 0; }
   h1, h2, h3, p { overflow-wrap: break-word; }
   a, button { @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary; }
