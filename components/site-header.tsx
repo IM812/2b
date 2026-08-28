@@ -29,7 +29,32 @@ export function SiteHeader() {
         </div>
         <button type="button" className="flex size-11 items-center justify-center lg:hidden" onClick={() => setOpen(!open)} aria-label={open ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={open}>{open ? <X /> : <Menu />}</button>
       </div>
-      {open && <nav className="border-t border-border bg-background px-5 py-6 lg:hidden" aria-label="Мобильная навигация"><ul className="flex flex-col">{NAV_ITEMS.map((item) => <li key={item.href}><Link href={item.href} onClick={() => setOpen(false)} className="flex items-center justify-between border-b border-border py-4 text-lg font-medium">{item.label}<ArrowUpRight className="size-4 text-muted-foreground" /></Link></li>)}</ul>        <LeadFormTrigger onClick={() => setOpen(false)} className="mt-6 flex w-full justify-center rounded-full bg-primary px-5 py-4 font-semibold text-primary-foreground">Обсудить проект</LeadFormTrigger></nav>}
+      {open && (
+        <nav className="mobile-menu fixed inset-x-0 top-16 flex h-[calc(100dvh-4rem)] flex-col overflow-y-auto bg-foreground text-background lg:hidden" aria-label="Мобильная навигация">
+          <div className="flex items-center justify-between border-b border-background/15 px-5 py-4">
+            <p className="font-mono text-[11px] uppercase tracking-[.22em] text-background/55">Навигация / 2В Сервис</p>
+            <span className="flex items-center gap-2 text-xs text-background/65"><span className="size-1.5 rounded-full bg-accent" />На связи</span>
+          </div>
+          <ul className="flex flex-1 flex-col px-5">
+            {NAV_ITEMS.map((item, index) => (
+              <li key={item.href} className="mobile-menu-item" style={{ '--menu-index': index } as React.CSSProperties}>
+                <Link href={item.href} onClick={() => setOpen(false)} className={cn('group flex min-h-16 items-center gap-4 border-b border-background/15 py-3 transition-colors hover:text-primary', pathname === item.href && 'text-primary')}>
+                  <span className="w-6 font-mono text-[10px] text-background/35">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="min-w-0 flex-1 text-lg font-medium tracking-[-.025em] sm:text-xl">{item.label}</span>
+                  <span className="flex size-8 items-center justify-center rounded-full border border-background/20 transition-colors group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground"><ArrowUpRight className="size-3.5 transition-transform" /></span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="border-t border-background/15 bg-background/5 p-5">
+            <div className="mb-4 flex items-end justify-between gap-4">
+              <div><p className="mb-1 text-[11px] text-background/45">Прямой контакт</p><a href="tel:+74957875615" className="text-base font-semibold">+7 495 787-56-15</a></div>
+              <a href="mailto:info@2bservice.ru" className="text-xs text-background/60">info@2bservice.ru</a>
+            </div>
+            <LeadFormTrigger onClick={() => setOpen(false)} className="group flex w-full items-center justify-between rounded-full bg-primary px-6 py-4 font-semibold text-primary-foreground transition-colors hover:bg-background hover:text-foreground"><span>Обсудить проект</span><ArrowUpRight className="size-5 transition-transform" /></LeadFormTrigger>
+          </div>
+        </nav>
+      )}
     </header>
   )
 }
