@@ -4,23 +4,38 @@ import { useEffect } from 'react'
 
 export function MotionSystem() {
   useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    if (reduceMotion.matches) {
-      document.documentElement.dataset.motion = 'reduced'
-      return
-    }
+    const root = document.documentElement
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
+    const constrained = reduceMotion || connection?.saveData === true
 
-    document.documentElement.dataset.motion = 'ready'
+    root.dataset.motion = constrained ? 'reduced' : 'ready'
+    if (constrained) return
+
     const targets = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'))
+    targets.forEach((target, index) => {
+      if (!target.style.getPropertyValue('--reveal-order')) {
+        target.style.setProperty('--reveal-order', String(index % 6))
+      }
+    })
+
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue
-        ;(entry.target as HTMLElement).dataset.visible = 'true'
-        observer.unobserve(entry.target)
+        const target = entry.target as HTMLElement
+        target.dataset.visible = 'true'
+        observer.unobserve(target)
       }
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 })
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.12 })
 
-    targets.forEach((target) => observer.observe(target))
+    targets.forEach((target) => {
+      const rect = target.getBoundingClientRect()
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        target.dataset.visible = 'true'
+        return
+      }
+      observer.observe(target)
+    })
     return () => observer.disconnect()
   }, [])
 

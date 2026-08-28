@@ -9,7 +9,7 @@ export default function NotFound() {
       <div className="route-grid absolute inset-0 opacity-70" aria-hidden="true" />
       <div className="section-shell relative flex flex-1 items-center py-12 sm:py-16 lg:py-20">
         <div className="grid w-full items-center gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
-          <div data-reveal className="relative z-10 max-w-xl">
+          <div data-reveal="clip" className="relative z-10 max-w-xl">
             <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/[.06] px-4 py-2 font-mono text-[10px] uppercase tracking-[.18em] text-white/65">
               <span className="signal-dot" /> Ошибка маршрута · 404
             </div>

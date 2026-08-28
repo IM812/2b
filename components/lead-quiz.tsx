@@ -47,7 +47,7 @@ export function LeadQuiz() {
 
   if (!open) return null
   return <div className="fixed inset-0 z-[60] flex items-end justify-center bg-surface/80 backdrop-blur-sm sm:items-center sm:p-5" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setOpen(false)}>
-    <section className="max-h-[94dvh] w-full overflow-y-auto rounded-t-[2rem] bg-background p-5 shadow-2xl sm:max-w-2xl sm:rounded-[2rem] sm:p-8" role="dialog" aria-modal="true" aria-labelledby="quiz-title">
+    <section key={step} className="quiz-panel max-h-[94dvh] w-full overflow-y-auto rounded-t-[2rem] bg-background p-5 shadow-2xl sm:max-w-2xl sm:rounded-[2rem] sm:p-8" role="dialog" aria-modal="true" aria-labelledby="quiz-title">
       <div className="flex items-start justify-between gap-5">
         <div><p className="eyebrow text-primary">Подбор решения · {Math.min(step + 1, 4)} / 4</p><h2 id="quiz-title" className="mt-3 max-w-xl text-balance text-2xl font-bold tracking-tight sm:text-4xl">{status === 'success' ? 'Спасибо. Картина уже яснее.' : step < 3 ? current.title : 'Куда отправить рекомендации?'}</h2></div>
         <button type="button" onClick={() => setOpen(false)} className="flex size-11 shrink-0 items-center justify-center rounded-full border border-border" aria-label="Закрыть квиз"><X className="size-5" /></button>

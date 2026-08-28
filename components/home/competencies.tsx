@@ -6,7 +6,7 @@ export function Competencies() {
   return (
     <section id="capabilities" className="section-pad overflow-hidden bg-background">
       <div className="section-shell">
-        <div data-reveal className="grid gap-8 lg:grid-cols-[.7fr_1.3fr] lg:items-end">
+        <div data-reveal="clip" className="grid gap-8 lg:grid-cols-[.7fr_1.3fr] lg:items-end">
           <div>
             <p className="eyebrow text-primary">Что держим в работе</p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">Не разрозненные подрядчики, а один центр ответственности за весь ИТ-ландшафт.</p>
@@ -18,7 +18,7 @@ export function Competencies() {
             <article key={item.title} data-reveal style={{ '--reveal-delay': `${Math.min(index, 3) * 90}ms` } as React.CSSProperties} className={`motion-card group relative min-h-56 overflow-hidden rounded-[1.5rem] p-5 sm:min-h-64 sm:rounded-[2rem] sm:p-7 md:p-9 ${index === 0 ? 'bg-primary text-primary-foreground lg:col-span-7 lg:row-span-2' : index === 1 ? 'bg-accent text-accent-foreground lg:col-span-5' : index === 2 ? 'bg-surface text-surface-foreground lg:col-span-5' : 'border border-border bg-card lg:col-span-4'}`}>
               <div className="flex items-center justify-between">
                 <span className="font-mono text-xs opacity-55">0{index + 1}</span>
-                <ArrowUpRight className="size-5 opacity-50 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+                <ArrowUpRight className="size-5 opacity-50 transition-transform" />
               </div>
               <div className={index === 0 ? 'mt-14 sm:mt-24 md:mt-40' : 'mt-10 sm:mt-14'}>
                 <h3 className={index === 0 ? 'max-w-xl text-[2rem] font-semibold leading-none tracking-[-0.055em] sm:text-4xl md:text-6xl' : 'text-2xl font-semibold leading-tight tracking-[-0.04em]'}>{item.title}</h3>
