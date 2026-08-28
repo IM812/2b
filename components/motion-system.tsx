@@ -15,16 +15,12 @@ export function MotionSystem() {
     const constrained = reduceMotion || connection?.saveData === true || (mobile && lowPower)
 
     root.dataset.motion = constrained ? 'reduced' : 'ready'
-    if (constrained) return
-
-    const authoredTargets = Array.from(document.querySelectorAll<HTMLElement>('main [data-reveal]'))
-    if (!mobile && authoredTargets.length === 0) {
-      document.querySelectorAll<HTMLElement>('main section > div > *').forEach((target) => {
-        if (!target.closest('[data-reveal]')) target.dataset.reveal = target.matches('article, a') ? 'scale' : 'default'
-      })
-    }
-
     const targets = Array.from(document.querySelectorAll<HTMLElement>('main [data-reveal]'))
+    targets.forEach((target) => delete target.dataset.visible)
+    if (constrained) {
+      targets.forEach((target) => { target.dataset.visible = 'true' })
+      return
+    }
     targets.forEach((target, index) => {
       if (!target.style.getPropertyValue('--reveal-order')) {
         target.style.setProperty('--reveal-order', String(index % 6))
@@ -48,7 +44,13 @@ export function MotionSystem() {
       }
       observer.observe(target)
     })
-    return () => observer.disconnect()
+    const fallback = window.setTimeout(() => {
+      targets.forEach((target) => { target.dataset.visible = 'true' })
+    }, 1_800)
+    return () => {
+      window.clearTimeout(fallback)
+      observer.disconnect()
+    }
   }, [pathname])
 
   return null

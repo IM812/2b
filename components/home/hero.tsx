@@ -15,26 +15,26 @@ export function Hero() {
           <p className="hidden font-mono text-[10px] uppercase tracking-[.18em] text-muted-foreground md:block">Москва · 55.7579° N</p>
         </div>
 
-        <div className="relative mt-7 sm:mt-10 lg:min-h-[35rem]">
-          <h1 data-reveal="clip" className="relative z-10 max-w-[76rem] text-[clamp(3rem,16vw,4rem)] font-semibold leading-[.86] tracking-[-.07em] sm:text-[4.4rem] md:text-[clamp(4.4rem,10.5vw,10.5rem)] md:leading-[.79] md:tracking-[-.085em]">
+        <div className="mt-7 grid items-end gap-8 sm:mt-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,.55fr)] lg:gap-12">
+          <h1 data-reveal="clip" className="relative z-10 max-w-[62rem] text-[clamp(3rem,16vw,4rem)] font-semibold leading-[.9] tracking-[-.065em] sm:text-[clamp(4rem,10vw,6.75rem)] sm:leading-[.86] md:tracking-[-.075em]">
             Держим
-            <span className="block pl-5 text-primary sm:pl-10 md:pl-[10vw]">цифровой</span>
+            <span className="block pl-5 text-primary sm:pl-10 lg:pl-[6vw]">цифровой</span>
             <span className="block">контур.</span>
           </h1>
-          <div data-reveal style={{ '--reveal-delay': '140ms' } as React.CSSProperties} className="relative z-20 mt-8 max-w-xl sm:mt-10 lg:absolute lg:bottom-2 lg:right-0 lg:mt-0 lg:w-[31rem]">
+          <div data-reveal style={{ '--reveal-delay': '140ms' } as React.CSSProperties} className="relative z-20 max-w-xl lg:pb-2">
             <p className="text-lead text-foreground/72">Берём ответственность за инфраструктуру, корпоративные системы и поддержку крупных организаций.</p>
-            <div className="mt-6 flex flex-col gap-2.5 min-[380px]:flex-row sm:mt-7 sm:flex-wrap sm:gap-3">
+            <div className="mt-6 flex flex-col gap-2.5 min-[380px]:flex-row sm:flex-wrap sm:gap-3">
               <LeadFormTrigger className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-accent px-5 py-3 text-sm font-bold text-accent-foreground motion-lift sm:px-6 sm:py-3.5">Обсудить задачу <ArrowRight className="size-4" /></LeadFormTrigger>
               <Link href="/projects" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-border bg-card px-5 py-3 text-sm font-bold motion-lift sm:px-6 sm:py-3.5">Проекты</Link>
             </div>
           </div>
         </div>
 
-        <div data-reveal="line" style={{ '--reveal-delay': '220ms' } as React.CSSProperties} className="relative mt-10 sm:mt-16 lg:mt-24">
-          <div className="lg:mr-52"><SignalPulse /></div>
-          <div className="mt-3 grid grid-cols-2 gap-2 sm:mt-4 sm:gap-4 lg:absolute lg:-bottom-10 lg:right-0 lg:mt-0 lg:w-[27rem] lg:rotate-[-2deg]">
-            <div className="rounded-[1.25rem] bg-primary p-4 text-primary-foreground sm:rounded-[2rem] sm:p-7 sm:shadow-2xl"><p className="eyebrow opacity-55">Под управлением</p><p className="num mt-5 text-4xl sm:mt-9 sm:text-6xl">8 500</p><p className="mt-2 text-xs opacity-70 sm:text-sm">пользователей ежедневно</p></div>
-            <div className="rounded-[1.25rem] bg-accent p-4 text-accent-foreground sm:rounded-[2rem] sm:p-7 sm:shadow-2xl"><div className="flex items-center gap-2 text-xs font-bold sm:text-sm"><Check className="size-4" /> На связи</div><p className="num mt-5 text-3xl sm:mt-9 sm:text-5xl">15 мин</p><p className="mt-2 text-xs opacity-70 sm:text-sm">норматив реакции</p></div>
+        <div data-reveal="line" style={{ '--reveal-delay': '220ms' } as React.CSSProperties} className="mt-10 grid items-stretch gap-3 sm:mt-16 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_22rem]">
+          <SignalPulse />
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-1">
+            <div className="flex min-h-40 flex-col justify-between rounded-[1.25rem] bg-primary p-4 text-primary-foreground sm:min-h-48 sm:rounded-[2rem] sm:p-7"><p className="eyebrow opacity-55">Под управлением</p><div><p className="num mt-5 text-4xl sm:text-6xl">8 500</p><p className="mt-2 text-xs opacity-70 sm:text-sm">пользователей ежедневно</p></div></div>
+            <div className="flex min-h-40 flex-col justify-between rounded-[1.25rem] bg-accent p-4 text-accent-foreground sm:min-h-48 sm:rounded-[2rem] sm:p-7"><div className="flex items-center gap-2 text-xs font-bold sm:text-sm"><Check className="size-4" /> На связи</div><div><p className="num mt-5 text-3xl sm:text-5xl">15 мин</p><p className="mt-2 text-xs opacity-70 sm:text-sm">норматив реакции</p></div></div>
           </div>
         </div>
 
