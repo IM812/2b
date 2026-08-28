@@ -26,14 +26,19 @@ function escapeHtml(value: string) {
 
 function isAllowedRequestOrigin(request: Request) {
   const origin = request.headers.get('origin')
-  if (!origin) return false
+  const fetchSite = request.headers.get('sec-fetch-site')
+
+  if (fetchSite === 'same-origin' || fetchSite === 'same-site') return true
+  if (!origin || fetchSite === 'cross-site') return false
 
   try {
-    const originUrl = new URL(origin)
-    const forwardedHost = request.headers.get('x-forwarded-host')?.split(',')[0]?.trim()
-    const requestHost = forwardedHost || request.headers.get('host') || new URL(request.url).host
-    const fetchSite = request.headers.get('sec-fetch-site')
-    return originUrl.host === requestHost && (!fetchSite || fetchSite === 'same-origin' || fetchSite === 'same-site')
+    const originHost = new URL(origin).host
+    const hosts = [
+      request.headers.get('x-forwarded-host')?.split(',')[0]?.trim(),
+      request.headers.get('host'),
+      new URL(request.url).host,
+    ].filter(Boolean)
+    return hosts.includes(originHost)
   } catch {
     return false
   }
