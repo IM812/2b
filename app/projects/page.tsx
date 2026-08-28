@@ -18,7 +18,6 @@ export default function ProjectsPage() {
           <span className="mt-8 inline-flex items-center gap-2 text-sm font-bold">Смотреть кейс <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"/></span>
         </div>
         <div className="flex flex-col justify-between gap-6 border-t border-current/15 pt-6 md:border-l md:border-t-0 md:pl-8 md:pt-0">
-          {project.contractValue && <div><p className="text-4xl font-black tracking-tighter text-primary md:text-5xl">{project.contractValue}</p><p className="mt-1 text-xs uppercase tracking-widest opacity-50">Стоимость договора</p></div>}
           <div className="flex flex-wrap gap-2">{project.stack.slice(0,4).map(s=><span key={s} className="rounded-full border border-current/20 px-3 py-1 text-xs">{s}</span>)}</div>
         </div>
       </Link>)}

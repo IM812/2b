@@ -35,7 +35,7 @@ export function SiteFooter() {
         </div>
         <div className="mt-12 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted-foreground md:flex-row md:justify-between">
           <p>© {new Date().getFullYear()} 2В Сервис</p>
-          <p>Москва, ул. 1-я Миусская, д. 20, стр. 5</p>
+          <p>БЦ «Башня Империя», Москва, Пресненская набережная, 6с2</p>
         </div>
       </div>
     </footer>

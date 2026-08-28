@@ -21,7 +21,7 @@ export function FlagshipProjects() {
             <div className="flex items-center justify-between"><p className="eyebrow text-white/60">{featured.clientShort} · {featured.industry}</p><ArrowUpRight className="size-8 transition-transform group-hover:-translate-y-2 group-hover:translate-x-2" /></div>
             <div className="grid gap-8 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
               <h3 className="text-pretty text-[2.15rem] font-semibold leading-[.93] tracking-[-.055em] sm:text-5xl md:text-8xl">{featured.title}</h3>
-              <div className="lg:border-l lg:border-white/20 lg:pl-8"><p className="num text-5xl text-accent md:text-7xl">{featured.contractValue || '24/7'}</p><p className="mt-5 text-sm leading-relaxed text-white/65">{featured.summary}</p></div>
+              <div className="lg:border-l lg:border-white/20 lg:pl-8"><p className="text-sm leading-relaxed text-white/65 md:text-base">{featured.summary}</p></div>
             </div>
           </div>
         </Link>
