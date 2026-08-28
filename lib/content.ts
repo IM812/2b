@@ -36,7 +36,7 @@ export const PROJECTS: Project[] = [
       'Единое информационное пространство документационного обеспечения, сокращение сроков согласования документов, прозрачный контроль исполнения поручений. Система находится на технической поддержке 2В Сервис.',
     timeline: 'Действующий договор, многолетнее сопровождение',
     stack: ['КАСУД', 'Интеграционная шина', 'Электронная подпись', 'Регламентные отчеты'],
-    image: '/images/case-document-system.png',
+    image: '/images/project-kasud.png',
   },
   {
     slug: 'aeroflot-support',
@@ -56,7 +56,7 @@ export const PROJECTS: Project[] = [
       'Стабильная эксплуатация систем, снижение количества повторяющихся инцидентов, регулярные релизы доработок по запросам бизнес-подразделений.',
     timeline: 'Действующий договор',
     stack: ['Техническая поддержка', 'SLA', 'Развитие функциональности'],
-    image: '/images/case-aviation.png',
+    image: '/images/project-support.png',
   },
   {
     slug: 'aeroflot-integration',
@@ -75,7 +75,7 @@ export const PROJECTS: Project[] = [
     result: 'Единое согласованное информационное пространство без дублирования данных и ручных операций.',
     timeline: 'Реализован в рамках действующих договоров',
     stack: ['API', 'Шина данных', 'НСИ', 'Мониторинг'],
-    image: '/images/case-integration.png',
+    image: '/images/project-integration.png',
   },
   {
     slug: 'exat-infrastructure',
@@ -91,7 +91,7 @@ export const PROJECTS: Project[] = [
     result: 'Единая управляемая среда с резервированием данных и постоянным инженерным сопровождением.',
     timeline: 'Миграция и дальнейшее сопровождение',
     stack: ['Colocation', 'Администрирование', 'Backup', 'Мониторинг'],
-    image: '/images/case-integration.png',
+    image: '/images/project-migration.png',
   },
   {
     slug: 'office-launch',
@@ -107,7 +107,7 @@ export const PROJECTS: Project[] = [
     result: 'Офис начал работу в срок с готовой и документированной инфраструктурой.',
     timeline: 'Оперативный запуск объекта',
     stack: ['СКС', 'LAN/Wi-Fi', 'IP-телефония', 'CCTV'],
-    image: '/images/case-infrastructure.png',
+    image: '/images/project-office.png',
   },
 ]
 
@@ -201,7 +201,7 @@ export const CORE_COMPETENCIES: Competency[] = [
       'Обеспечиваем стабильную эксплуатацию корпоративных систем, устраняем инциденты, консультируем пользователей и сопровождаем изменения.',
     details: [
       'Многоуровневая поддержка по SLA',
-      'Устранение инцидентов и мониторинг си��тем',
+      'Устранение инцидентов и мониторинг систем',
       'Консультирование пользователей',
       'Сопровождение изменений в промышленной эксплуатации',
     ],

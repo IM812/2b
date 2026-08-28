@@ -1,8 +1,11 @@
 'use client'
 
 import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 export function MotionSystem() {
+  const pathname = usePathname()
+
   useEffect(() => {
     const root = document.documentElement
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -12,7 +15,14 @@ export function MotionSystem() {
     root.dataset.motion = constrained ? 'reduced' : 'ready'
     if (constrained) return
 
-    const targets = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'))
+    const authoredTargets = Array.from(document.querySelectorAll<HTMLElement>('main [data-reveal]'))
+    if (authoredTargets.length === 0) {
+      document.querySelectorAll<HTMLElement>('main section > div > *').forEach((target) => {
+        if (!target.closest('[data-reveal]')) target.dataset.reveal = target.matches('article, a') ? 'scale' : 'default'
+      })
+    }
+
+    const targets = Array.from(document.querySelectorAll<HTMLElement>('main [data-reveal]'))
     targets.forEach((target, index) => {
       if (!target.style.getPropertyValue('--reveal-order')) {
         target.style.setProperty('--reveal-order', String(index % 6))
@@ -37,7 +47,7 @@ export function MotionSystem() {
       observer.observe(target)
     })
     return () => observer.disconnect()
-  }, [])
+  }, [pathname])
 
   return null
 }
