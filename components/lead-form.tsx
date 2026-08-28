@@ -75,7 +75,7 @@ export function LeadForm({ compact = false, onSuccess, source = 'form', heading,
           <Input name="name" required minLength={2} maxLength={80} autoComplete="name" placeholder="Как к вам обращаться" className={controlClass} />
         </label>
         <label className={labelClass}>Телефон
-          <Input name="phone" type="tel" required minLength={7} maxLength={30} autoComplete="tel" inputMode="tel" placeholder="+7 000 000-00-00" className={controlClass} />
+          <Input name="phone" type="tel" required minLength={11} maxLength={18} autoComplete="tel" inputMode="tel" placeholder="+7 000 000-00-00" pattern="(?:\+7|7|8)(?:(?: |\(|\)|-)*[0-9]){10}" title="Введите российский номер: +7 000 000-00-00" className={controlClass} />
         </label>
       </div>
       <label className={cn(labelClass, 'mt-6')}>{messageLabel}

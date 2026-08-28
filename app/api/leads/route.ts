@@ -24,11 +24,28 @@ function escapeHtml(value: string) {
   })[character] ?? character)
 }
 
-export async function POST(request: Request) {
-  const requestOrigin = new URL(request.url).origin
+function isAllowedRequestOrigin(request: Request) {
   const origin = request.headers.get('origin')
-  const fetchSite = request.headers.get('sec-fetch-site')
-  if (origin !== requestOrigin || (fetchSite && fetchSite !== 'same-origin')) {
+  if (!origin) return false
+
+  try {
+    const originUrl = new URL(origin)
+    const forwardedHost = request.headers.get('x-forwarded-host')?.split(',')[0]?.trim()
+    const requestHost = forwardedHost || request.headers.get('host') || new URL(request.url).host
+    const fetchSite = request.headers.get('sec-fetch-site')
+    return originUrl.host === requestHost && (!fetchSite || fetchSite === 'same-origin' || fetchSite === 'same-site')
+  } catch {
+    return false
+  }
+}
+
+function isValidRussianPhone(value: string) {
+  const digits = value.replace(/\D/g, '')
+  return digits.length === 11 && (digits.startsWith('7') || digits.startsWith('8'))
+}
+
+export async function POST(request: Request) {
+  if (!isAllowedRequestOrigin(request)) {
     return NextResponse.json({ error: 'Источник запроса не разрешён.' }, { status: 403 })
   }
 
@@ -90,8 +107,8 @@ export async function POST(request: Request) {
   const scale = clean(body.scale, 100)
   const timeline = clean(body.timeline, 100)
 
-  if (name.length < 2 || !/^\+?[\d\s()\-]{7,20}$/.test(phone) || message.length < 5) {
-    return NextResponse.json({ error: 'Проверьте имя, телефон и описание задачи.' }, { status: 400 })
+  if (name.length < 2 || !isValidRussianPhone(phone) || message.length < 5) {
+    return NextResponse.json({ error: 'Проверьте имя, российский номер телефона и описание задачи.' }, { status: 400 })
   }
 
   if (source === 'quiz' && (!taskType || !scale || !timeline)) {
