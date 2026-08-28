@@ -16,7 +16,7 @@ export function Hero() {
         </div>
 
         <div className="relative mt-7 sm:mt-10 lg:min-h-[35rem]">
-          <h1 data-reveal="clip" className="relative z-10 max-w-[76rem] text-[3.45rem] font-semibold leading-[.82] tracking-[-.075em] min-[360px]:text-[3.8rem] sm:text-[4.4rem] md:text-[clamp(4.4rem,10.5vw,10.5rem)] md:leading-[.79] md:tracking-[-.085em]">
+          <h1 data-reveal="clip" className="relative z-10 max-w-[76rem] text-[clamp(3rem,16vw,4rem)] font-semibold leading-[.86] tracking-[-.07em] sm:text-[4.4rem] md:text-[clamp(4.4rem,10.5vw,10.5rem)] md:leading-[.79] md:tracking-[-.085em]">
             Держим
             <span className="block pl-5 text-primary sm:pl-10 md:pl-[10vw]">цифровой</span>
             <span className="block">контур.</span>
@@ -32,13 +32,13 @@ export function Hero() {
 
         <div data-reveal="line" style={{ '--reveal-delay': '220ms' } as React.CSSProperties} className="relative mt-10 sm:mt-16 lg:mt-24">
           <div className="lg:mr-52"><SignalPulse /></div>
-          <div className="mt-3 grid gap-3 sm:mt-4 sm:grid-cols-2 sm:gap-4 lg:absolute lg:-bottom-10 lg:right-0 lg:mt-0 lg:w-[27rem] lg:rotate-[-2deg]">
-            <div className="rounded-[1.5rem] bg-primary p-5 text-primary-foreground shadow-2xl sm:rounded-[2rem] sm:p-7"><p className="eyebrow opacity-55">Под управлением</p><p className="num mt-6 text-5xl sm:mt-9 sm:text-6xl">8 500</p><p className="mt-2 text-sm opacity-70">пользователей ежедневно</p></div>
-            <div className="rounded-[1.5rem] bg-accent p-5 text-accent-foreground shadow-2xl sm:rounded-[2rem] sm:p-7"><div className="flex items-center gap-2 text-sm font-bold"><Check className="size-4" /> На связи</div><p className="num mt-6 text-4xl sm:mt-9 sm:text-5xl">15 мин</p><p className="mt-2 text-sm opacity-70">норматив реакции</p></div>
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:mt-4 sm:gap-4 lg:absolute lg:-bottom-10 lg:right-0 lg:mt-0 lg:w-[27rem] lg:rotate-[-2deg]">
+            <div className="rounded-[1.25rem] bg-primary p-4 text-primary-foreground sm:rounded-[2rem] sm:p-7 sm:shadow-2xl"><p className="eyebrow opacity-55">Под управлением</p><p className="num mt-5 text-4xl sm:mt-9 sm:text-6xl">8 500</p><p className="mt-2 text-xs opacity-70 sm:text-sm">пользователей ежедневно</p></div>
+            <div className="rounded-[1.25rem] bg-accent p-4 text-accent-foreground sm:rounded-[2rem] sm:p-7 sm:shadow-2xl"><div className="flex items-center gap-2 text-xs font-bold sm:text-sm"><Check className="size-4" /> На связи</div><p className="num mt-5 text-3xl sm:mt-9 sm:text-5xl">15 мин</p><p className="mt-2 text-xs opacity-70 sm:text-sm">норматив реакции</p></div>
           </div>
         </div>
 
-        <a href="#capabilities" className="mt-20 inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.2em] text-muted-foreground"><ArrowDown className="size-4" /> Смотреть возможности</a>
+        <a href="#capabilities" className="mt-12 inline-flex min-h-11 items-center gap-3 font-mono text-[10px] uppercase tracking-[.16em] text-muted-foreground sm:mt-20 sm:tracking-[.2em]"><ArrowDown className="size-4" /> Смотреть возможности</a>
       </div>
     </section>
   )

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { NAV_ITEMS } from '@/lib/nav'
 import { LeadFormTrigger } from '@/components/lead-form-trigger'
@@ -13,9 +13,21 @@ export function SiteHeader() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
 
+  useEffect(() => {
+    if (!open) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const closeOnEscape = (event: KeyboardEvent) => event.key === 'Escape' && setOpen(false)
+    window.addEventListener('keydown', closeOnEscape)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [open])
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background/80 backdrop-blur-xl">
-      <div className="section-shell flex h-16 items-center justify-between md:h-18">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/85 md:backdrop-blur-xl">
+      <div className="section-shell flex h-16 items-center justify-between pt-[env(safe-area-inset-top)] md:h-18">
         <Link href="/" className="flex items-center gap-2.5 sm:gap-3" onClick={() => setOpen(false)} aria-label="2В Сервис — на главную">
           <BrandMark className="size-10" />
           <span className="text-sm font-bold tracking-[-0.02em]">Сервис</span>
@@ -30,7 +42,7 @@ export function SiteHeader() {
         <button type="button" className="flex size-11 items-center justify-center lg:hidden" onClick={() => setOpen(!open)} aria-label={open ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={open}>{open ? <X /> : <Menu />}</button>
       </div>
       {open && (
-        <nav className="mobile-menu fixed inset-x-0 top-16 flex h-[calc(100dvh-4rem)] flex-col overflow-y-auto bg-background text-foreground lg:hidden" aria-label="Мобильная навигация">
+        <nav className="mobile-menu fixed inset-x-0 top-16 flex h-[calc(100dvh-4rem)] flex-col overflow-y-auto bg-background text-foreground lg:hidden" aria-label="Мобильная навигация" aria-modal="true">
           <ul className="flex flex-1 flex-col px-5 pt-5">
             {NAV_ITEMS.map((item, index) => (
               <li key={item.href} className="mobile-menu-item" style={{ '--menu-index': index } as React.CSSProperties}>

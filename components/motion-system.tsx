@@ -10,13 +10,15 @@ export function MotionSystem() {
     const root = document.documentElement
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
-    const constrained = reduceMotion || connection?.saveData === true
+    const mobile = window.matchMedia('(max-width: 767px)').matches
+    const lowPower = typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 4
+    const constrained = reduceMotion || connection?.saveData === true || (mobile && lowPower)
 
     root.dataset.motion = constrained ? 'reduced' : 'ready'
     if (constrained) return
 
     const authoredTargets = Array.from(document.querySelectorAll<HTMLElement>('main [data-reveal]'))
-    if (authoredTargets.length === 0) {
+    if (!mobile && authoredTargets.length === 0) {
       document.querySelectorAll<HTMLElement>('main section > div > *').forEach((target) => {
         if (!target.closest('[data-reveal]')) target.dataset.reveal = target.matches('article, a') ? 'scale' : 'default'
       })

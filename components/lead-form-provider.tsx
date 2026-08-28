@@ -44,8 +44,8 @@ export function LeadFormProvider() {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-surface/75 p-0 backdrop-blur-sm sm:items-center sm:p-5" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && close()}>
-      <section className="max-h-[92dvh] w-full overflow-y-auto rounded-t-[2rem] bg-background p-4 shadow-2xl sm:max-w-xl sm:rounded-[2rem] sm:p-6" role="dialog" aria-modal="true" aria-labelledby="lead-form-title" onKeyDown={(event) => event.key === 'Escape' && close()}>
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-surface/80 p-0 sm:items-center sm:bg-surface/75 sm:p-5 sm:backdrop-blur-sm" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && close()}>
+      <section className="max-h-[calc(100dvh-env(safe-area-inset-top))] w-full overscroll-contain overflow-y-auto rounded-t-[1.5rem] bg-background p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:max-h-[92dvh] sm:max-w-xl sm:rounded-[2rem] sm:p-6 sm:shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="lead-form-title" onKeyDown={(event) => event.key === 'Escape' && close()}>
         <div className="mb-4 flex items-start justify-between gap-4 px-1 pt-1 sm:mb-6">
           <div>
             <p className="eyebrow text-primary">Обсудить задачу</p>
