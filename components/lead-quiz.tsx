@@ -1,9 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Check, X } from 'lucide-react'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 
@@ -23,9 +22,11 @@ export function LeadQuiz() {
   const [status, setStatus] = useState<'idle' | 'pending' | 'success'>('idle')
   const [error, setError] = useState('')
 
-  useState(() => {
-    if (typeof window !== 'undefined') window.addEventListener(OPEN_QUIZ_EVENT, () => setOpen(true))
-  })
+  useEffect(() => {
+    const openQuiz = () => setOpen(true)
+    window.addEventListener(OPEN_QUIZ_EVENT, openQuiz)
+    return () => window.removeEventListener(OPEN_QUIZ_EVENT, openQuiz)
+  }, [])
 
   const current = steps[step]
   function choose(value: string) {
@@ -36,13 +37,18 @@ export function LeadQuiz() {
   async function submit(formData: FormData) {
     setStatus('pending')
     setError('')
-    const response = await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
-      name: formData.get('name'), phone: formData.get('phone'), message: formData.get('message') || 'Запрос на подбор решения', website: formData.get('website'), consent: formData.get('consent') === 'on', source: 'quiz', ...answers,
-    }) })
-    const result = await response.json()
-    if (!response.ok) { setError(result.error || 'Не удалось отправить заявку.'); setStatus('idle'); return }
-    setStatus('success')
-    sessionStorage.setItem('lead-form-sent', 'true')
+    try {
+      const response = await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+        name: formData.get('name'), phone: formData.get('phone'), message: formData.get('message') || 'Запрос на подбор решения', website: formData.get('website'), consent: formData.get('consent') === 'on', source: 'quiz', ...answers,
+      }) })
+      const result = await response.json()
+      if (!response.ok) throw new Error(result.error || 'Не удалось отправить заявку.')
+      setStatus('success')
+      sessionStorage.setItem('lead-form-sent', 'true')
+    } catch (submitError) {
+      setError(submitError instanceof Error ? submitError.message : 'Не удалось отправить заявку.')
+      setStatus('idle')
+    }
   }
 
   if (!open) return null
@@ -57,7 +63,7 @@ export function LeadQuiz() {
         <div className="grid gap-5 sm:grid-cols-2"><label className="flex flex-col gap-2 text-xs font-bold uppercase tracking-widest">Имя<Input name="name" required minLength={2} autoComplete="name" placeholder="Как к вам обращаться" /></label><label className="flex flex-col gap-2 text-xs font-bold uppercase tracking-widest">Телефон<Input name="phone" required minLength={7} autoComplete="tel" inputMode="tel" placeholder="+7 000 000-00-00" /></label></div>
         <label className="flex flex-col gap-2 text-xs font-bold uppercase tracking-widest">Комментарий<Textarea name="message" rows={3} placeholder="Необязательно — добавьте важные детали" /></label>
         <input name="website" className="sr-only" tabIndex={-1} autoComplete="off" />
-        <label className="flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-muted-foreground"><Checkbox name="consent" required aria-label="Согласие на обработку персональных данных" /><span>Я принимаю <Link href="/personal-data-consent" className="underline underline-offset-2">согласие на обработку персональных данных</Link> и <Link href="/privacy" className="underline underline-offset-2">политику конфиденциальности</Link>.</span></label>
+        <label className="flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-muted-foreground"><input type="checkbox" name="consent" required className="mt-0.5 size-4 shrink-0 accent-primary" aria-label="Согласие на обработку персональных данных" /><span>Я принимаю <Link href="/personal-data-consent" className="underline underline-offset-2">согласие на обработку персональных данных</Link> и <Link href="/privacy" className="underline underline-offset-2">политику конфиденциальности</Link>.</span></label>
         {error && <p className="text-sm font-semibold text-destructive" role="alert">{error}</p>}
         <button disabled={status === 'pending'} className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-foreground px-7 py-3 font-bold text-background disabled:opacity-60">{status === 'pending' ? 'Отправляем…' : 'Получить рекомендации'}<ArrowRight className="size-5" /></button>
       </form>}

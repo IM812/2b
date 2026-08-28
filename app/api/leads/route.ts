@@ -75,6 +75,7 @@ export async function POST(request: Request) {
     '',
     `<b>Имя:</b> ${escapeHtml(name)}`,
     `<b>Телефон:</b> ${escapeHtml(phone)}`,
+    `<b>Тип обращения:</b> ${escapeHtml(source === 'career' ? 'Открытый отклик' : source === 'contact' ? 'Контактная форма' : source === 'quiz' ? 'Квиз' : 'Форма заявки')}`,
     `<b>Задача:</b> ${escapeHtml(message)}`,
     ...(source === 'quiz' ? [
       '',

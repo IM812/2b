@@ -10,7 +10,10 @@ export function PageHero({ eyebrow, title, description, className }: PageHeroPro
         <div className="absolute inset-24 rounded-full bg-primary" />
       </div>
       <div className="section-shell relative">
-        <div className="flex items-center gap-3"><span className="signal-dot" /><p className="eyebrow text-surface-foreground/55">{eyebrow}</p></div>
+        <div className="flex items-center justify-between gap-6 border-b border-white/15 pb-5">
+          <div className="flex items-center gap-3"><span className="signal-dot" /><p className="eyebrow text-surface-foreground/55">{eyebrow}</p></div>
+          <p className="hidden font-mono text-[10px] uppercase tracking-[.2em] text-surface-foreground/35 sm:block">Москва · Работаем по всей России</p>
+        </div>
         <h1 className="display-title mt-6 max-w-[65rem] break-words text-balance sm:mt-8">{title}</h1>
         {description && (
           <div className="mt-8 flex flex-col gap-4 border-t border-white/15 pt-6 sm:mt-12 sm:gap-6 sm:pt-8 md:flex-row md:items-start md:justify-between">
