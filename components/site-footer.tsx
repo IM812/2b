@@ -33,8 +33,15 @@ export function SiteFooter() {
             ))}
           </nav>
         </div>
-        <div className="mt-12 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted-foreground md:flex-row md:justify-between">
-          <p>© {new Date().getFullYear()} 2В Сервис</p>
+        <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 text-xs text-muted-foreground md:flex-row md:items-end md:justify-between">
+          <div className="flex flex-col gap-2">
+            <p>© {new Date().getFullYear()} 2В Сервис</p>
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
+              <Link href="/privacy" className="hover:text-foreground">Политика конфиденциальности</Link>
+              <Link href="/personal-data-consent" className="hover:text-foreground">Согласие на обработку ПДн</Link>
+              <Link href="/cross-border-consent" className="hover:text-foreground">Трансграничная передача</Link>
+            </div>
+          </div>
           <p>БЦ «Башня Империя», Москва, Пресненская набережная, 6с2</p>
         </div>
       </div>

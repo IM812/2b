@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowDown, ArrowRight, Check } from 'lucide-react'
 import { SignalPulse } from '@/components/signal-pulse'
+import { LeadFormTrigger } from '@/components/lead-form-trigger'
 
 export function Hero() {
   return (
@@ -23,7 +24,7 @@ export function Hero() {
           <div className="relative z-20 mt-8 max-w-xl sm:mt-10 lg:absolute lg:bottom-2 lg:right-0 lg:mt-0 lg:w-[31rem]">
             <p className="text-lead text-foreground/72">Берём ответственность за инфраструктуру, корпоративные системы и поддержку крупных организаций.</p>
             <div className="mt-6 flex flex-col gap-2.5 min-[380px]:flex-row sm:mt-7 sm:flex-wrap sm:gap-3">
-              <Link href="/contacts" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-accent px-5 py-3 text-sm font-bold text-accent-foreground transition-transform hover:-translate-y-1 sm:px-6 sm:py-3.5">Обсудить задачу <ArrowRight className="size-4" /></Link>
+              <LeadFormTrigger className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-accent px-5 py-3 text-sm font-bold text-accent-foreground transition-transform hover:-translate-y-1 sm:px-6 sm:py-3.5">Обсудить задачу <ArrowRight className="size-4" /></LeadFormTrigger>
               <Link href="/projects" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-border bg-card px-5 py-3 text-sm font-bold transition-transform hover:-translate-y-1 sm:px-6 sm:py-3.5">Проекты</Link>
             </div>
           </div>

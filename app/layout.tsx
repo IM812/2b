@@ -1,8 +1,8 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Manrope, IBM_Plex_Mono } from 'next/font/google'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
+import { LeadFormProvider } from '@/components/lead-form-provider'
 import './globals.css'
 
 const _manrope = Manrope({
@@ -60,7 +60,7 @@ export default function RootLayout({
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <LeadFormProvider />
       </body>
     </html>
   )
