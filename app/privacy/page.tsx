@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { LegalPage } from '@/components/legal-page'
 
-export const metadata: Metadata = { title: 'Политика конфиденциальности — 2В Сервис', description: 'Политика обработки персональных данных АО «2В Сервис».' }
+export const metadata: Metadata = { title: 'Политика обработки персональных данных', description: 'Политика обработки персональных данных АО «2В Сервис».', alternates: { canonical: '/privacy' }, robots: { index: false, follow: true } }
 
 export default function PrivacyPage() {
   return <LegalPage eyebrow="Персональные данные" title="Политика обработки персональных данных" updated="28 августа 2026 года">

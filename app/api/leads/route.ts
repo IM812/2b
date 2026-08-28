@@ -4,7 +4,7 @@ const attempts = new Map<string, { count: number; resetAt: number }>()
 const WINDOW_MS = 10 * 60 * 1000
 const MAX_ATTEMPTS = 5
 const MAX_BODY_BYTES = 6_000
-const BASE_FIELDS = new Set(['name', 'phone', 'message', 'website', 'consent', 'source'])
+const BASE_FIELDS = new Set(['name', 'phone', 'message', 'website', 'consent', 'source', 'submittedAt'])
 const QUIZ_FIELDS = new Set([...BASE_FIELDS, 'taskType', 'scale', 'timeline'])
 const ALLOWED_SOURCES = new Set(['form', 'contact', 'career', 'quiz'])
 
@@ -25,6 +25,13 @@ function escapeHtml(value: string) {
 }
 
 export async function POST(request: Request) {
+  const requestOrigin = new URL(request.url).origin
+  const origin = request.headers.get('origin')
+  const fetchSite = request.headers.get('sec-fetch-site')
+  if (origin !== requestOrigin || (fetchSite && fetchSite !== 'same-origin')) {
+    return NextResponse.json({ error: 'Источник запроса не разрешён.' }, { status: 403 })
+  }
+
   const contentType = request.headers.get('content-type') ?? ''
   const contentLength = Number(request.headers.get('content-length') ?? 0)
   if (!contentType.toLowerCase().startsWith('application/json') || contentLength > MAX_BODY_BYTES) {
@@ -61,6 +68,12 @@ export async function POST(request: Request) {
   }
 
   if (body.website) return NextResponse.json({ ok: true })
+
+  const submittedAt = typeof body.submittedAt === 'number' ? body.submittedAt : 0
+  const formAge = Date.now() - submittedAt
+  if (!Number.isFinite(submittedAt) || formAge < 1_500 || formAge > 2 * 60 * 60 * 1_000) {
+    return NextResponse.json({ error: 'Обновите страницу и повторите отправку.' }, { status: 400 })
+  }
 
   const rawSource = clean(body.source, 20)
   const source = ALLOWED_SOURCES.has(rawSource) ? rawSource : ''

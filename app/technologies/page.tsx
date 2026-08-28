@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { TechnologiesIntro } from '@/components/editorial/page-intros'
 import { TECH_AREAS, INDUSTRIES } from '@/lib/content'
 
-export const metadata: Metadata = { title: 'Технологии и экспертиза — 2В Сервис', description: 'Архитектура, интеграция, данные, безопасность и эксплуатация enterprise-систем.' }
+export const metadata: Metadata = { title: 'Технологии и ИТ-архитектура', description: 'Проектирование архитектуры, интеграция, управление данными, безопасность и эксплуатация корпоративных ИТ-систем.', alternates: { canonical: '/technologies' }, openGraph: { url: '/technologies', title: 'Технологии и ИТ-архитектура | 2В Сервис', description: 'Технологический стек, выбранный под процессы, данные и требования эксплуатации.' } }
 const LAYERS=[['Процессы','Документооборот, BPM и корпоративные порталы'],['Данные','Миграция, НСИ и контролируемый обмен'],['Интеграция','API, шины и связь с действующим ландшафтом'],['Эксплуатация','Отказоустойчивость, безопасность и поддержка']]
 
 export default function TechnologiesPage(){return <>

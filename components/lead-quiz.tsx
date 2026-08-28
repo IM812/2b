@@ -21,6 +21,7 @@ export function LeadQuiz() {
   const [answers, setAnswers] = useState<Answers>({ taskType: '', scale: '', timeline: '' })
   const [status, setStatus] = useState<'idle' | 'pending' | 'success'>('idle')
   const [error, setError] = useState('')
+  const [formStartedAt] = useState(() => Date.now())
 
   useEffect(() => {
     const openQuiz = () => setOpen(true)
@@ -39,7 +40,7 @@ export function LeadQuiz() {
     setError('')
     try {
       const response = await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
-        name: formData.get('name'), phone: formData.get('phone'), message: formData.get('message') || 'Запрос на подбор решения', website: formData.get('website'), consent: formData.get('consent') === 'on', source: 'quiz', ...answers,
+        name: formData.get('name'), phone: formData.get('phone'), message: formData.get('message') || 'Запрос на подбор решения', website: formData.get('website'), consent: formData.get('consent') === 'on', source: 'quiz', submittedAt: formStartedAt, ...answers,
       }) })
       const result = await response.json()
       if (!response.ok) throw new Error(result.error || 'Не удалось отправить заявку.')

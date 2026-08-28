@@ -5,7 +5,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { ProjectsIntro } from '@/components/editorial/page-intros'
 import { PROJECTS } from '@/lib/content'
 
-export const metadata: Metadata = { title: 'Проекты — 2В Сервис', description: 'Проекты внедрения, интеграции и поддержки критичных ИТ-систем.' }
+export const metadata: Metadata = { title: 'Проекты и кейсы', description: 'Реализованные проекты 2В Сервис: корпоративные системы, интеграция, ИТ-инфраструктура и многолетняя поддержка.', alternates: { canonical: '/projects' }, openGraph: { url: '/projects', title: 'Проекты и кейсы | 2В Сервис', description: 'Практический опыт внедрения и сопровождения критичных ИТ-систем.' } }
 
 export default function ProjectsPage() {
   return <>

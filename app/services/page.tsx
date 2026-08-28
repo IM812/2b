@@ -4,7 +4,7 @@ import { LeadFormTrigger } from '@/components/lead-form-trigger'
 import { ServicesIntro } from '@/components/editorial/page-intros'
 import { CORE_COMPETENCIES, PROCESS_STEPS } from '@/lib/content'
 
-export const metadata: Metadata = { title: 'Решения и услуги — 2В Сервис', description: 'Комплексные ИТ-проекты: инфраструктура, корпоративные системы, интеграция и поддержка.' }
+export const metadata: Metadata = { title: 'ИТ-услуги для бизнеса', description: 'ИТ-аутсорсинг, инфраструктура, корпоративные системы, информационная безопасность, интеграция и поддержка по SLA.', alternates: { canonical: '/services' }, openGraph: { url: '/services', title: 'ИТ-услуги для бизнеса | 2В Сервис', description: 'Комплексные ИТ-проекты: от обследования и архитектуры до внедрения и эксплуатации.' } }
 
 export default function ServicesPage() {
   return <>

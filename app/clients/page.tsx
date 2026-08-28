@@ -4,7 +4,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { ClientsIntro } from '@/components/editorial/page-intros'
 import { PROJECTS } from '@/lib/content'
 
-export const metadata: Metadata = { title: 'Клиенты — 2В Сервис', description: 'Опыт 2В Сервис с авиационными, транспортными и цифровыми компаниями.' }
+export const metadata: Metadata = { title: 'Клиенты и форматы работы', description: 'Опыт 2В Сервис в авиации, TravelTech и корпоративной инфраструктуре: внедрение, развитие и поддержка по SLA.', alternates: { canonical: '/clients' }, openGraph: { url: '/clients', title: 'Клиенты и форматы работы | 2В Сервис', description: 'Проектное внедрение, развитие систем и многолетнее сопровождение.' } }
 const FORMATS=[['Проект внедрения','Полный цикл с фиксированными этапами и критериями приёмки.'],['Развитие системы','Регулярные релизы и адаптация решения к новым процессам.'],['Поддержка по SLA','Мониторинг, линии поддержки и управляемая эскалация.']]
 
 export default function ClientsPage(){return <>

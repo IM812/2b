@@ -23,6 +23,7 @@ const controlClass = 'min-h-12 rounded-none border-x-0 border-t-0 border-foregro
 export function LeadForm({ compact = false, onSuccess, source = 'form', heading, messageLabel = 'Задача', messagePlaceholder = 'Коротко опишите задачу', submitLabel = 'Отправить заявку' }: LeadFormProps) {
   const [status, setStatus] = useState<'idle' | 'pending' | 'success'>('idle')
   const [error, setError] = useState('')
+  const [formStartedAt] = useState(() => Date.now())
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -42,6 +43,7 @@ export function LeadForm({ compact = false, onSuccess, source = 'form', heading,
           website: data.get('website'),
           consent: data.get('consent') === 'on',
           source,
+          submittedAt: formStartedAt,
         }),
       })
       const result = await response.json()

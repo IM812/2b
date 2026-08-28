@@ -3,7 +3,7 @@ import { Check } from 'lucide-react'
 import { CompetenciesIntro } from '@/components/editorial/page-intros'
 import { LEGACY_SERVICES } from '@/lib/content'
 
-export const metadata: Metadata = { title: 'Дополнительные компетенции — 2В Сервис', description: 'ИТ-консалтинг, инженерные сервисы и логистическая поддержка проектов.' }
+export const metadata: Metadata = { title: 'Дополнительные ИТ-компетенции', description: 'ИТ-консалтинг, инженерные системы, аудит инфраструктуры и координация распределённых технологических проектов.', alternates: { canonical: '/additional-competencies' }, openGraph: { url: '/additional-competencies', title: 'Дополнительные ИТ-компетенции | 2В Сервис', description: 'Инженерные и организационные компетенции для комплексных ИТ-проектов.' } }
 const USE_CASES=[['Когда открывается новый объект','Связываем монтаж, сеть, рабочие места и запуск сервисов в один график.'],['Когда инфраструктура выросла стихийно','Проводим аудит, документируем контур и формируем план модернизации.'],['Когда проект распределён по площадкам','Берём организационную и логистическую координацию поставок и работ.']]
 
 export default function AdditionalCompetenciesPage(){return <>

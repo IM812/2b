@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { LegalPage } from '@/components/legal-page'
 
-export const metadata: Metadata = { title: 'Согласие на обработку персональных данных — 2В Сервис' }
+export const metadata: Metadata = { title: 'Согласие на обработку персональных данных', alternates: { canonical: '/personal-data-consent' }, robots: { index: false, follow: true } }
 
 export default function PersonalDataConsentPage() {
   return <LegalPage eyebrow="Согласие" title="Согласие на обработку персональных данных" updated="28 августа 2026 года">

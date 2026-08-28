@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Building2, MapPin } from 'lucide-react'
 
-export const metadata: Metadata = { title: 'Реквизиты — 2В Сервис', description: 'Юридические реквизиты и адреса АО «2В Сервис».', alternates: { canonical: '/details' } }
+export const metadata: Metadata = { title: 'Реквизиты', description: 'Юридические реквизиты, регистрационные данные и адреса АО «2В Сервис».', alternates: { canonical: '/details' }, openGraph: { url: '/details', title: 'Реквизиты | 2В Сервис', description: 'Юридическая информация АО «2В Сервис» для договоров и деловой переписки.' } }
 
 const details = [['Полное наименование', 'Акционерное общество «2В Сервис»'], ['ИНН', '7722701720'], ['КПП', '772201001'], ['ОГРН', '1097746738253']]
 

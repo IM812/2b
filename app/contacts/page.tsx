@@ -3,7 +3,7 @@ import { Clock, Mail, MapPin, Phone } from 'lucide-react'
 import { ContactsIntro } from '@/components/editorial/page-intros'
 import { LeadForm } from '@/components/lead-form'
 
-export const metadata: Metadata = { title: 'Контакты — 2В Сервис', description: 'Свяжитесь с 2В Сервис для обсуждения ИТ-проекта.' }
+export const metadata: Metadata = { title: 'Контакты', description: 'Контакты АО «2В Сервис» в Москве: телефон, email, офис и форма для обсуждения ИТ-проекта.', alternates: { canonical: '/contacts' }, openGraph: { url: '/contacts', title: 'Контакты | 2В Сервис', description: 'Свяжитесь с командой 2В Сервис для обсуждения ИТ-проекта.' } }
 const CONTACTS=[{label:'Телефон',value:'+7 (495) 787-56-15',href:'tel:+74957875615',icon:Phone},{label:'Email',value:'info@2bservice.ru',href:'mailto:info@2bservice.ru',icon:Mail},{label:'Офис',value:'Москва, Пресненская набережная, 6с2',icon:MapPin},{label:'Технологическая площадка',value:'Москва, Остаповский проезд, 22, стр. 16',icon:MapPin}]
 
 export default function ContactsPage(){return <>

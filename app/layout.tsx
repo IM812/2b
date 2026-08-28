@@ -22,8 +22,9 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://2bservice.ru'),
   title: { default: '2В Сервис — ИТ-аутсорсинг и инфраструктура', template: '%s | 2В Сервис' },
   description: 'Единый ИТ-партнёр для крупных государственных и коммерческих организаций: инфраструктура, аутсорсинг, информационная безопасность и корпоративные системы.',
-  alternates: { canonical: '/' },
-  openGraph: { type: 'website', locale: 'ru_RU', url: '/', siteName: '2В Сервис', title: '2В Сервис — ИТ-аутсорсинг и инфраструктура', description: 'Инфраструктура, безопасность и корпоративные системы для организаций федерального масштаба.', images: ['/opengraph-image'] },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
+  alternates: { canonical: '/', languages: { 'ru-RU': '/' } },
+  openGraph: { type: 'website', locale: 'ru_RU', url: '/', siteName: '2В Сервис', title: '2В Сервис — ИТ-аутсорсинг и инфраструктура', description: 'Инфраструктура, безопасность и корпоративные системы для организаций федерального масштаба.', images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: '2В Сервис — ИТ-инфраструктура и корпоративные системы' }] },
   twitter: { card: 'summary_large_image', title: '2В Сервис — ИТ-аутсорсинг и инфраструктура', description: 'Инфраструктура, безопасность и корпоративные системы.', images: ['/opengraph-image'] },
   icons: { icon: '/icon.svg', apple: '/apple-icon' },
 }
@@ -59,6 +60,15 @@ export default function RootLayout({
           location: { '@type': 'Place', name: 'Офис 2В Сервис — Башня Империя', address: { '@type': 'PostalAddress', addressLocality: 'Москва', streetAddress: 'Пресненская набережная, 6, стр. 2', addressCountry: 'RU' } },
           areaServed: 'RU',
           knowsAbout: ['ИТ-аутсорсинг', 'ИТ-инфраструктура', 'Информационная безопасность', 'Корпоративные информационные системы', 'Инженерные системы'],
+        }).replace(/</g, '\\u003c') }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          '@id': 'https://2bservice.ru/#website',
+          url: 'https://2bservice.ru',
+          name: '2В Сервис',
+          inLanguage: 'ru-RU',
+          publisher: { '@id': 'https://2bservice.ru/#organization' },
         }).replace(/</g, '\\u003c') }} />
         <MotionSystem />
         <SiteHeader />
