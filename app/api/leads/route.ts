@@ -47,9 +47,17 @@ export async function POST(request: Request) {
   const phone = clean(body.phone, 30)
   const message = clean(body.message, 1500)
   const consent = body.consent === true
+  const source = clean(body.source, 20)
+  const taskType = clean(body.taskType, 100)
+  const scale = clean(body.scale, 100)
+  const timeline = clean(body.timeline, 100)
 
   if (name.length < 2 || !/^\+?[\d\s()\-]{7,20}$/.test(phone) || message.length < 5) {
     return NextResponse.json({ error: 'Проверьте имя, телефон и описание задачи.' }, { status: 400 })
+  }
+
+  if (source === 'quiz' && (!taskType || !scale || !timeline)) {
+    return NextResponse.json({ error: 'Ответьте на все вопросы квиза.' }, { status: 400 })
   }
 
   if (!consent) {
@@ -68,6 +76,13 @@ export async function POST(request: Request) {
     `<b>Имя:</b> ${escapeHtml(name)}`,
     `<b>Телефон:</b> ${escapeHtml(phone)}`,
     `<b>Задача:</b> ${escapeHtml(message)}`,
+    ...(source === 'quiz' ? [
+      '',
+      '<b>Ответы квиза</b>',
+      `<b>Тип задачи:</b> ${escapeHtml(taskType)}`,
+      `<b>Масштаб:</b> ${escapeHtml(scale)}`,
+      `<b>Срок:</b> ${escapeHtml(timeline)}`,
+    ] : []),
     '',
     '<i>Пользователь подтвердил согласие на обработку персональных данных.</i>',
   ].join('\n')
