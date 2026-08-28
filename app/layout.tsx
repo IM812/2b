@@ -3,6 +3,7 @@ import { Manrope, IBM_Plex_Mono } from 'next/font/google'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { LeadFormProvider } from '@/components/lead-form-provider'
+import { MotionSystem } from '@/components/motion-system'
 import './globals.css'
 
 const _manrope = Manrope({
@@ -57,6 +58,7 @@ export default function RootLayout({
       className={`${_manrope.variable} ${_plexMono.variable} bg-background`}
     >
       <body className="antialiased font-sans">
+        <MotionSystem />
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />

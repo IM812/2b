@@ -47,14 +47,13 @@ export async function POST(request: Request) {
   const phone = clean(body.phone, 30)
   const message = clean(body.message, 1500)
   const consent = body.consent === true
-  const transferConsent = body.transferConsent === true
 
   if (name.length < 2 || !/^\+?[\d\s()\-]{7,20}$/.test(phone) || message.length < 5) {
     return NextResponse.json({ error: 'Проверьте имя, телефон и описание задачи.' }, { status: 400 })
   }
 
-  if (!consent || !transferConsent) {
-    return NextResponse.json({ error: 'Для отправки нужны оба согласия.' }, { status: 400 })
+  if (!consent) {
+    return NextResponse.json({ error: 'Подтвердите согласие на обработку персональных данных.' }, { status: 400 })
   }
 
   const token = process.env.TELEGRAM_BOT_TOKEN
@@ -70,7 +69,7 @@ export async function POST(request: Request) {
     `<b>Телефон:</b> ${escapeHtml(phone)}`,
     `<b>Задача:</b> ${escapeHtml(message)}`,
     '',
-    '<i>Пользователь подтвердил обработку и трансграничную передачу персональных данных.</i>',
+    '<i>Пользователь подтвердил согласие на обработку персональных данных.</i>',
   ].join('\n')
 
   try {

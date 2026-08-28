@@ -37,7 +37,6 @@ export function LeadForm({ compact = false, onSuccess }: LeadFormProps) {
           message: data.get('message'),
           website: data.get('website'),
           consent: data.get('consent') === 'on',
-          transferConsent: data.get('transferConsent') === 'on',
         }),
       })
       const result = await response.json()
@@ -81,10 +80,6 @@ export function LeadForm({ compact = false, onSuccess }: LeadFormProps) {
         <label className="flex cursor-pointer items-start gap-3">
           <Checkbox name="consent" required aria-label="Согласие на обработку персональных данных" />
           <span>Я принимаю <Link href="/personal-data-consent" className="underline underline-offset-2">согласие на обработку персональных данных</Link> и <Link href="/privacy" className="underline underline-offset-2">политику конфиденциальности</Link>.</span>
-        </label>
-        <label className="flex cursor-pointer items-start gap-3">
-          <Checkbox name="transferConsent" required aria-label="Согласие на трансграничную передачу персональных данных" />
-          <span>Я отдельно соглашаюсь на <Link href="/cross-border-consent" className="underline underline-offset-2">трансграничную передачу данных</Link> через Telegram.</span>
         </label>
       </div>
       {error && <p className="mt-5 text-sm font-semibold text-destructive" role="alert">{error}</p>}

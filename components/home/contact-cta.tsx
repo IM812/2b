@@ -5,8 +5,8 @@ export function ContactCta() {
   return (
     <section className="overflow-hidden bg-primary text-primary-foreground">
       <div className="section-shell section-pad relative">
-        <div className="pointer-events-none absolute -right-24 top-1/2 size-[34rem] -translate-y-1/2 rounded-full border border-white/15" aria-hidden="true"><div className="absolute inset-16 rounded-full border border-white/15" /><div className="absolute inset-32 rounded-full bg-accent" /></div>
-        <div className="relative max-w-5xl">
+        <div data-reveal="scale" className="pointer-events-none absolute -right-24 top-1/2 size-[34rem] -translate-y-1/2 rounded-full border border-white/15" aria-hidden="true"><div className="absolute inset-16 rounded-full border border-white/15" /><div className="absolute inset-32 rounded-full bg-accent" /></div>
+        <div data-reveal className="relative max-w-5xl">
           <p className="eyebrow text-white/55">Следующий проект</p>
           <h2 className="display-title mt-6">Давайте соберём систему, на которую можно положиться.</h2>
           <div className="mt-8 flex flex-col items-start gap-5 sm:mt-12 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">

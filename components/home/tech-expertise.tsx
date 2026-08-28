@@ -9,7 +9,7 @@ export function TechExpertise() {
   return (
     <section className="bg-surface">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div data-reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
             invert
             eyebrow="Технологическая экспертиза"
@@ -26,8 +26,8 @@ export function TechExpertise() {
         </div>
 
         <div className="mt-14 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-          {preview.map((area) => (
-            <div key={area.title} className="border-t border-surface-foreground/15 pt-5">
+          {preview.map((area, index) => (
+            <div key={area.title} data-reveal style={{ '--reveal-delay': `${index * 70}ms` } as React.CSSProperties} className="border-t border-surface-foreground/15 pt-5">
               <h3 className="font-heading text-base font-medium leading-snug text-surface-foreground">
                 {area.title}
               </h3>
