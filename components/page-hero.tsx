@@ -1,15 +1,14 @@
 import { cn } from '@/lib/utils'
+import { PageNetworkScene, type SceneVariant } from '@/components/page-network-scene'
 
-type PageHeroProps = { eyebrow: string; title: string; description?: string; className?: string }
+type PageHeroProps = { eyebrow: string; title: string; description?: string; className?: string; variant?: SceneVariant }
 
-export function PageHero({ eyebrow, title, description, className }: PageHeroProps) {
+export function PageHero({ eyebrow, title, description, className, variant }: PageHeroProps) {
   return (
     <section className={cn('relative overflow-hidden bg-surface pb-12 pt-28 text-surface-foreground sm:pb-16 sm:pt-32 md:pb-24 md:pt-44', className)}>
-      <div className="pointer-events-none absolute -right-24 top-24 size-52 rounded-full border border-white/10 sm:-right-16 sm:top-28 sm:size-64 md:size-96" aria-hidden>
-        <div className="absolute inset-10 rounded-full border border-primary/60" />
-        <div className="absolute inset-24 rounded-full bg-primary" />
-      </div>
-      <div className="section-shell relative">
+      {variant && <PageNetworkScene variant={variant} />}
+      <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/90 to-surface/20" aria-hidden />
+      <div className="section-shell relative z-10">
         <div className="flex items-center justify-between gap-6 border-b border-white/15 pb-5">
           <div className="flex items-center gap-3"><span className="signal-dot" /><p className="eyebrow text-surface-foreground/55">{eyebrow}</p></div>
           <p className="hidden font-mono text-[10px] uppercase tracking-[.2em] text-surface-foreground/35 sm:block">Москва · Работаем по всей России</p>

@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: 'Проекты — 2В Сервис'
 
 export default function ProjectsPage() {
   return <>
-    <PageHero eyebrow="Проекты" title="Сложность превращаем в работающую систему." description="Показываем не только результат, но и задачу, масштаб, архитектурный подход и дальнейшую эксплуатацию." />
+    <PageHero variant="projects" eyebrow="Проекты" title="Сложность превращаем в работающую систему." description="Показываем не только результат, но и задачу, масштаб, архитектурный подход и дальнейшую эксплуатацию." />
     <section className="section-pad overflow-hidden bg-background">
       <div className="section-shell">
         <div data-reveal="line" className="mb-12 grid gap-6 border-b border-border pb-9 md:grid-cols-3">
