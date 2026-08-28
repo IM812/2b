@@ -17,9 +17,14 @@ export function SignalPulse({ className }: { className?: string; tone?: 'ink' | 
         <span className="hidden items-center gap-2 text-xs text-white/55 min-[420px]:flex"><i className="signal-dot" />Все системы работают</span>
       </div>
       <svg viewBox="0 0 760 440" className="absolute inset-0 size-full" aria-hidden="true">
-        <path className="route-line" d="M92 119 C180 119 250 202 372 202 S510 92 548 92" fill="none" stroke="var(--primary)" strokeWidth="2" />
-        <path className="route-line" d="M190 315 C250 315 292 202 372 202 S512 342 548 342" fill="none" stroke="var(--accent)" strokeWidth="2" />
-        <path className="route-line route-line-delay" d="M372 202 C490 202 570 224 646 224" fill="none" stroke="white" strokeOpacity=".35" strokeWidth="1.5" />
+        <path id="route-work" className="route-line" d="M92 119 C180 119 250 202 372 202 S510 92 548 92" fill="none" stroke="var(--primary)" strokeWidth="2" />
+        <path id="route-service" className="route-line" d="M190 315 C250 315 292 202 372 202 S512 342 548 342" fill="none" stroke="var(--accent)" strokeWidth="2" />
+        <path id="route-erp" className="route-line route-line-delay" d="M372 202 C490 202 570 224 646 224" fill="none" stroke="white" strokeOpacity=".35" strokeWidth="1.5" />
+        <g className="route-packets">
+          <circle r="4" fill="var(--primary)"><animateMotion dur="4.8s" repeatCount="indefinite"><mpath href="#route-work" /></animateMotion></circle>
+          <circle r="3.5" fill="var(--accent)"><animateMotion dur="5.4s" begin="-2.7s" repeatCount="indefinite"><mpath href="#route-service" /></animateMotion></circle>
+          <circle r="3" fill="white" fillOpacity=".8"><animateMotion dur="4.2s" begin="-1.4s" repeatCount="indefinite"><mpath href="#route-erp" /></animateMotion></circle>
+        </g>
         <circle cx="372" cy="202" r="74" fill="var(--primary)" fillOpacity=".14" className="pulse-halo" />
         <circle cx="372" cy="202" r="42" fill="var(--primary)" />
         <text x="372" y="199" textAnchor="middle" fill="white" fontSize="12" fontWeight="700">2В</text>

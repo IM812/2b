@@ -19,9 +19,9 @@ export function FlagshipProjects() {
           <div className="absolute -bottom-12 -right-3 select-none text-[11rem] font-black leading-none text-white/[.07] sm:-bottom-20 sm:-right-6 sm:text-[18rem]" aria-hidden>01</div>
           <div className="relative flex min-h-[27rem] flex-col justify-between sm:min-h-[31rem]">
             <div className="flex items-center justify-between"><p className="eyebrow text-white/60">{featured.clientShort} · {featured.industry}</p><ArrowUpRight className="size-8 transition-transform" /></div>
-            <div className="grid gap-8 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
-              <h3 className="text-pretty text-[2.15rem] font-semibold leading-[.93] tracking-[-.055em] sm:text-5xl md:text-8xl">{featured.title}</h3>
-              <div className="lg:border-l lg:border-white/20 lg:pl-8"><p className="text-sm leading-relaxed text-white/65 md:text-base">{featured.summary}</p></div>
+            <div className="grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,.7fr)] lg:items-end">
+              <h3 className="min-w-0 text-pretty text-[2.15rem] font-semibold leading-[.93] tracking-[-.055em] sm:text-5xl md:text-8xl">{featured.title}</h3>
+              <div className="min-w-0 lg:border-l lg:border-white/20 lg:pl-8"><p className="max-w-md text-sm leading-relaxed text-white/65 md:text-base">{featured.summary}</p></div>
             </div>
           </div>
         </Link>
