@@ -26,7 +26,7 @@ export function SiteHeader() {
   }, [open])
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/85 md:backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background/95">
       <div className="section-shell flex h-16 items-center justify-between pt-[env(safe-area-inset-top)] md:h-18">
         <Link href="/" className="flex items-center gap-2.5 sm:gap-3" onClick={() => setOpen(false)} aria-label="2В Сервис — на главную">
           <BrandMark className="size-10" />
