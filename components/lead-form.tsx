@@ -85,7 +85,7 @@ export function LeadForm({ compact = false, onSuccess, source = 'form', heading,
       <div className="mt-6 flex flex-col gap-4 text-xs leading-relaxed text-muted-foreground">
         <label className="flex cursor-pointer items-start gap-3">
           <input type="checkbox" name="consent" required className="mt-0.5 size-4 shrink-0 accent-primary" aria-label="Согласие на обработку персональных данных" />
-          <span>Я принимаю <Link href="/personal-data-consent" className="underline underline-offset-2">согласие на обработку персональных данных</Link> и <Link href="/privacy" className="underline underline-offset-2">политику конфиденциальности</Link>.</span>
+          <span>Я даю <Link href="/personal-data-consent" className="underline underline-offset-2">согласие на обработку персональных данных</Link> и подтверждаю, что ознакомлен(а) с <Link href="/privacy" className="underline underline-offset-2">политикой обработки персональных данных</Link>.</span>
         </label>
       </div>
       {error && <p className="mt-5 text-sm font-semibold text-destructive" role="alert">{error}</p>}

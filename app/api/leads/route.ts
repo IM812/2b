@@ -3,6 +3,10 @@ import { NextResponse } from 'next/server'
 const attempts = new Map<string, { count: number; resetAt: number }>()
 const WINDOW_MS = 10 * 60 * 1000
 const MAX_ATTEMPTS = 5
+const MAX_BODY_BYTES = 6_000
+const BASE_FIELDS = new Set(['name', 'phone', 'message', 'website', 'consent', 'source'])
+const QUIZ_FIELDS = new Set([...BASE_FIELDS, 'taskType', 'scale', 'timeline'])
+const ALLOWED_SOURCES = new Set(['form', 'contact', 'career', 'quiz'])
 
 function clean(value: unknown, maxLength: number) {
   return typeof value === 'string'
@@ -21,9 +25,20 @@ function escapeHtml(value: string) {
 }
 
 export async function POST(request: Request) {
+  const contentType = request.headers.get('content-type') ?? ''
+  const contentLength = Number(request.headers.get('content-length') ?? 0)
+  if (!contentType.toLowerCase().startsWith('application/json') || contentLength > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: 'Некорректный запрос.' }, { status: 400 })
+  }
+
   const forwardedFor = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
   const ip = forwardedFor || 'unknown'
   const now = Date.now()
+  if (attempts.size > 2_000) {
+    for (const [key, value] of attempts) {
+      if (value.resetAt <= now) attempts.delete(key)
+    }
+  }
   const current = attempts.get(ip)
 
   if (current && current.resetAt > now && current.count >= MAX_ATTEMPTS) {
@@ -41,13 +56,23 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Некорректный запрос.' }, { status: 400 })
   }
 
+  if (!body || Array.isArray(body)) {
+    return NextResponse.json({ error: 'Некорректный запрос.' }, { status: 400 })
+  }
+
   if (body.website) return NextResponse.json({ ok: true })
+
+  const rawSource = clean(body.source, 20)
+  const source = ALLOWED_SOURCES.has(rawSource) ? rawSource : ''
+  const allowedFields = source === 'quiz' ? QUIZ_FIELDS : BASE_FIELDS
+  if (!source || Object.keys(body).some((key) => !allowedFields.has(key))) {
+    return NextResponse.json({ error: 'Некорректный состав запроса.' }, { status: 400 })
+  }
 
   const name = clean(body.name, 80)
   const phone = clean(body.phone, 30)
   const message = clean(body.message, 1500)
   const consent = body.consent === true
-  const source = clean(body.source, 20)
   const taskType = clean(body.taskType, 100)
   const scale = clean(body.scale, 100)
   const timeline = clean(body.timeline, 100)
