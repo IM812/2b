@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { NAV_ITEMS } from '@/lib/nav'
+import { BrandMark } from '@/components/brand-mark'
 
 export function SiteFooter() {
   return (
@@ -8,9 +9,7 @@ export function SiteFooter() {
         <div className="grid gap-10 md:grid-cols-[1.2fr_2fr]">
           <div>
             <Link href="/" className="inline-flex items-center gap-3">
-              <span className="flex size-9 items-center justify-center rounded-xl bg-foreground text-xs font-bold text-background">
-                2В
-              </span>
+              <BrandMark className="size-10" />
               <span className="text-sm font-bold">2В Сервис</span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">

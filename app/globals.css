@@ -58,6 +58,9 @@
 @keyframes pulse-node { 0%,100% { transform: scale(1); opacity: .35; } 50% { transform: scale(1.18); opacity: .08; } }
 @keyframes route-flow { to { stroke-dashoffset: -84; } }
 @keyframes marquee-flow { to { transform: translateX(-50%); } }
+@keyframes not-found-travel { from { left: 0; } to { left: calc(100% - 1rem); } }
+.brand-mark svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.not-found-node { animation: not-found-travel 5s cubic-bezier(.45,0,.55,1) infinite alternate; }
 .pulse-node,.pulse-halo { animation: pulse-node 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 .route-line { stroke-dasharray: 9 12; animation: route-flow 4s linear infinite; }
 .route-line-delay { animation-delay: -1.8s; }
