@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { PageHero } from '@/components/page-hero'
+import { AboutIntro } from '@/components/editorial/page-intros'
 import { STATS } from '@/lib/content'
 
 export const metadata: Metadata = { title: 'О компании — 2В Сервис', description: '2В Сервис — единый ИТ-партнёр крупных организаций с 2010 года.' }
 const PRINCIPLES=[['Сначала контекст','Начинаем с процессов, ограничений и цены риска, а не с каталога решений.'],['Один ответственный контур','Архитекторы, инженеры, аналитики и поддержка работают одной командой.'],['Прозрачность управления','Фиксируем SLA, контрольные точки, документацию и измеримые критерии.'],['Эксплуатация важна','Проектируем с учётом того, кто и как будет поддерживать систему после запуска.']]
 
 export default function AboutPage(){return <>
-<PageHero variant="about" eyebrow="О компании" title="15 лет строим системы, на которые можно опереться." description="2В Сервис объединяет инфраструктуру, корпоративные системы, интеграцию и поддержку в одном центре ответственности." />
+<AboutIntro />
 <section className="section-pad bg-background"><div className="section-shell"><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><div><p className="eyebrow text-primary">С 2010 года</p><h2 className="section-title mt-5">От ИТ-задачи — к устойчивой эксплуатации.</h2></div><div><p className="text-pretty text-2xl font-medium leading-relaxed md:text-4xl">Мы берём проект не до акта внедрения, а до момента, когда решение стабильно работает внутри реального бизнеса.</p><p className="mt-8 max-w-2xl leading-relaxed text-muted-foreground">Поэтому в одной команде соединяем обследование, архитектуру, разработку, инженерные работы, миграцию, обучение и поддержку. Заказчику не приходится координировать несколько подрядчиков на стыках.</p></div></div><div className="mt-16 grid gap-px overflow-hidden rounded-[2rem] bg-border sm:grid-cols-2 lg:grid-cols-3">{STATS.slice(0,6).map(stat=><article key={stat.label} className="min-h-44 bg-secondary p-7"><p className="text-4xl font-black tracking-[-.05em] text-primary md:text-5xl">{stat.value}</p><p className="mt-5 max-w-48 text-sm leading-relaxed text-muted-foreground">{stat.label}</p></article>)}</div></div></section>
 <section className="section-pad bg-surface text-surface-foreground"><div className="section-shell grid gap-12 lg:grid-cols-[.65fr_1.35fr]"><div className="lg:sticky lg:top-28 lg:self-start"><p className="eyebrow text-primary">Рабочие принципы</p><h2 className="section-title mt-5">Ответственность начинается до запуска.</h2></div><div className="flex flex-col">{PRINCIPLES.map(([title,text],i)=><article key={title} className="grid gap-4 border-t border-white/15 py-8 last:border-b md:grid-cols-[4rem_.8fr_1.2fr]"><span className="font-mono text-xs text-primary">0{i+1}</span><h3 className="text-2xl font-bold">{title}</h3><p className="leading-relaxed text-surface-foreground/55">{text}</p></article>)}</div></div></section>
 </>}

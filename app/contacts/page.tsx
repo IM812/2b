@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import { Clock, Mail, MapPin, Phone } from 'lucide-react'
-import { PageHero } from '@/components/page-hero'
+import { ContactsIntro } from '@/components/editorial/page-intros'
 import { LeadForm } from '@/components/lead-form'
 
 export const metadata: Metadata = { title: 'Контакты — 2В Сервис', description: 'Свяжитесь с 2В Сервис для обсуждения ИТ-проекта.' }
 const CONTACTS=[{label:'Телефон',value:'+7 (495) 787-56-15',href:'tel:+74957875615',icon:Phone},{label:'Email',value:'info@2bservice.ru',href:'mailto:info@2bservice.ru',icon:Mail},{label:'Офис',value:'Москва, Пресненская набережная, 6с2',icon:MapPin},{label:'Технологическая площадка',value:'Москва, Остаповский проезд, 22, стр. 16',icon:MapPin}]
 
 export default function ContactsPage(){return <>
-<PageHero variant="contacts" eyebrow="Контакты" title="Начнём с задачи. Не с презентации." description="Опишите контекст — уточним детали и предложим понятный следующий шаг." />
+<ContactsIntro />
 <section className="section-pad bg-background"><div className="section-shell"><div className="grid gap-4 md:grid-cols-2">{CONTACTS.map(({label,value,href,icon:Icon},i)=><article key={label} className={`min-h-52 rounded-[2rem] p-7 ${i===0?'bg-primary text-primary-foreground':'bg-secondary'}`}><div className="flex items-center justify-between"><p className="eyebrow opacity-55">{label}</p><Icon className="size-5 opacity-55"/></div>{href?<a href={href} className="mt-16 block break-words text-2xl font-bold tracking-tight md:text-3xl">{value}</a>:<p className="mt-16 max-w-lg text-2xl font-bold tracking-tight md:text-3xl">{value}</p>}</article>)}</div><div className="mt-4 flex items-center gap-3 rounded-[2rem] bg-surface p-6 text-surface-foreground"><Clock className="size-5 text-primary"/><div><p className="font-bold">Мониторинг и техническая поддержка — 24/7</p><p className="mt-1 text-sm text-surface-foreground/55">Для действующих заказчиков — согласно условиям SLA.</p></div></div></div></section>
 <section className="section-pad bg-secondary"><div className="section-shell grid gap-10 lg:grid-cols-[.65fr_1.35fr]"><div><p className="eyebrow text-primary">Обсудить проект</p><h2 className="section-title mt-5">Вернёмся с предметным ответом.</h2><div className="mt-8 flex flex-col gap-4 text-sm text-muted-foreground"><p><strong className="text-foreground">1.</strong> Получим обращение.</p><p><strong className="text-foreground">2.</strong> Уточним задачу и ограничения.</p><p><strong className="text-foreground">3.</strong> Предложим формат следующего шага.</p></div></div><LeadForm source="contact" heading="Расскажите о задаче"/></div></section>
 </>}

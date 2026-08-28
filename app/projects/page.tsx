@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { PageHero } from '@/components/page-hero'
+import { ProjectsIntro } from '@/components/editorial/page-intros'
 import { PROJECTS } from '@/lib/content'
 
 export const metadata: Metadata = { title: 'Проекты — 2В Сервис', description: 'Проекты внедрения, интеграции и поддержки критичных ИТ-систем.' }
 
 export default function ProjectsPage() {
   return <>
-    <PageHero variant="projects" eyebrow="Проекты" title="Сложность превращаем в работающую систему." description="Показываем не только результат, но и задачу, масштаб, архитектурный подход и дальнейшую эксплуатацию." />
+    <ProjectsIntro />
     <section className="section-pad overflow-hidden bg-background">
       <div className="section-shell">
         <div data-reveal="line" className="mb-12 grid gap-6 border-b border-border pb-9 md:grid-cols-3">
