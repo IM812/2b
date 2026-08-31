@@ -29,6 +29,15 @@ async function send(chatId: number, text: string, replyMarkup?: object) {
   return telegram('sendMessage', { chat_id: chatId, text, reply_markup: replyMarkup })
 }
 
+async function canPublish(userId: number) {
+  try {
+    const member = await telegram<{ status: string }>('getChatMember', { chat_id: allowedChat, user_id: userId })
+    return ['creator', 'administrator', 'member'].includes(member.status)
+  } catch {
+    return false
+  }
+}
+
 async function preview(draft: NewsDraft, scheduled = false) {
   const caption = `Предпросмотр новости:\n\n${draft.text || '(новость без текста)'}\n\n${draft.photoFileId ? 'Фото прикреплено.' : 'Без фотографии.'}`
   if (draft.photoFileId) return telegram('sendPhoto', { chat_id: draft.chatId, photo: draft.photoFileId, caption: caption.slice(0, 1024), reply_markup: keyboard(draft.id, scheduled) })
@@ -49,7 +58,19 @@ function parseMoscowDate(value: string) {
 }
 
 async function handleMessage(message: Message) {
-  if (message.chat.id !== allowedChat || !message.from) return
+  if (!message.from) return
+  const raw = message.text || message.caption || ''
+  if (/^\/start(?:@\w+)?(?:\s|$)/i.test(raw)) {
+    const authorized = await canPublish(message.from.id)
+    await send(message.chat.id, authorized
+      ? 'Вы можете публиковать новости. Отправьте /news, затем текст или фотографию с подписью.'
+      : 'Нет доступа к публикации. Войдите в разрешённый чат и попробуйте снова.')
+    return
+  }
+  if (!(await canPublish(message.from.id))) {
+    if (/^\/news(?:@\w+)?(?:\s|$)/i.test(raw)) await send(message.chat.id, 'Нет доступа к публикации новостей.')
+    return
+  }
   const state = await readNewsState()
   const waitingDraftId = state.awaitingDate[String(message.from.id)]
   if (waitingDraftId && message.text) {
@@ -63,7 +84,6 @@ async function handleMessage(message: Message) {
     await send(message.chat.id, `Ок, будет размещено ${new Intl.DateTimeFormat('ru-RU', { dateStyle: 'long', timeStyle: 'short', timeZone: 'Europe/Moscow' }).format(date)} по Москве.`)
     return
   }
-  const raw = message.text || message.caption || ''
   const userKey = String(message.from.id)
   const isNewsCommand = /^\/news(?:@\w+)?(?:\s|$)/i.test(raw)
   const isWaitingForContent = state.awaitingContent[userKey] === true
@@ -87,15 +107,16 @@ async function handleMessage(message: Message) {
 }
 
 async function handleCallback(query: NonNullable<Update['callback_query']>) {
-  if (query.message?.chat.id !== allowedChat || !query.data) return
+  if (!query.message || !query.data || !(await canPublish(query.from.id))) return
+  const replyChatId = query.message.chat.id
   const [action, id] = query.data.split(':')
   const state = await readNewsState()
   const draft = state.drafts[id]
   await telegram('answerCallbackQuery', { callback_query_id: query.id })
-  if (!draft || draft.userId !== query.from.id) { await send(allowedChat, 'Черновик не найден или принадлежит другому автору.'); return }
-  if (action === 'cancel') { delete state.drafts[id]; await writeNewsState(state); await send(allowedChat, 'Публикация отменена.'); return }
-  if (action === 'schedule') { state.awaitingDate[String(query.from.id)] = id; await writeNewsState(state); await send(allowedChat, 'Ответьте на это сообщение датой и временем по Москве: 31.12.2026 18:30', { force_reply: true, selective: true }); return }
-  if (action === 'now') { await publish(draft); delete state.drafts[id]; await writeNewsState(state); await send(allowedChat, 'Ок, новость размещена в канале.'); }
+  if (!draft || draft.userId !== query.from.id) { await send(replyChatId, 'Черновик не найден или принадлежит другому автору.'); return }
+  if (action === 'cancel') { delete state.drafts[id]; await writeNewsState(state); await send(replyChatId, 'Публикация отменена.'); return }
+  if (action === 'schedule') { state.awaitingDate[String(query.from.id)] = id; await writeNewsState(state); await send(replyChatId, 'Ответьте на это сообщение датой и временем по Москве: 31.12.2026 18:30', { force_reply: true, selective: true }); return }
+  if (action === 'now') { await publish(draft); delete state.drafts[id]; await writeNewsState(state); await send(replyChatId, 'Ок, новость размещена в канале.'); }
 }
 
 async function publishDue() {
