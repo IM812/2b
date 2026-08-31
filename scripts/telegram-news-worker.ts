@@ -1,4 +1,6 @@
 import { randomUUID } from 'node:crypto'
+import { mkdir, open, readFile, unlink } from 'node:fs/promises'
+import { dirname, resolve } from 'node:path'
 import { load } from 'cheerio'
 import { readNewsState, writeNewsState, type NewsDraft } from '../lib/news-queue'
 
@@ -7,9 +9,34 @@ const allowedChat = Number(process.env.NEWS_TELEGRAM_CHAT_ID)
 const channel = '@twoB_news'
 if (!token || !Number.isSafeInteger(allowedChat)) throw new Error('NEWS_TELEGRAM_BOT_TOKEN and NEWS_TELEGRAM_CHAT_ID are required')
 const api = `https://api.telegram.org/bot${token}`
+const lockPath = resolve(process.env.NEWS_WORKER_LOCK_FILE || './data/telegram-news-worker.lock')
 
 type Update = { update_id: number; message?: Message; callback_query?: { id: string; data?: string; from: { id: number }; message?: Message } }
 type Message = { message_id: number; chat: { id: number }; from?: { id: number }; text?: string; caption?: string; photo?: { file_id: string }[] }
+
+async function acquireWorkerLock() {
+  await mkdir(dirname(lockPath), { recursive: true })
+  try {
+    const handle = await open(lockPath, 'wx', 0o600)
+    await handle.writeFile(String(process.pid))
+    await handle.close()
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+    const existingPid = Number(await readFile(lockPath, 'utf8').catch(() => '0'))
+    try {
+      if (existingPid > 0) process.kill(existingPid, 0)
+      throw new Error(`Telegram news worker is already running (PID ${existingPid})`)
+    } catch (processError) {
+      if ((processError as NodeJS.ErrnoException).code !== 'ESRCH') throw processError
+      await unlink(lockPath).catch(() => undefined)
+      return acquireWorkerLock()
+    }
+  }
+  const release = () => unlink(lockPath).catch(() => undefined)
+  process.once('SIGINT', () => void release().finally(() => process.exit(0)))
+  process.once('SIGTERM', () => void release().finally(() => process.exit(0)))
+  process.once('exit', () => { void release() })
+}
 
 async function telegram<T>(method: string, body: Record<string, unknown>): Promise<T> {
   for (let attempt = 0; attempt < 3; attempt++) {
@@ -53,11 +80,15 @@ async function getChannelPosts(before?: number): Promise<ManagedPost[]> {
     const text = message.find('.tgme_widget_message_text').text().replace(/\s+/g, ' ').trim()
     const hasPhoto = message.find('.tgme_widget_message_photo_wrap').length > 0
     const isCommand = /^\/news(?:@\w+)?(?:\s|$)/i.test(text)
-    return Number.isSafeInteger(id) && !isCommand && (text || hasPhoto) ? { id, text, hasPhoto } : null
+    const isServiceMessage = /^(channel|group) created$/i.test(text)
+    return Number.isSafeInteger(id) && !isCommand && !isServiceMessage && (text || hasPhoto) ? { id, text, hasPhoto } : null
   }).get().filter((post): post is ManagedPost => Boolean(post)).reverse()
 }
 
-async function getAllChannelPosts() {
+let postCache: { expiresAt: number; posts: ManagedPost[] } | null = null
+
+async function getAllChannelPosts(force = false) {
+  if (!force && postCache && postCache.expiresAt > Date.now()) return postCache.posts
   const all = new Map<number, ManagedPost>()
   let before: number | undefined
   for (let page = 0; page < 100; page++) {
@@ -67,7 +98,9 @@ async function getAllChannelPosts() {
     if (!oldest || oldest === before || posts.length < 2) break
     before = oldest
   }
-  return [...all.values()].sort((a, b) => b.id - a.id)
+  const posts = [...all.values()].sort((a, b) => b.id - a.id)
+  postCache = { expiresAt: Date.now() + 15_000, posts }
+  return posts
 }
 
 function nextNewsNumber(posts: ManagedPost[]) {
@@ -75,26 +108,39 @@ function nextNewsNumber(posts: ManagedPost[]) {
 }
 
 function postLabel(post: ManagedPost) {
-  const content = post.text || 'Новость с фотографией'
-  return `${post.hasPhoto ? 'Фото · ' : ''}${content}`.slice(0, 50)
+  const number = post.text.match(/^Новость №\d+/i)?.[0]
+  const content = post.text.replace(/^Новость №\d+\s*/i, '').trim() || 'Без текста'
+  return `${number ?? `Пост #${post.id}`} — ${post.hasPhoto ? 'фото, ' : ''}${content}`.slice(0, 36)
 }
 
-async function showManageMenu(chatId: number, before?: number) {
+async function showManageMenu(chatId: number, before?: number, messageId?: number) {
   const allPosts = await getAllChannelPosts()
   const posts = before ? allPosts.filter((post) => post.id < before) : allPosts
-  if (!posts.length) { await send(chatId, `Новостей в канале: ${allPosts.length}. Больше доступных публикаций нет.`); return }
-  const visible = posts.slice(0, 8)
+  const visible = posts.slice(0, 6)
   const oldestId = visible.at(-1)?.id
   const keyboardRows = visible.map((post) => [{ text: postLabel(post), callback_data: `view:${post.id}` }])
-  if (posts.length > visible.length && oldestId) keyboardRows.push([{ text: 'Показать более старые', callback_data: `manage:${oldestId}` }])
-  await send(chatId, `Управление новостями\n\nВсего новостей: ${allPosts.length}. Выберите публикацию. Она будет удалена только после отдельного подтверждения.`, { inline_keyboard: keyboardRows })
+  if (posts.length > visible.length && oldestId) keyboardRows.push([{ text: 'Более старые', callback_data: `manage:${oldestId}` }])
+  if (before) keyboardRows.push([{ text: 'К началу', callback_data: 'manage:0' }])
+  const text = allPosts.length
+    ? `Новости: ${allPosts.length}\n\nВыберите публикацию для просмотра.`
+    : 'Новостей пока нет.'
+  const replyMarkup = { inline_keyboard: keyboardRows }
+  if (messageId) {
+    await telegram('editMessageText', { chat_id: chatId, message_id: messageId, text, reply_markup: replyMarkup })
+    return
+  }
+  await send(chatId, text, replyMarkup)
 }
 
-async function showPost(chatId: number, postId: number) {
-  const posts = await getChannelPosts(postId + 1)
-  const post = posts.find((item) => item.id === postId)
+async function showPost(chatId: number, messageId: number, postId: number) {
+  const post = (await getAllChannelPosts()).find((item) => item.id === postId)
   const text = post?.text || 'Новость с фотографией'
-  await send(chatId, `Новость #${postId}\n\n${text.slice(0, 3500)}`, { inline_keyboard: [[{ text: 'Удалить', callback_data: `askdelete:${postId}` }], [{ text: 'Назад к списку', callback_data: 'manage:0' }]] })
+  await telegram('editMessageText', {
+    chat_id: chatId,
+    message_id: messageId,
+    text: `${text.slice(0, 3500)}\n\nПост #${postId}`,
+    reply_markup: { inline_keyboard: [[{ text: 'Удалить', callback_data: `askdelete:${postId}` }], [{ text: 'Назад', callback_data: 'manage:0' }]] },
+  })
 }
 
 async function preview(draft: NewsDraft, scheduled = false) {
@@ -106,8 +152,11 @@ async function preview(draft: NewsDraft, scheduled = false) {
 async function publish(draft: NewsDraft) {
   const posts = await getAllChannelPosts()
   const numberedText = `Новость №${nextNewsNumber(posts)}${draft.text ? `\n\n${draft.text}` : ''}`
-  if (draft.photoFileId) return telegram('sendPhoto', { chat_id: channel, photo: draft.photoFileId, caption: numberedText.slice(0, 1024) })
-  return telegram('sendMessage', { chat_id: channel, text: numberedText })
+  const result = draft.photoFileId
+    ? await telegram('sendPhoto', { chat_id: channel, photo: draft.photoFileId, caption: numberedText.slice(0, 1024) })
+    : await telegram('sendMessage', { chat_id: channel, text: numberedText })
+  postCache = null
+  return result
 }
 
 function parseMoscowDate(value: string) {
@@ -179,22 +228,22 @@ async function handleCallback(query: NonNullable<Update['callback_query']>) {
   await telegram('answerCallbackQuery', { callback_query_id: query.id }).catch(() => undefined)
 
   if (action === 'manage') {
-    await showManageMenu(replyChatId, Number(id) || undefined)
+    await showManageMenu(replyChatId, Number(id) || undefined, query.message.message_id)
     return
   }
   if (action === 'view') {
-    await showPost(replyChatId, Number(id))
+    await showPost(replyChatId, query.message.message_id, Number(id))
     return
   }
   if (action === 'askdelete') {
-    await send(replyChatId, `Удалить новость #${id} из канала и с сайта?`, { inline_keyboard: [[{ text: 'Да, удалить', callback_data: `delete:${id}` }], [{ text: 'Отмена', callback_data: 'manage:0' }]] })
+    await telegram('editMessageText', { chat_id: replyChatId, message_id: query.message.message_id, text: `Удалить пост #${id} из канала и с сайта?`, reply_markup: { inline_keyboard: [[{ text: 'Да, удалить', callback_data: `delete:${id}` }], [{ text: 'Отмена', callback_data: 'manage:0' }]] } })
     return
   }
   if (action === 'delete') {
     try {
       await telegram('deleteMessage', { chat_id: channel, message_id: Number(id) })
-      await send(replyChatId, `Новость #${id} удалена из канала. На сайте она исчезнет автоматически в течение минуты.`)
-      await showManageMenu(replyChatId)
+      postCache = null
+      await telegram('editMessageText', { chat_id: replyChatId, message_id: query.message.message_id, text: `Пост #${id} удалён. На сайте он исчезнет в течение минуты.` })
     } catch (error) {
       const description = error instanceof Error ? error.message : ''
       const reason = /message can't be deleted|not enough rights|CHAT_ADMIN_REQUIRED/i.test(description)
@@ -236,6 +285,7 @@ async function publishDue() {
 }
 
 async function main() {
+  await acquireWorkerLock()
   await telegram('setMyCommands', {
     commands: [
       { command: 'news', description: 'Создать новую публикацию' },
