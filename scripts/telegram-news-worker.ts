@@ -57,19 +57,37 @@ async function getChannelPosts(before?: number): Promise<ManagedPost[]> {
   }).get().filter((post): post is ManagedPost => Boolean(post)).reverse()
 }
 
+async function getAllChannelPosts() {
+  const all = new Map<number, ManagedPost>()
+  let before: number | undefined
+  for (let page = 0; page < 100; page++) {
+    const posts = await getChannelPosts(before)
+    for (const post of posts) all.set(post.id, post)
+    const oldest = posts.at(-1)?.id
+    if (!oldest || oldest === before || posts.length < 2) break
+    before = oldest
+  }
+  return [...all.values()].sort((a, b) => b.id - a.id)
+}
+
+function nextNewsNumber(posts: ManagedPost[]) {
+  return Math.max(0, ...posts.map((post) => Number(post.text.match(/^Новость №(\d+)/i)?.[1] ?? 0))) + 1
+}
+
 function postLabel(post: ManagedPost) {
   const content = post.text || 'Новость с фотографией'
   return `${post.hasPhoto ? 'Фото · ' : ''}${content}`.slice(0, 50)
 }
 
 async function showManageMenu(chatId: number, before?: number) {
-  const posts = await getChannelPosts(before)
-  if (!posts.length) { await send(chatId, 'В канале больше нет доступных новостей.'); return }
+  const allPosts = await getAllChannelPosts()
+  const posts = before ? allPosts.filter((post) => post.id < before) : allPosts
+  if (!posts.length) { await send(chatId, `Новостей в канале: ${allPosts.length}. Больше доступных публикаций нет.`); return }
   const visible = posts.slice(0, 8)
-  const oldestId = posts.at(-1)?.id
+  const oldestId = visible.at(-1)?.id
   const keyboardRows = visible.map((post) => [{ text: postLabel(post), callback_data: `view:${post.id}` }])
-  if (oldestId) keyboardRows.push([{ text: 'Показать более старые', callback_data: `manage:${oldestId}` }])
-  await send(chatId, 'Управление новостями\n\nВыберите публикацию. Она будет удалена только после отдельного подтверждения.', { inline_keyboard: keyboardRows })
+  if (posts.length > visible.length && oldestId) keyboardRows.push([{ text: 'Показать более старые', callback_data: `manage:${oldestId}` }])
+  await send(chatId, `Управление новостями\n\nВсего новостей: ${allPosts.length}. Выберите публикацию. Она будет удалена только после отдельного подтверждения.`, { inline_keyboard: keyboardRows })
 }
 
 async function showPost(chatId: number, postId: number) {
@@ -86,8 +104,10 @@ async function preview(draft: NewsDraft, scheduled = false) {
 }
 
 async function publish(draft: NewsDraft) {
-  if (draft.photoFileId) return telegram('sendPhoto', { chat_id: channel, photo: draft.photoFileId, caption: draft.text.slice(0, 1024) })
-  return telegram('sendMessage', { chat_id: channel, text: draft.text })
+  const posts = await getAllChannelPosts()
+  const numberedText = `Новость №${nextNewsNumber(posts)}${draft.text ? `\n\n${draft.text}` : ''}`
+  if (draft.photoFileId) return telegram('sendPhoto', { chat_id: channel, photo: draft.photoFileId, caption: numberedText.slice(0, 1024) })
+  return telegram('sendMessage', { chat_id: channel, text: numberedText })
 }
 
 function parseMoscowDate(value: string) {
