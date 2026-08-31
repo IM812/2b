@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "concurrently --kill-others-on-fail --names site,telegram \"next start\" \"tsx scripts/telegram-news-worker.ts\"",
+    "start:site": "next start",
     "news:worker": "tsx scripts/telegram-news-worker.ts"
   },
   "dependencies": {
@@ -13,6 +14,7 @@
     "cheerio": "^1.2.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "concurrently": "^10.0.5",
     "lucide-react": "^1.16.0",
     "next": "16.3.0",
     "next-themes": "^0.4.6",
