@@ -112,11 +112,23 @@ async function handleCallback(query: NonNullable<Update['callback_query']>) {
   const [action, id] = query.data.split(':')
   const state = await readNewsState()
   const draft = state.drafts[id]
-  await telegram('answerCallbackQuery', { callback_query_id: query.id })
+  await telegram('answerCallbackQuery', { callback_query_id: query.id }).catch(() => undefined)
   if (!draft || draft.userId !== query.from.id) { await send(replyChatId, 'Черновик не найден или принадлежит другому автору.'); return }
   if (action === 'cancel') { delete state.drafts[id]; await writeNewsState(state); await send(replyChatId, 'Публикация отменена.'); return }
   if (action === 'schedule') { state.awaitingDate[String(query.from.id)] = id; await writeNewsState(state); await send(replyChatId, 'Ответьте на это сообщение датой и временем по Москве: 31.12.2026 18:30', { force_reply: true, selective: true }); return }
-  if (action === 'now') { await publish(draft); delete state.drafts[id]; await writeNewsState(state); await send(replyChatId, 'Ок, новость размещена в канале.'); }
+  if (action === 'now') {
+    try {
+      await publish(draft)
+      delete state.drafts[id]
+      await writeNewsState(state)
+      await send(replyChatId, 'Ок, новость размещена в канале.')
+    } catch (error) {
+      const reason = error instanceof Error && error.message.includes('not a member of the channel')
+        ? 'Добавьте этого бота администратором канала @twoB_news с правом публикации сообщений.'
+        : 'Telegram не смог опубликовать новость. Проверьте права бота в канале и попробуйте снова.'
+      await send(replyChatId, reason)
+    }
+  }
 }
 
 async function publishDue() {
@@ -137,10 +149,15 @@ async function main() {
       const state = await readNewsState()
       const updates = await telegram<Update[]>('getUpdates', { offset: state.offset, timeout: 25, allowed_updates: ['message', 'callback_query'] })
       for (const update of updates) {
-        if (update.message) await handleMessage(update.message)
-        if (update.callback_query) await handleCallback(update.callback_query)
-        state.offset = Math.max(state.offset, update.update_id + 1)
-        const latest = await readNewsState(); latest.offset = state.offset; await writeNewsState(latest)
+        try {
+          if (update.message) await handleMessage(update.message)
+          if (update.callback_query) await handleCallback(update.callback_query)
+        } catch (error) {
+          console.error('Update processing failed:', error)
+        } finally {
+          state.offset = Math.max(state.offset, update.update_id + 1)
+          const latest = await readNewsState(); latest.offset = state.offset; await writeNewsState(latest)
+        }
       }
     } catch (error) { console.error('Worker loop error:', error); await new Promise((resolve) => setTimeout(resolve, 3000)) }
   }
