@@ -1,10 +1,10 @@
 import { randomUUID } from 'node:crypto'
 import { readNewsState, writeNewsState, type NewsDraft } from '../lib/news-queue'
 
-const token = process.env.TELEGRAM_BOT_TOKEN
-const allowedChat = Number(process.env.TELEGRAM_CHAT_ID)
+const token = process.env.NEWS_TELEGRAM_BOT_TOKEN
+const allowedChat = Number(process.env.NEWS_TELEGRAM_CHAT_ID)
 const channel = '@twoB_news'
-if (!token || !Number.isSafeInteger(allowedChat)) throw new Error('TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID are required')
+if (!token || !Number.isSafeInteger(allowedChat)) throw new Error('NEWS_TELEGRAM_BOT_TOKEN and NEWS_TELEGRAM_CHAT_ID are required')
 const api = `https://api.telegram.org/bot${token}`
 
 type Update = { update_id: number; message?: Message; callback_query?: { id: string; data?: string; from: { id: number }; message?: Message } }
