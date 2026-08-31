@@ -236,6 +236,14 @@ async function publishDue() {
 }
 
 async function main() {
+  await telegram('setMyCommands', {
+    commands: [
+      { command: 'news', description: 'Создать новую публикацию' },
+      { command: 'manage', description: 'Посмотреть и удалить новости' },
+      { command: 'start', description: 'Открыть справку по боту' },
+    ],
+    scope: { type: 'all_private_chats' },
+  })
   console.log('Telegram news worker started for', channel)
   while (true) {
     try {
