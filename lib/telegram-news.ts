@@ -33,11 +33,12 @@ async function loadTelegramNews(): Promise<TelegramNews[]> {
     const text = message.find('.tgme_widget_message_text').text().trim()
     const image = imageFromStyle(message.find('.tgme_widget_message_photo_wrap').attr('style'))
     const isServiceMessage = /^(channel|group) created$/i.test(text)
-    return id && !isServiceMessage && (text || image) ? { id, text, date: time, image, url: `https://t.me/${NEWS_CHANNEL}/${id}` } : null
+    const isBotCommand = /^\/news(?:@\w+)?(?:\s|$)/i.test(text)
+    return id && !isServiceMessage && !isBotCommand && (text || image) ? { id, text, date: time, image, url: `https://t.me/${NEWS_CHANNEL}/${id}` } : null
   }).get().filter((item): item is TelegramNews => Boolean(item)).reverse()
 }
 
-const cachedNews = unstable_cache(loadTelegramNews, ['telegram-news-v1'], { revalidate: 300, tags: ['telegram-news'] })
+const cachedNews = unstable_cache(loadTelegramNews, ['telegram-news-v2'], { revalidate: 60, tags: ['telegram-news'] })
 
 export async function getTelegramNews() {
   try { return await cachedNews() } catch { return [] }

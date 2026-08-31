@@ -64,11 +64,22 @@ async function handleMessage(message: Message) {
     return
   }
   const raw = message.text || message.caption || ''
-  if (!raw.startsWith('/news')) return
-  const text = raw.replace(/^\/news(?:@\w+)?\s*/i, '').trim()
+  const userKey = String(message.from.id)
+  const isNewsCommand = /^\/news(?:@\w+)?(?:\s|$)/i.test(raw)
+  const isWaitingForContent = state.awaitingContent[userKey] === true
+  if (!isNewsCommand && !isWaitingForContent) return
+
+  const text = isNewsCommand ? raw.replace(/^\/news(?:@\w+)?\s*/i, '').trim() : raw.trim()
   const photoFileId = message.photo?.at(-1)?.file_id
-  if (!text && !photoFileId) { await send(message.chat.id, 'Добавьте текст после /news или отправьте фото с подписью /news текст.'); return }
+  if (isNewsCommand && !text && !photoFileId) {
+    state.awaitingContent[userKey] = true
+    await writeNewsState(state)
+    await send(message.chat.id, 'Пришлите следующим сообщением текст новости или фотографию с подписью. Я покажу предпросмотр перед публикацией.', { force_reply: true, selective: true })
+    return
+  }
+  if (!text && !photoFileId) { await send(message.chat.id, 'Нужен текст или фотография для новости.'); return }
   if (text.length > (photoFileId ? 1024 : 4096)) { await send(message.chat.id, `Текст слишком длинный для ${photoFileId ? 'подписи к фото' : 'Telegram-сообщения'}.`); return }
+  delete state.awaitingContent[userKey]
   const draft: NewsDraft = { id: randomUUID(), chatId: message.chat.id, userId: message.from.id, text, photoFileId, createdAt: new Date().toISOString() }
   state.drafts[draft.id] = draft
   await writeNewsState(state)

@@ -3,10 +3,10 @@ import { dirname, resolve } from 'node:path'
 
 export type NewsDraft = { id: string; chatId: number; userId: number; text: string; photoFileId?: string; createdAt: string }
 export type ScheduledNews = NewsDraft & { publishAt: string }
-export type NewsState = { offset: number; drafts: Record<string, NewsDraft>; awaitingDate: Record<string, string>; queue: ScheduledNews[] }
+export type NewsState = { offset: number; drafts: Record<string, NewsDraft>; awaitingContent: Record<string, boolean>; awaitingDate: Record<string, string>; queue: ScheduledNews[] }
 
 const statePath = resolve(process.env.NEWS_STATE_FILE || './data/telegram-news.json')
-const emptyState = (): NewsState => ({ offset: 0, drafts: {}, awaitingDate: {}, queue: [] })
+const emptyState = (): NewsState => ({ offset: 0, drafts: {}, awaitingContent: {}, awaitingDate: {}, queue: [] })
 
 export async function readNewsState(): Promise<NewsState> {
   try { return { ...emptyState(), ...JSON.parse(await readFile(statePath, 'utf8')) } }
