@@ -21,7 +21,7 @@ function imageFromStyle(style?: string) {
 async function loadTelegramNews(): Promise<TelegramNews[]> {
   const response = await fetch(`https://t.me/s/${NEWS_CHANNEL}`, {
     headers: { 'user-agent': 'Mozilla/5.0 (compatible; 2BServiceNews/1.0)' },
-    next: { revalidate: 300 },
+    next: { revalidate: 60 },
   })
   if (!response.ok) throw new Error(`Telegram returned ${response.status}`)
   const $ = load(await response.text())

@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto'
+import { load } from 'cheerio'
 import { readNewsState, writeNewsState, type NewsDraft } from '../lib/news-queue'
 
 const token = process.env.NEWS_TELEGRAM_BOT_TOKEN
@@ -38,6 +39,46 @@ async function canPublish(userId: number) {
   }
 }
 
+type ManagedPost = { id: number; text: string; hasPhoto: boolean }
+
+async function getChannelPosts(before?: number): Promise<ManagedPost[]> {
+  const url = new URL('https://t.me/s/twoB_news')
+  if (before) url.searchParams.set('before', String(before))
+  const response = await fetch(url, { headers: { 'user-agent': 'Mozilla/5.0 (compatible; 2BServiceNewsBot/1.0)' } })
+  if (!response.ok) throw new Error(`Telegram history returned ${response.status}`)
+  const $ = load(await response.text())
+  return $('.tgme_widget_message').map((_, element) => {
+    const message = $(element)
+    const id = Number((message.attr('data-post') ?? '').split('/').at(-1))
+    const text = message.find('.tgme_widget_message_text').text().replace(/\s+/g, ' ').trim()
+    const hasPhoto = message.find('.tgme_widget_message_photo_wrap').length > 0
+    const isCommand = /^\/news(?:@\w+)?(?:\s|$)/i.test(text)
+    return Number.isSafeInteger(id) && !isCommand && (text || hasPhoto) ? { id, text, hasPhoto } : null
+  }).get().filter((post): post is ManagedPost => Boolean(post)).reverse()
+}
+
+function postLabel(post: ManagedPost) {
+  const content = post.text || 'Новость с фотографией'
+  return `${post.hasPhoto ? 'Фото · ' : ''}${content}`.slice(0, 50)
+}
+
+async function showManageMenu(chatId: number, before?: number) {
+  const posts = await getChannelPosts(before)
+  if (!posts.length) { await send(chatId, 'В канале больше нет доступных новостей.'); return }
+  const visible = posts.slice(0, 8)
+  const oldestId = posts.at(-1)?.id
+  const keyboardRows = visible.map((post) => [{ text: postLabel(post), callback_data: `view:${post.id}` }])
+  if (oldestId) keyboardRows.push([{ text: 'Показать более старые', callback_data: `manage:${oldestId}` }])
+  await send(chatId, 'Управление новостями\n\nВыберите публикацию. Она будет удалена только после отдельного подтверждения.', { inline_keyboard: keyboardRows })
+}
+
+async function showPost(chatId: number, postId: number) {
+  const posts = await getChannelPosts(postId + 1)
+  const post = posts.find((item) => item.id === postId)
+  const text = post?.text || 'Новость с фотографией'
+  await send(chatId, `Новость #${postId}\n\n${text.slice(0, 3500)}`, { inline_keyboard: [[{ text: 'Удалить', callback_data: `askdelete:${postId}` }], [{ text: 'Назад к списку', callback_data: 'manage:0' }]] })
+}
+
 async function preview(draft: NewsDraft, scheduled = false) {
   const caption = `Предпросмотр новости:\n\n${draft.text || '(новость без текста)'}\n\n${draft.photoFileId ? 'Фото прикреплено.' : 'Без фотографии.'}`
   if (draft.photoFileId) return telegram('sendPhoto', { chat_id: draft.chatId, photo: draft.photoFileId, caption: caption.slice(0, 1024), reply_markup: keyboard(draft.id, scheduled) })
@@ -63,12 +104,17 @@ async function handleMessage(message: Message) {
   if (/^\/start(?:@\w+)?(?:\s|$)/i.test(raw)) {
     const authorized = await canPublish(message.from.id)
     await send(message.chat.id, authorized
-      ? 'Вы можете публиковать новости. Отправьте /news, затем текст или фотографию с подписью.'
+      ? 'Вы можете публиковать новости.\n\n/news — создать новость\n/manage — посмотреть и удалить публикации'
       : 'Нет доступа к публикации. Войдите в разрешённый чат и попробуйте снова.')
     return
   }
   if (!(await canPublish(message.from.id))) {
-    if (/^\/news(?:@\w+)?(?:\s|$)/i.test(raw)) await send(message.chat.id, 'Нет доступа к публикации новостей.')
+    if (/^\/(?:news|manage)(?:@\w+)?(?:\s|$)/i.test(raw)) await send(message.chat.id, 'Нет доступа к управлению новостями.')
+    return
+  }
+  if (/^\/manage(?:@\w+)?(?:\s|$)/i.test(raw)) {
+    try { await showManageMenu(message.chat.id) }
+    catch { await send(message.chat.id, 'Не удалось прочитать историю канала. Попробуйте ещё раз.') }
     return
   }
   const state = await readNewsState()
@@ -110,9 +156,37 @@ async function handleCallback(query: NonNullable<Update['callback_query']>) {
   if (!query.message || !query.data || !(await canPublish(query.from.id))) return
   const replyChatId = query.message.chat.id
   const [action, id] = query.data.split(':')
+  await telegram('answerCallbackQuery', { callback_query_id: query.id }).catch(() => undefined)
+
+  if (action === 'manage') {
+    await showManageMenu(replyChatId, Number(id) || undefined)
+    return
+  }
+  if (action === 'view') {
+    await showPost(replyChatId, Number(id))
+    return
+  }
+  if (action === 'askdelete') {
+    await send(replyChatId, `Удалить новость #${id} из канала и с сайта?`, { inline_keyboard: [[{ text: 'Да, удалить', callback_data: `delete:${id}` }], [{ text: 'Отмена', callback_data: 'manage:0' }]] })
+    return
+  }
+  if (action === 'delete') {
+    try {
+      await telegram('deleteMessage', { chat_id: channel, message_id: Number(id) })
+      await send(replyChatId, `Новость #${id} удалена из канала. На сайте она исчезнет автоматически в течение минуты.`)
+      await showManageMenu(replyChatId)
+    } catch (error) {
+      const description = error instanceof Error ? error.message : ''
+      const reason = /message can't be deleted|not enough rights|CHAT_ADMIN_REQUIRED/i.test(description)
+        ? 'Telegram не разрешил удаление. Дайте боту право удалять сообщения в канале; для некоторых старых публикаций Telegram также может ограничивать удаление через Bot API.'
+        : 'Не удалось удалить новость. Возможно, она уже удалена или недоступна.'
+      await send(replyChatId, reason)
+    }
+    return
+  }
+
   const state = await readNewsState()
   const draft = state.drafts[id]
-  await telegram('answerCallbackQuery', { callback_query_id: query.id }).catch(() => undefined)
   if (!draft || draft.userId !== query.from.id) { await send(replyChatId, 'Черновик не найден или принадлежит другому автору.'); return }
   if (action === 'cancel') { delete state.drafts[id]; await writeNewsState(state); await send(replyChatId, 'Публикация отменена.'); return }
   if (action === 'schedule') { state.awaitingDate[String(query.from.id)] = id; await writeNewsState(state); await send(replyChatId, 'Ответьте на это сообщение датой и временем по Москве: 31.12.2026 18:30', { force_reply: true, selective: true }); return }
