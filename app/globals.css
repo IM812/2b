@@ -52,6 +52,12 @@
   .legal-copy { @apply flex flex-col gap-4; }
   .legal-copy h2 { @apply mt-6 text-xl font-bold tracking-tight text-foreground sm:text-2xl; }
   .legal-copy p { @apply text-pretty; }
+  .legacy-copy { @apply flex flex-col gap-6; }
+  .legacy-copy section { @apply flex flex-col gap-5; }
+  .legacy-copy h2 { @apply mt-8 text-balance text-3xl font-semibold leading-tight tracking-[-.04em] sm:text-4xl; }
+  .legacy-copy h3 { @apply mt-6 text-balance text-xl font-semibold leading-snug tracking-[-.025em] sm:text-2xl; }
+  .legacy-copy p,.legacy-copy li { @apply text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg; }
+  .legacy-copy ul { @apply flex list-disc flex-col gap-2 pl-6; }
   .route-grid { background-image: linear-gradient(color-mix(in oklab,var(--surface-foreground) 7%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in oklab,var(--surface-foreground) 7%,transparent) 1px,transparent 1px); background-size: 42px 42px; }
 }
 
