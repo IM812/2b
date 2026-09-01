@@ -2,16 +2,16 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 const licenses = [
-  { title: 'Лицензия на оказание услуг по передаче данных', image: '/licenses/data-transfer-v2.webp', original: '/licenses/data-transfer.jpg' },
-  { title: 'Лицензия на оказание телематических услуг связи', image: '/licenses/communication-services-v2.webp', original: '/licenses/communication-services.jpg' },
-  { title: 'Сертификат партнера 1С', image: '/licenses/1c-partner-v2.webp', original: '/licenses/1c-partner.jpg' },
-  { title: 'Сертификат соответствия IQS', image: null, original: null },
-  { title: 'Сертификат соответствия ГОСТ Р', image: '/licenses/gost-v2.webp', original: '/licenses/gost.jpg' },
-  { title: 'Приложение к сертификату ГОСТ Р', image: '/licenses/gost-appendix-v2.webp', original: '/licenses/gost-appendix.jpg' },
-  { title: 'Сертификат Intel', image: null, original: null },
-  { title: 'Сертификат Europlan', image: null, original: null },
-  { title: 'Сертификат по медным и оптическим системам СКС', image: null, original: null },
-  { title: 'Разрешение на использование знака соответствия', image: null, original: null },
+  { title: 'Лицензия на оказание услуг по передаче данных', image: '/licenses/data-transfer.jpg' },
+  { title: 'Лицензия на оказание телематических услуг связи', image: '/licenses/communication-services.jpg' },
+  { title: 'Сертификат партнера 1С', image: '/licenses/1c-partner.jpg' },
+  { title: 'Сертификат соответствия IQS', image: null },
+  { title: 'Сертификат соответствия ГОСТ Р', image: '/licenses/gost.jpg' },
+  { title: 'Приложение к сертификату ГОСТ Р', image: '/licenses/gost-appendix.jpg' },
+  { title: 'Сертификат Intel', image: null },
+  { title: 'Сертификат Europlan', image: null },
+  { title: 'Сертификат по медным и оптическим системам СКС', image: '/licenses/cabling-systems.jpg' },
+  { title: 'Разрешение на использование знака соответствия', image: '/licenses/conformity-mark.jpg' },
 ]
 
 const path = '/company/licenses/'
@@ -70,7 +70,7 @@ export default function LicensesPage() {
               return license.image ? (
                 <a
                   key={license.title}
-                  href={license.original ?? ''}
+                  href={license.image ?? ''}
                   target="_blank"
                   rel="noreferrer"
                   className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card text-card-foreground transition-colors hover:border-primary"
