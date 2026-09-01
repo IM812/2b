@@ -4,14 +4,6 @@ import Link from 'next/link'
 const licenses = [
   { title: 'Лицензия на оказание услуг по передаче данных', image: '/licenses/data-transfer.jpg' },
   { title: 'Лицензия на оказание телематических услуг связи', image: '/licenses/communication-services.jpg' },
-  { title: 'Сертификат партнера 1С', image: '/licenses/1c-partner.jpg' },
-  { title: 'Сертификат соответствия IQS', image: '/licenses/iqs.jpeg' },
-  { title: 'Сертификат соответствия ГОСТ Р', image: '/licenses/gost.jpg' },
-  { title: 'Приложение к сертификату ГОСТ Р', image: '/licenses/gost-appendix.jpg' },
-  { title: 'Сертификат Intel', image: '/licenses/intel.png' },
-  { title: 'Сертификат Europlan', image: '/licenses/europlan.png' },
-  { title: 'Сертификат по медным и оптическим системам СКС', image: '/licenses/cabling-systems.jpg' },
-  { title: 'Разрешение на использование знака соответствия', image: '/licenses/conformity-mark.jpg' },
 ]
 
 const path = '/company/licenses/'
@@ -39,7 +31,7 @@ export default function LicensesPage() {
 
       <main className="section-pad bg-background">
         <div className="section-shell">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid max-w-4xl items-start gap-5 sm:grid-cols-2">
             {licenses.map((license) => (
               <a
                 key={license.image}
@@ -48,7 +40,7 @@ export default function LicensesPage() {
                 rel="noreferrer"
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card text-card-foreground transition-colors hover:border-primary"
               >
-                <div className="flex h-80 items-center justify-center overflow-hidden bg-secondary p-4 sm:h-96">
+                <div className="flex aspect-[4/5] items-center justify-center overflow-hidden bg-secondary p-5">
                   <img
                     src={license.image}
                     alt={license.title}
