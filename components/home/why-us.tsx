@@ -12,7 +12,7 @@ const REASONS = [
       'Опыт сопровождения систем крупнейших авиационных заказчиков страны, эксплуатируемых в режиме 24/7.',
   },
   {
-    title: 'Подтверждённая масштабность проектов',
+    title: 'Подтвержденная масштабность проектов',
     description: 'Действующие договоры с фактурой и цифрами, а не абстрактные обещания.',
   },
   {
@@ -25,7 +25,7 @@ export function WhyUs() {
   return (
     <section className="bg-background">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28">
-        <SectionHeading eyebrow="Почему 2В Сервис" title="Надёжность вместо рекламного креатива" />
+        <SectionHeading eyebrow="Почему 2В Сервис" title="Надежность вместо рекламного креатива" />
 
         <div className="mt-14 grid gap-x-10 gap-y-10 md:grid-cols-2">
           {REASONS.map((reason) => (

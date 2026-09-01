@@ -62,7 +62,7 @@ export function LeadForm({ compact = false, onSuccess, source = 'form', heading,
       <div className={cn('rounded-[1.75rem] bg-primary p-7 text-primary-foreground', !compact && 'md:p-12')} role="status">
         <Check className="size-9" aria-hidden />
         <h3 className="mt-7 text-3xl font-bold">{source === 'career' ? 'Отклик отправлен.' : 'Заявка отправлена.'}</h3>
-        <p className="mt-3 max-w-md text-primary-foreground/75">{source === 'career' ? 'Спасибо за знакомство. Вернёмся, когда появится задача под ваш профиль.' : 'Свяжемся с вами и начнём с короткого разговора о задаче.'}</p>
+        <p className="mt-3 max-w-md text-primary-foreground/75">{source === 'career' ? 'Спасибо за знакомство. Вернемся, когда появится задача под ваш профиль.' : 'Свяжемся с вами и начнем с короткого разговора о задаче.'}</p>
       </div>
     )
   }

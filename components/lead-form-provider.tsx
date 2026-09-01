@@ -44,7 +44,7 @@ export function LeadFormProvider() {
         <div className="mb-4 flex items-start justify-between gap-4 px-1 pt-1 sm:mb-6">
           <div>
             <p className="eyebrow text-primary">Обсудить задачу</p>
-            <h2 id="lead-form-title" className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">Начнём с короткого разговора.</h2>
+            <h2 id="lead-form-title" className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">Начнем с короткого разговора</h2>
           </div>
           <button ref={closeButtonRef} type="button" onClick={close} className="flex size-11 shrink-0 items-center justify-center rounded-full border border-border" aria-label="Закрыть форму"><X className="size-5" /></button>
         </div>

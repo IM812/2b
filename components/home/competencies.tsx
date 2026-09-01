@@ -21,7 +21,7 @@ export function Competencies() {
                 <ArrowUpRight className="size-5 opacity-50 transition-transform" />
               </div>
               <div className={index === 0 ? 'mt-14 sm:mt-24 md:mt-40' : 'mt-10 sm:mt-14'}>
-                <h3 className={index === 0 ? 'max-w-xl text-[2rem] font-semibold leading-none tracking-[-0.055em] sm:text-4xl md:text-6xl' : 'text-2xl font-semibold leading-tight tracking-[-0.04em]'}>{item.title}</h3>
+                <h3 className={index === 0 ? 'max-w-xl text-[1.7rem] font-semibold leading-none tracking-[-0.045em] sm:text-[2rem] md:text-[3.45rem]' : 'text-xl font-semibold leading-tight tracking-[-0.035em] sm:text-[1.2rem]'}>{item.title}</h3>
                 <p className="mt-5 max-w-lg text-sm leading-relaxed opacity-65">{item.description}</p>
               </div>
             </article>

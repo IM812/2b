@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
 
-const PRINCIPLES = ['Ответственность за результат', 'Инженерная преемственность', 'Прозрачные SLA и отчётность']
+const PRINCIPLES = ['Ответственность за результат', 'Инженерная преемственность', 'Прозрачные SLA и отчетность']
 
 export function AboutPreview() {
   return (
@@ -10,7 +10,7 @@ export function AboutPreview() {
         <div className="grid gap-12 lg:grid-cols-[1.15fr_.85fr] lg:items-start">
           <div>
             <p className="eyebrow text-primary">2В Сервис · с 2010 года</p>
-            <h2 className="section-title mt-5 max-w-4xl">Встраиваемся в бизнес. Остаёмся рядом после запуска.</h2>
+            <h2 className="section-title mt-5 max-w-4xl">Встраиваемся в бизнес — остаемся рядом после запуска</h2>
             <p className="text-lead mt-8 max-w-2xl text-muted-foreground">Работаем по России — от отдельного офиса до федеральной инфраструктуры, где ИТ напрямую влияет на рейсы, производство и тысячи рабочих мест.</p>
           </div>
           <div className="rounded-[2rem] bg-secondary p-8 md:p-10">
@@ -21,7 +21,7 @@ export function AboutPreview() {
           </div>
         </div>
         <div className="mt-16 flex flex-col gap-8 border-t border-border pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="max-w-2xl text-2xl font-semibold leading-tight tracking-[-.035em] md:text-3xl">Одна команда проектирует, внедряет и сопровождает решение на всём жизненном цикле.</p>
+          <p className="max-w-2xl text-2xl font-semibold leading-tight tracking-[-.035em] md:text-3xl">Одна команда проектирует, внедряет и сопровождает решение на всем жизненном цикле.</p>
           <Link href="/about" className="inline-flex shrink-0 items-center gap-3 rounded-full bg-foreground px-6 py-3.5 text-sm font-bold text-background">О компании <ArrowRight className="size-4" /></Link>
         </div>
       </div>
