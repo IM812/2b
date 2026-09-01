@@ -21,7 +21,7 @@ const _plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://2bservice.ru'),
   title: { default: '2В Сервис — ИТ-аутсорсинг и инфраструктура', template: '%s | 2В Сервис' },
-  description: 'Единый ИТ-партнёр для крупных государственных и коммерческих организаций: инфраструктура, аутсорсинг, информационная безопасность и корпоративные системы.',
+  description: 'Единый ИТ-партнер для крупных государственных и коммерческих организаций: инфраструктура, аутсорсинг, информационная безопасность и корпоративные системы.',
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
   alternates: { canonical: '/', languages: { 'ru-RU': '/' } },
   openGraph: { type: 'website', locale: 'ru_RU', url: '/', siteName: '2В Сервис', title: '2В Сервис — ИТ-аутсорсинг и инфраструктура', description: 'Инфраструктура, безопасность и корпоративные системы для организаций федерального масштаба.', images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: '2В Сервис — ИТ-инфраструктура и корпоративные системы' }] },

@@ -51,7 +51,7 @@ function isValidRussianPhone(value: string) {
 
 export async function POST(request: Request) {
   if (!isAllowedRequestOrigin(request)) {
-    return NextResponse.json({ error: 'Источник запроса не разрешён.' }, { status: 403 })
+    return NextResponse.json({ error: 'Источник запроса не разрешен.' }, { status: 403 })
   }
 
   const contentType = request.headers.get('content-type') ?? ''

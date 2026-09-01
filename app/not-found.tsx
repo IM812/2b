@@ -14,7 +14,7 @@ export default function NotFound() {
               <span className="signal-dot" /> Ошибка маршрута · 404
             </div>
             <h1 className="text-balance text-[3.4rem] font-semibold leading-[.9] tracking-[-.065em] sm:text-7xl lg:text-[6.5rem]">Такой страницы нет</h1>
-            <p className="mt-7 max-w-lg text-pretty text-base leading-relaxed text-white/60 sm:text-lg">Похоже, адрес изменился или маршрут больше не существует. Вернитесь на главную — там всё работает по плану.</p>
+            <p className="mt-7 max-w-lg text-pretty text-base leading-relaxed text-white/60 sm:text-lg">Похоже, адрес изменился или маршрут больше не существует. Вернитесь на главную — там все работает по плану.</p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/" className="motion-lift inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground"><ArrowLeft className="size-4" /> На главную</Link>
               <LeadFormTrigger className="motion-lift inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-white/20 bg-white/[.06] px-6 py-3.5 text-sm font-bold text-white">Обсудить проект <ArrowUpRight className="size-4" /></LeadFormTrigger>

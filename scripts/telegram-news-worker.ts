@@ -39,14 +39,26 @@ async function acquireWorkerLock() {
 }
 
 async function telegram<T>(method: string, body: Record<string, unknown>): Promise<T> {
-  for (let attempt = 0; attempt < 3; attempt++) {
-    const response = await fetch(`${api}/${method}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
-    const data = await response.json() as { ok: boolean; result: T; description?: string }
-    if (data.ok) return data.result
-    if (response.status < 500 && response.status !== 429) throw new Error(data.description || method)
-    await new Promise((resolve) => setTimeout(resolve, 1000 * (attempt + 1)))
+  let lastError: unknown
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), method === 'getUpdates' ? 35_000 : 15_000)
+    try {
+      const response = await fetch(`${api}/${method}`, { method: 'POST', signal: controller.signal, headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
+      const data = await response.json().catch(() => null) as { ok: boolean; result: T; description?: string } | null
+      if (response.ok && data?.ok) return data.result
+      const error = new Error(data?.description || `Telegram ${method} returned ${response.status}`)
+      if (response.status < 500 && response.status !== 429) throw error
+      lastError = error
+    } catch (error) {
+      lastError = error
+      if (error instanceof Error && !/abort|fetch|network/i.test(error.message) && attempt === 0) throw error
+    } finally {
+      clearTimeout(timer)
+    }
+    await new Promise((resolve) => setTimeout(resolve, Math.min(15_000, 1000 * 2 ** attempt)))
   }
-  throw new Error(`Telegram method failed: ${method}`)
+  throw lastError instanceof Error ? lastError : new Error(`Telegram method failed: ${method}`)
 }
 
 function keyboard(id: string, scheduled = false) {
@@ -57,8 +69,8 @@ async function send(chatId: number, text: string, replyMarkup?: object) {
   return telegram('sendMessage', { chat_id: chatId, text, reply_markup: replyMarkup })
 }
 
-function canPublish(_userId: number) {
-  return true
+function canPublish(userId: number, chatId: number) {
+  return chatId === allowedChat || userId === allowedChat
 }
 
 type ManagedPost = { id: number; text: string; hasPhoto: boolean }
@@ -166,13 +178,13 @@ async function handleMessage(message: Message) {
   if (!message.from) return
   const raw = message.text || message.caption || ''
   if (/^\/start(?:@\w+)?(?:\s|$)/i.test(raw)) {
-    const authorized = await canPublish(message.from.id)
+    const authorized = canPublish(message.from.id, message.chat.id)
     await send(message.chat.id, authorized
       ? 'Вы можете публиковать новости.\n\n/news — создать новость\n/manage — посмотреть и удалить публикации'
       : 'Нет доступа к публикации. Войдите в разрешённый чат и попробуйте снова.')
     return
   }
-  if (!(await canPublish(message.from.id))) {
+  if (!(canPublish(message.from.id, message.chat.id))) {
     if (/^\/(?:news|manage)(?:@\w+)?(?:\s|$)/i.test(raw)) await send(message.chat.id, 'Нет доступа к управлению новостями.')
     return
   }
@@ -217,7 +229,7 @@ async function handleMessage(message: Message) {
 }
 
 async function handleCallback(query: NonNullable<Update['callback_query']>) {
-  if (!query.message || !query.data || !(await canPublish(query.from.id))) return
+  if (!query.message || !query.data || !canPublish(query.from.id, query.message.chat.id)) return
   const replyChatId = query.message.chat.id
   const [action, id] = query.data.split(':')
   await telegram('answerCallbackQuery', { callback_query_id: query.id }).catch(() => undefined)
@@ -290,11 +302,13 @@ async function main() {
     scope: { type: 'all_private_chats' },
   })
   console.log('Telegram news worker started for', channel)
+  let consecutiveFailures = 0
   while (true) {
     try {
       await publishDue()
       const state = await readNewsState()
       const updates = await telegram<Update[]>('getUpdates', { offset: state.offset, timeout: 25, allowed_updates: ['message', 'callback_query'] })
+      consecutiveFailures = 0
       for (const update of updates) {
         try {
           if (update.message) await handleMessage(update.message)
@@ -306,7 +320,12 @@ async function main() {
           const latest = await readNewsState(); latest.offset = state.offset; await writeNewsState(latest)
         }
       }
-    } catch (error) { console.error('Worker loop error:', error); await new Promise((resolve) => setTimeout(resolve, 3000)) }
+    } catch (error) {
+      consecutiveFailures += 1
+      const delay = Math.min(60_000, 1000 * 2 ** Math.min(consecutiveFailures, 6))
+      console.error(`Worker loop error; retrying in ${delay}ms:`, error)
+      await new Promise((resolve) => setTimeout(resolve, delay))
+    }
   }
 }
 

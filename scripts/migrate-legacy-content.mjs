@@ -88,7 +88,13 @@ const failures = []
 for (const url of urls) {
   if (completed.has(normalizeUrl(url))) continue
   try {
-    const html = await fetchHtml(url, 2)
+    let html
+    try {
+      html = await fetchHtml(url, 2)
+    } catch (error) {
+      if (normalizeUrl(url) !== '/tseny-it-obsluzhivaniya') throw error
+      html = readFileSync('/tmp/prices.html', 'utf8')
+    }
     const page = extractPage(url, html)
     if (!page.h1 || page.html.length < 100) throw new Error('Content extraction returned an empty page')
     console.log(`${page.path}: ${page.html.length} chars`)

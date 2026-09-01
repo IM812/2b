@@ -5,7 +5,11 @@ import { getLegacyPage } from '@/lib/legacy-content'
 
 const slugs = ['otkat-sistemy-windows-10-k-tochke-vosstanovleniya','kak-proverit-kompyuter-na-virusy-bez-antivirusa','15730','15743','15721','1117','4061','posledstviya-ne-obnovlyat-programmnoye-obespecheniye-na-kompyutere','sposoby-ochistki-kesha-v-outlook','top-variantov-khraneniya-paroley','15736','564','kak-ponyat-chto-zhestkiy-disk-skoro-vyydet-iz-stroya','kakiye-byvayu-sistemy-videonablyudeniya','prolil-kofe-na-klaviaturu','15732','15744','kakaya-windows-samaya-bystraya-test-shesti-pokoleniy-ot-xp-do-11','15742'] as const
 
-export const dynamic = 'force-dynamic'
+export const dynamicParams = false
+
+export function generateStaticParams() {
+  return slugs.map((slug) => ({ slug }))
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
