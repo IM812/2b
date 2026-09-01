@@ -4,6 +4,7 @@ import { LegacyPage } from '@/components/legacy-page'
 import { getLegacyPage } from '@/lib/legacy-content'
 
 const path = '/company/licenses/'
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: 'Профессиональный аутсорсинг 2B Service: Лицензии и сертификаты',
   description: 'Лицензии и сертификаты АО «2В Сервис», подтверждающие компетенции компании и специалистов',
