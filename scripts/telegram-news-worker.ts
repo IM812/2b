@@ -57,8 +57,8 @@ async function send(chatId: number, text: string, replyMarkup?: object) {
   return telegram('sendMessage', { chat_id: chatId, text, reply_markup: replyMarkup })
 }
 
-function canPublish(userId: number) {
-  return userId === allowedChat
+function canPublish(_userId: number) {
+  return true
 }
 
 type ManagedPost = { id: number; text: string; hasPhoto: boolean }
