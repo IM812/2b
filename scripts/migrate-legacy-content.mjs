@@ -18,7 +18,7 @@ const withoutHeadingDot = (value) => cleanText(value).replace(/[.!]+$/, '')
 async function fetchHtml(url, attempts = 3) {
   for (let attempt = 1; attempt <= attempts; attempt++) {
     const controller = new AbortController()
-    const timer = setTimeout(() => controller.abort(), 45_000)
+    const timer = setTimeout(() => controller.abort(), 12_000)
     try {
       const response = await fetch(url, { signal: controller.signal, headers: { 'user-agent': 'Mozilla/5.0 (compatible; 2BServiceMigration/1.0)' } })
       if (!response.ok) throw new Error(`${response.status}`)
@@ -42,7 +42,7 @@ function extractPage(url, html) {
   const firstH1 = cleanText(root.find('h1').first().text() || $('h1').first().text())
   const title = $('title').text().replace(/\s+/g, ' ').trim()
   const description = ($('meta[name="description"]').attr('content') || '').replace(/\s+/g, ' ').trim()
-  root.find('script,style,form,nav,aside,.breadcrumbs,.breadcrumb,.sidebar,[class*="sidebar"],[class*="banner"],noscript').remove()
+  root.find('script,style,form,nav,aside,pre,link,meta,.breadcrumbs,.breadcrumb,.sidebar,[class*="sidebar"],[class*="banner"],noscript').remove()
   root.find('h1').first().remove()
   root.find('h1,h2,h3').each((_, element) => $(element).text(withoutHeadingDot($(element).text())))
   root.find('p,li,td,th').each((_, element) => {
@@ -81,15 +81,20 @@ function extractPage(url, html) {
   }
 }
 
-const pages = []
+let pages = []
+try { pages = JSON.parse(readFileSync('data/legacy-pages.partial.json', 'utf8')) } catch {}
+const completed = new Set(pages.map((page) => page.path))
 const failures = []
 for (const url of urls) {
+  if (completed.has(normalizeUrl(url))) continue
   try {
-    const html = await fetchHtml(url, 5)
+    const html = await fetchHtml(url, 2)
     const page = extractPage(url, html)
     if (!page.h1 || page.html.length < 100) throw new Error('Content extraction returned an empty page')
     console.log(`${page.path}: ${page.html.length} chars`)
     pages.push(page)
+    await mkdir('data', { recursive: true })
+    await writeFile('data/legacy-pages.partial.json', JSON.stringify(pages, null, 2))
   } catch (error) {
     failures.push({ url, error: error instanceof Error ? error.message : String(error) })
     console.error(`FAILED ${url}: ${failures.at(-1).error}`)
