@@ -1,0 +1,24 @@
+[Unit]
+Description=2B Service Next.js site
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=2bservice
+Group=2bservice
+WorkingDirectory=/opt/2bservice/current
+EnvironmentFile=/etc/2bservice/2bservice.env
+Environment=NODE_ENV=production
+Environment=PORT=3000
+ExecStart=/usr/bin/node /opt/2bservice/current/.next/standalone/server.js
+Restart=always
+RestartSec=5
+TimeoutStopSec=20
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/2bservice
+
+[Install]
+WantedBy=multi-user.target
