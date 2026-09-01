@@ -26,7 +26,7 @@ install -m 0600 -o root -g "$APP_USER" "$ENV_SOURCE" "$ENV_DIR/2bservice.env"
 cd "$APP_DIR"
 corepack enable
 pnpm install --frozen-lockfile
-pnpm build
+BUILD_STANDALONE=1 pnpm build
 cp -a public .next/standalone/
 mkdir -p .next/standalone/.next
 cp -a .next/static .next/standalone/.next/

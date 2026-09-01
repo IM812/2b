@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  ...(process.env.BUILD_STANDALONE === '1' ? { output: 'standalone' } : {}),
   async headers() {
     return [
       {
