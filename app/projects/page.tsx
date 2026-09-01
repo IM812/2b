@@ -15,7 +15,7 @@ export default function ProjectsPage() {
         <div data-reveal="line" className="mb-12 grid gap-6 border-b border-border pb-9 md:grid-cols-3">
           <div><p className="eyebrow text-primary">Портфель</p><p className="mt-3 text-3xl font-black">{PROJECTS.length} кейсов</p></div>
           <p className="text-sm leading-relaxed text-muted-foreground">Корпоративные системы, инфраструктура, интеграция и многолетняя поддержка.</p>
-          <p className="text-sm leading-relaxed text-muted-foreground">Авиаперевозки, TravelTech и распределённая корпоративная инфраструктура.</p>
+          <p className="text-sm leading-relaxed text-muted-foreground">Авиаперевозки, TravelTech и распределенная корпоративная инфраструктура.</p>
         </div>
 
         <div className="flex flex-col gap-5 md:gap-8">
@@ -28,7 +28,7 @@ export default function ProjectsPage() {
               className={`motion-card group grid min-h-[34rem] overflow-hidden rounded-[1.75rem] bg-secondary sm:rounded-[2.5rem] lg:min-h-[31rem] lg:grid-cols-[1.05fr_.95fr] ${index === 0 ? 'lg:min-h-[38rem]' : ''}`}
             >
               <div className={`relative min-h-72 overflow-hidden ${index % 2 ? 'lg:order-2' : ''}`}>
-                <Image src={project.image} alt={`${project.clientShort}: ${project.title}`} fill sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.045]" priority={index === 0} />
+                <Image src={project.image} alt={`${project.clientShort}: ${project.title}`} fill quality={70} sizes="(max-width: 640px) 94vw, (max-width: 1024px) 92vw, 55vw" className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.045]" priority={index === 0} loading={index === 0 ? 'eager' : 'lazy'} />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface/60 via-transparent to-transparent" />
                 <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4 text-white sm:inset-x-7 sm:bottom-7">
                   <p className="font-mono text-[10px] uppercase tracking-[.18em] text-white/75">Документальный кадр · {project.industry}</p>

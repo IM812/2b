@@ -16,7 +16,7 @@ export function Process() {
               <div className="grid gap-4 md:grid-cols-[4rem_1fr]">
                 <span className="font-mono text-xs text-muted-foreground">{String(index + 1).padStart(2, '0')} / 08</span>
                 <div>
-                  <h3 className="text-2xl font-semibold md:text-3xl">{step.title}</h3>
+                  <h3 className="text-[1.2rem] font-semibold md:text-[1.7rem]">{step.title}</h3>
                   <p className="mt-3 max-w-lg text-sm leading-relaxed text-foreground/58 md:text-base">{step.description}</p>
                 </div>
               </div>

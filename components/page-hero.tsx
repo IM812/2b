@@ -5,7 +5,7 @@ type PageHeroProps = { eyebrow: string; title: string; description?: string; cla
 
 export function PageHero({ eyebrow, title, description, className, variant }: PageHeroProps) {
   return (
-    <section className={cn('relative overflow-hidden bg-surface pb-12 pt-28 text-surface-foreground sm:pb-16 sm:pt-32 md:pb-24 md:pt-44', className)}>
+    <section className={cn('relative max-h-[700px] overflow-hidden bg-surface pb-12 pt-28 text-surface-foreground sm:pb-16 sm:pt-32 md:pb-20 md:pt-36', className)}>
       {variant && <PageNetworkScene variant={variant} />}
       <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/90 to-surface/20" aria-hidden />
       <div className="section-shell relative z-10">

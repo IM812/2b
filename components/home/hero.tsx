@@ -22,7 +22,7 @@ export function Hero() {
             <span className="block pl-2">контур</span>
           </h1>
           <div data-reveal style={{ '--reveal-delay': '140ms' } as React.CSSProperties} className="relative z-20 max-w-xl lg:pb-2">
-            <p className="text-lead text-foreground/72">Берём ответственность за инфраструктуру, корпоративные системы и поддержку крупных организаций.</p>
+            <p className="text-lead text-foreground/72">Берем ответственность за инфраструктуру, корпоративные системы и поддержку крупных организаций.</p>
             <div className="mt-6 flex flex-col gap-2.5 min-[380px]:flex-row sm:flex-wrap sm:gap-3">
               <LeadFormTrigger className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-accent px-5 py-3 text-sm font-bold text-accent-foreground motion-lift sm:px-6 sm:py-3.5">Обсудить задачу <ArrowRight className="size-4" /></LeadFormTrigger>
               <Link href="/projects" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-border bg-card px-5 py-3 text-sm font-bold motion-lift sm:px-6 sm:py-3.5">Проекты</Link>

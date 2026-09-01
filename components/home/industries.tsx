@@ -14,7 +14,7 @@ export function Industries() {
             {INDUSTRIES.map((industry, index) => (
               <div key={industry.title} data-reveal="line" style={{ '--reveal-delay': `${index * 55}ms` } as React.CSSProperties} className="group grid gap-4 border-b border-surface-foreground/20 py-7 md:grid-cols-[4rem_1fr_auto] md:items-center">
                 <span className="font-mono text-[10px] text-surface-foreground/40">0{index + 1}</span>
-                <div><h3 className="text-2xl font-semibold md:text-3xl">{industry.title}</h3><p className="mt-2 max-w-xl text-sm leading-relaxed text-surface-foreground/55">{industry.description}</p></div>
+                <div><h3 className="text-[1.2rem] font-semibold md:text-[1.7rem]">{industry.title}</h3><p className="mt-2 max-w-xl text-sm leading-relaxed text-surface-foreground/55">{industry.description}</p></div>
                 <span className="h-2 w-2 rounded-full bg-[oklch(0.42_0.09_125)] transition-transform group-hover:scale-150" aria-hidden="true" />
               </div>
             ))}

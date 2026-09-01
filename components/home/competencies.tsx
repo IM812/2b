@@ -11,7 +11,7 @@ export function Competencies() {
             <p className="eyebrow text-primary">Что держим в работе</p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">Не разрозненные подрядчики, а один центр ответственности за весь ИТ-ландшафт.</p>
           </div>
-          <h2 className="section-title">От первого обращения до критичного контура.</h2>
+          <h2 className="section-title">От первого обращения до критичного контура</h2>
         </div>
         <div className="mt-14 grid gap-4 lg:grid-cols-12 lg:grid-rows-2">
           {CORE_COMPETENCIES.slice(0, 6).map((item, index) => (

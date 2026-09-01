@@ -82,17 +82,22 @@ function extractPage(url, html) {
 }
 
 const pages = []
-for (let index = 0; index < urls.length; index += 3) {
-  const batch = urls.slice(index, index + 3)
-  const results = await Promise.all(batch.map(async (url) => {
-    const html = await fetchHtml(url)
+const failures = []
+for (const url of urls) {
+  try {
+    const html = await fetchHtml(url, 5)
     const page = extractPage(url, html)
+    if (!page.h1 || page.html.length < 100) throw new Error('Content extraction returned an empty page')
     console.log(`${page.path}: ${page.html.length} chars`)
-    return page
-  }))
-  pages.push(...results)
+    pages.push(page)
+  } catch (error) {
+    failures.push({ url, error: error instanceof Error ? error.message : String(error) })
+    console.error(`FAILED ${url}: ${failures.at(-1).error}`)
+  }
 }
 
 await mkdir('data', { recursive: true })
 await writeFile('data/legacy-pages.json', JSON.stringify(pages, null, 2))
-console.log(`Saved ${pages.length} pages`)
+await writeFile('data/legacy-migration-failures.json', JSON.stringify(failures, null, 2))
+console.log(`Saved ${pages.length}/${urls.length} pages`)
+if (failures.length) process.exitCode = 1
