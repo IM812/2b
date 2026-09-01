@@ -57,13 +57,8 @@ async function send(chatId: number, text: string, replyMarkup?: object) {
   return telegram('sendMessage', { chat_id: chatId, text, reply_markup: replyMarkup })
 }
 
-async function canPublish(userId: number) {
-  try {
-    const member = await telegram<{ status: string }>('getChatMember', { chat_id: allowedChat, user_id: userId })
-    return ['creator', 'administrator', 'member'].includes(member.status)
-  } catch {
-    return false
-  }
+function canPublish(userId: number) {
+  return userId === allowedChat
 }
 
 type ManagedPost = { id: number; text: string; hasPhoto: boolean }
