@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 
 const licenses = [
@@ -40,27 +39,25 @@ export default function LicensesPage() {
 
       <main className="section-pad bg-background">
         <div className="section-shell">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {licenses.map((license) => (
               <a
                 key={license.image}
                 href={license.image}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card text-card-foreground transition-colors hover:border-primary"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card text-card-foreground transition-colors hover:border-primary"
               >
-                <div className="relative aspect-[3/4] overflow-hidden bg-secondary">
-                  <Image
+                <div className="flex h-80 items-center justify-center overflow-hidden bg-secondary p-4 sm:h-96">
+                  <img
                     src={license.image}
                     alt={license.title}
-                    fill
                     loading="eager"
-                    quality={82}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-contain p-4 transition-transform duration-300 group-hover:scale-[1.02]"
+                    decoding="async"
+                    className="block max-h-full w-auto max-w-full object-contain"
                   />
                 </div>
-                <h2 className="text-pretty p-5 text-lg font-semibold leading-snug">{license.title}</h2>
+                <h2 className="text-pretty p-4 text-base font-semibold leading-snug">{license.title}</h2>
               </a>
             ))}
           </div>
