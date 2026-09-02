@@ -30,7 +30,26 @@ const dataCenterRows = [
 ]
 
 function PriceTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="mt-7 overflow-x-auto rounded-2xl border border-border"><table className="w-full min-w-[42rem] border-collapse text-left text-sm"><thead className="bg-secondary"><tr>{headers.map((header) => <th key={header} className="border-b border-border px-5 py-4 font-bold">{header}</th>)}</tr></thead><tbody>{rows.map((row) => <tr key={row.join('-')} className="border-b border-border last:border-0">{row.map((cell, index) => <td key={`${cell}-${index}`} className={`px-5 py-4 ${index ? 'font-semibold' : 'text-muted-foreground'}`}>{cell}</td>)}</tr>)}</tbody></table></div>
+  const wide = headers.length > 2
+  return <>
+    <ul className={`mt-7 flex flex-col gap-3 ${wide ? 'lg:hidden' : 'md:hidden'}`}>
+      {rows.map((row) => <li key={row.join('-')} className="rounded-2xl border border-border bg-card p-5">
+        <p className="text-pretty text-base font-semibold leading-snug">{row[0]}</p>
+        <dl className="mt-4 flex flex-col gap-2 border-t border-border pt-4">
+          {row.slice(1).map((cell, index) => <div key={`${cell}-${index}`} className="flex items-baseline justify-between gap-4">
+            <dt className="font-mono text-[11px] uppercase tracking-[.14em] text-muted-foreground">{headers[index + 1]}</dt>
+            <dd className="text-right text-sm font-semibold">{cell}</dd>
+          </div>)}
+        </dl>
+      </li>)}
+    </ul>
+    <div className={`mt-7 hidden overflow-hidden rounded-2xl border border-border ${wide ? 'lg:block' : 'md:block'}`}>
+      <table className="w-full table-fixed border-collapse text-left text-sm">
+        <thead className="bg-secondary"><tr>{headers.map((header, index) => <th key={header} className={`border-b border-border px-4 py-4 font-bold lg:px-5 ${index === 0 ? 'w-[34%]' : ''}`}>{header}</th>)}</tr></thead>
+        <tbody>{rows.map((row) => <tr key={row.join('-')} className="border-b border-border last:border-0">{row.map((cell, index) => <td key={`${cell}-${index}`} className={`px-4 py-4 text-pretty align-top lg:px-5 ${index ? 'font-semibold' : 'text-muted-foreground'}`}>{cell}</td>)}</tr>)}</tbody>
+      </table>
+    </div>
+  </>
 }
 
 export default function PricesPage() {
