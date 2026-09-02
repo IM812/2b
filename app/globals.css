@@ -30,7 +30,8 @@
   html { @apply bg-background; scroll-behavior: auto; }
   body { @apply overflow-x-hidden bg-background font-sans text-foreground antialiased; }
   main, section, article, div { min-width: 0; }
-  h1, h2, h3, p { overflow-wrap: break-word; }
+  p { overflow-wrap: break-word; }
+  h1, h2, h3, h4 { overflow-wrap: normal; word-break: keep-all; hyphens: manual; }
   a, button { @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary; }
   ::selection { @apply bg-primary text-primary-foreground; }
 }
@@ -39,8 +40,8 @@
   .section-shell { @apply mx-auto w-full max-w-[88rem] px-4 sm:px-5 md:px-10 lg:px-14; }
   .section-pad { @apply py-14 sm:py-20 md:py-28 lg:py-36; }
   .eyebrow { @apply font-mono text-[9px] font-semibold uppercase tracking-[0.16em] sm:text-[10px] sm:tracking-[0.2em]; }
-  .display-title { @apply text-balance text-[2.8rem] font-semibold leading-[0.9] tracking-[-0.065em] sm:text-[3.3rem] md:text-[clamp(3.3rem,8vw,8rem)]; }
-  .section-title { @apply text-balance text-[2.25rem] font-semibold leading-[0.96] tracking-[-0.055em] sm:text-[2.5rem] md:text-[clamp(2.5rem,5vw,5rem)]; }
+  .display-title { @apply text-balance text-[2.35rem] font-semibold leading-[0.94] tracking-[-0.055em] sm:text-[3rem] md:text-[clamp(3rem,6vw,5.5rem)]; }
+  .section-title { @apply text-balance text-[1.95rem] font-semibold leading-[1] tracking-[-0.045em] sm:text-[2.25rem] md:text-[clamp(2.25rem,3.4vw,3.5rem)]; }
   .section-title-compact { @apply text-balance text-[2.1rem] font-semibold leading-[0.98] tracking-[-0.05em] sm:text-[2.35rem] md:text-[clamp(2.35rem,3.2vw,3.5rem)]; }
   .text-lead { @apply text-pretty text-base leading-relaxed sm:text-lg md:text-xl; }
   .num { @apply font-semibold tabular-nums tracking-[-0.055em]; }
@@ -100,8 +101,8 @@ html[data-motion='ready'] [data-reveal][data-visible='true'] { opacity:1; transf
   .mobile-menu { overscroll-behavior:contain; padding-bottom:env(safe-area-inset-bottom); }
 }
 @media (max-width:389px) {
-  .display-title { font-size:2.45rem; }
-  .section-title { font-size:2rem; }
+  .display-title { font-size:2.1rem; }
+  .section-title { font-size:1.75rem; }
   .eyebrow { letter-spacing:.12em; }
 }
 @media (hover:none) and (pointer:coarse) {
