@@ -1,17 +1,18 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const licenses = [
-  { title: 'Лицензия на оказание услуг по передаче данных', image: '/licenses/data-transfer.jpg' },
-  { title: 'Лицензия на оказание телематических услуг связи', image: '/licenses/communication-services.jpg' },
-  { title: 'Сертификат партнера 1С', image: '/licenses/1c-partner.jpg' },
-  { title: 'Сертификат соответствия IQS', image: null },
-  { title: 'Сертификат соответствия ГОСТ Р', image: '/licenses/gost.jpg' },
-  { title: 'Приложение к сертификату ГОСТ Р', image: '/licenses/gost-appendix.jpg' },
-  { title: 'Сертификат Intel', image: null },
-  { title: 'Сертификат Europlan', image: null },
-  { title: 'Сертификат по медным и оптическим системам СКС', image: '/licenses/cabling-systems.jpg' },
-  { title: 'Разрешение на использование знака соответствия', image: '/licenses/conformity-mark.jpg' },
+  { title: 'Лицензия на оказание услуг по передаче данных', image: '/licenses/data-transfer-new.png' },
+  { title: 'Лицензия на оказание телематических услуг связи', image: '/licenses/communication-services-new.png' },
+  { title: 'Сертификат партнера 1С', image: '/licenses/1c-new.png' },
+  { title: 'Сертификат соответствия IQS', image: '/licenses/iqs-certificate-new.png' },
+  { title: 'Сертификат соответствия ГОСТ Р', image: '/licenses/gost-new.png' },
+  { title: 'Приложение к сертификату ГОСТ Р', image: '/licenses/gost-appendix-new.png' },
+  { title: 'Сертификат Intel Technology Provider Gold', image: '/licenses/intel-new.png' },
+  { title: 'Сертификат авторизованного партнера Eurolan', image: '/licenses/eurolan-new.png' },
+  { title: 'Сертификат по медным и оптическим системам СКС', image: '/licenses/molex-new.png' },
+  { title: 'Разрешение на использование знака соответствия IQS', image: '/licenses/iqs-permit-new.png' },
 ]
 
 const path = '/company/licenses/'
@@ -40,52 +41,27 @@ export default function LicensesPage() {
       <main className="section-pad bg-background">
         <div className="section-shell">
           <div className="grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {licenses.map((license) => {
-              const content = (
-                <>
-                  <div className="flex aspect-[4/5] items-center justify-center overflow-hidden bg-secondary p-5">
-                    {license.image ? (
-                      <img
-                        src={license.image}
-                        alt={license.title}
-                        loading="eager"
-                        decoding="async"
-                        className="block max-h-full w-auto max-w-full object-contain"
-                      />
-                    ) : (
-                      <div className="flex max-w-56 flex-col items-center gap-3 text-center">
-                        <span className="rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-                          Архивный документ
-                        </span>
-                        <p className="text-sm leading-relaxed text-muted-foreground">
-                          Исходный скан поврежден в архиве старого сайта
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                  <h2 className="text-pretty p-4 text-base font-semibold leading-snug">{license.title}</h2>
-                </>
-              )
-
-              return license.image ? (
-                <a
-                  key={license.title}
-                  href={license.image ?? ''}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card text-card-foreground transition-colors hover:border-primary"
-                >
-                  {content}
-                </a>
-              ) : (
-                <article
-                  key={license.title}
-                  className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card text-card-foreground"
-                >
-                  {content}
-                </article>
-              )
-            })}
+            {licenses.map((license) => (
+              <a
+                key={license.title}
+                href={license.image}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card text-card-foreground transition-colors hover:border-primary"
+              >
+                <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
+                  <Image
+                    src={license.image}
+                    alt={license.title}
+                    fill
+                    quality={95}
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-contain p-5"
+                  />
+                </div>
+                <h2 className="text-pretty p-4 text-base font-semibold leading-snug">{license.title}</h2>
+              </a>
+            ))}
           </div>
 
           <div className="mt-12 flex flex-col items-start justify-between gap-6 rounded-3xl bg-secondary p-6 sm:flex-row sm:items-center sm:p-8">
