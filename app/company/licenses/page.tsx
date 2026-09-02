@@ -40,7 +40,7 @@ export default function LicensesPage() {
 
       <main className="section-pad bg-background">
         <div className="section-shell">
-          <div className="grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-2 items-start gap-3 sm:gap-5 lg:grid-cols-3">
             {licenses.map((license) => (
               <a
                 key={license.title}
@@ -54,12 +54,12 @@ export default function LicensesPage() {
                     src={license.image}
                     alt={license.title}
                     fill
-                    quality={95}
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-contain p-5"
+                    quality={90}
+                    sizes="(max-width: 640px) 46vw, (max-width: 1024px) 48vw, 33vw"
+                    className="object-contain p-2.5 sm:p-5"
                   />
                 </div>
-                <h2 className="text-pretty p-4 text-base font-semibold leading-snug">{license.title}</h2>
+                <h2 className="text-pretty p-3 text-[13px] font-semibold leading-snug sm:p-4 sm:text-base">{license.title}</h2>
               </a>
             ))}
           </div>

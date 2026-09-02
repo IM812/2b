@@ -6,7 +6,7 @@ import { LeadFormTrigger } from '@/components/lead-form-trigger'
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-background pb-12 pt-24 sm:pb-16 sm:pt-28 md:pt-36">
-      <div className="pointer-events-none absolute -right-6 top-14 select-none text-[9rem] font-black leading-none tracking-[-0.12em] text-primary/[0.05] sm:-right-[4vw] sm:top-16 sm:text-[clamp(10rem,28vw,32rem)] sm:text-primary/[0.045]" aria-hidden>
+      <div className="pointer-events-none absolute hidden select-none font-black leading-none tracking-[-0.12em] sm:-right-[4vw] sm:top-16 sm:block sm:text-[clamp(10rem,28vw,32rem)] sm:text-primary/[0.045]" aria-hidden>
         2В
       </div>
       <div className="section-shell relative">
