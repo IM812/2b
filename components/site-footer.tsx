@@ -32,16 +32,28 @@ export function SiteFooter() {
             ))}
           </nav>
         </div>
-        <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 text-xs text-muted-foreground md:flex-row md:items-end md:justify-between">
-          <div className="flex flex-col gap-2">
-            <p>© {new Date().getFullYear()} 2В Сервис</p>
+        <div className="mt-12 border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">
+          <div className="flex flex-col gap-x-10 gap-y-4 lg:flex-row lg:justify-between">
+            <p className="max-w-md">
+              <span className="font-semibold text-foreground">Акционерное общество «2В Сервис»</span>
+              <br />
+              ИНН 7722701720 · КПП 772201001 · ОГРН 1097746738253
+            </p>
+            <dl className="grid max-w-xl gap-x-3 gap-y-1 sm:grid-cols-[8.5rem_1fr]">
+              <dt>Юридический адрес</dt>
+              <dd className="text-foreground/80">109316, г. Москва, Остаповский проезд, 22, стр. 16</dd>
+              <dt>Фактический адрес</dt>
+              <dd className="text-foreground/80">г. Москва, Пресненская набережная, 6, стр. 2, БЦ «Башня Империя»</dd>
+            </dl>
+          </div>
+          <div className="mt-6 flex flex-col gap-3 border-t border-border pt-5 md:flex-row md:items-center md:justify-between">
+            <p>© {new Date().getFullYear()} АО «2В Сервис». Все права защищены.</p>
             <div className="flex flex-wrap gap-x-4 gap-y-2">
               <Link href="/privacy" className="hover:text-foreground">Политика конфиденциальности</Link>
               <Link href="/personal-data-consent" className="hover:text-foreground">Согласие на обработку ПДн</Link>
               <Link href="/details" className="hover:text-foreground">Реквизиты</Link>
             </div>
           </div>
-          <p>БЦ «Башня Империя», Москва, Пресненская набережная, 6с2</p>
         </div>
       </div>
     </footer>
