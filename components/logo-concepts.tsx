@@ -1,30 +1,60 @@
+'use client'
+
+import { useId } from 'react'
+
 type MarkProps = {
   className?: string
 }
 
-function JunctionMark({ className = '' }: MarkProps) {
+function CounterformMark({ className = '' }: MarkProps) {
+  const maskId = useId().replace(/:/g, '')
+
   return (
-    <svg className={className} viewBox="0 0 176 112" role="img" aria-label="Концепт Стык — знак 2В">
-      <path d="M20 33C20 19 31 12 46 12h17c17 0 27 9 27 23 0 11-5 18-18 26L25 91h67" fill="none" stroke="currentColor" strokeWidth="15" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M105 18v76h26c20 0 31-8 31-22 0-11-8-18-21-19 11-2 17-8 17-18 0-12-10-17-28-17h-25Zm15 13h10c8 0 12 3 12 8s-4 8-12 8h-10V31Zm0 29h12c9 0 14 4 14 10 0 7-5 10-14 10h-12V60Z" fill="currentColor" fillRule="evenodd" />
+    <svg className={className} viewBox="0 0 128 120" role="img" aria-label="Концепт Контрформа — знак 2В">
+      <defs>
+        <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="128" height="120">
+          <rect width="128" height="120" fill="white" />
+          <path
+            d="M34 35c0-11 8-17 21-17h12c12 0 19 6 19 15 0 8-4 13-13 19L38 75h50M38 75v17h50"
+            fill="none"
+            stroke="black"
+            strokeWidth="13"
+            strokeLinecap="square"
+            strokeLinejoin="round"
+          />
+        </mask>
+      </defs>
+      <path
+        d="M18 8h48c26 0 41 11 41 29 0 11-6 19-17 24 13 4 20 13 20 25 0 18-15 26-44 26H18V8Z"
+        fill="currentColor"
+        mask={`url(#${maskId})`}
+      />
     </svg>
   )
 }
 
-function ModuleMark({ className = '' }: MarkProps) {
+function LigatureMark({ className = '' }: MarkProps) {
   return (
-    <svg className={className} viewBox="0 0 176 112" role="img" aria-label="Концепт Модуль — знак 2В">
-      <path d="M12 18h55c17 0 27 10 27 25 0 11-6 20-18 27L48 86h46v16H12V87l51-30c9-5 14-9 14-15 0-5-4-8-11-8H12V18Z" fill="currentColor" />
-      <path d="M105 18h36c17 0 27 8 27 22 0 10-5 17-14 20 11 3 17 10 17 20 0 14-11 22-30 22h-36V18Zm17 15v20h16c8 0 12-3 12-10s-4-10-12-10h-16Zm0 34v20h18c9 0 13-3 13-10s-4-10-13-10h-18Z" fill="currentColor" fillRule="evenodd" />
+    <svg className={className} viewBox="0 0 168 120" role="img" aria-label="Концепт Лигатура — знак 2В">
+      <path d="M8 10h50c23 0 36 11 36 29 0 13-7 22-22 31L45 87h51v25H8V88l48-30c8-5 12-10 12-16 0-5-4-8-12-8H8V10Z" fill="currentColor" />
+      <path
+        d="M83 10h38c25 0 38 9 38 27 0 11-6 19-18 23 14 4 21 12 21 24 0 19-14 28-42 28H83V10Zm25 21v20h13c9 0 14-3 14-10s-5-10-14-10h-13Zm0 40v20h15c10 0 15-3 15-10s-5-10-15-10h-15Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
     </svg>
   )
 }
 
-function RouteMark({ className = '' }: MarkProps) {
+function ProtocolMark({ className = '' }: MarkProps) {
   return (
-    <svg className={className} viewBox="0 0 176 112" role="img" aria-label="Концепт Маршрут — знак 2В">
-      <path d="M16 30c0-10 8-18 18-18h32c14 0 23 9 23 22 0 9-5 16-14 21L24 88h65" fill="none" stroke="currentColor" strokeWidth="14" strokeLinecap="square" strokeLinejoin="round" />
-      <path d="M110 18v76m0-76h22c16 0 26 7 26 19 0 11-9 18-25 18h-23m0 0h25c17 0 27 7 27 20 0 12-10 19-27 19h-25" fill="none" stroke="currentColor" strokeWidth="14" strokeLinejoin="round" />
+    <svg className={className} viewBox="0 0 184 120" role="img" aria-label="Концепт Протокол — знак 2В">
+      <path d="M8 8h58l22 20v23L46 82h43v30H8V81l50-36v-9H8V8Z" fill="currentColor" />
+      <path
+        d="M101 8h48l25 22v20l-12 11 14 13v18l-23 20h-52V8Zm27 26v16h17l6-6v-5l-6-5h-17Zm0 40v16h19l6-5v-6l-6-5h-19Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
     </svg>
   )
 }
@@ -32,43 +62,43 @@ function RouteMark({ className = '' }: MarkProps) {
 const CONCEPTS = [
   {
     code: 'A',
-    name: 'Стык',
-    description: 'Плавная «2» соединяется с компактной «В». Знак сохраняет преемственность с текущей пластикой, но становится спокойнее и увереннее.',
-    traits: ['Преемственность', 'Мягкая геометрия', 'Хорошая читаемость'],
-    Mark: JunctionMark,
+    name: 'Контрформа',
+    description: 'Цифра 2 вырезана внутри силуэта буквы В. Один цельный знак вместо двух соседних символов — компактный, строгий и узнаваемый.',
+    traits: ['Единый силуэт', 'Негативное пространство', 'Иконка и favicon'],
+    Mark: CounterformMark,
   },
   {
     code: 'B',
-    name: 'Модуль',
-    description: 'Плотная конструкция из двух равных блоков. Подчеркивает системность, инженерный подход и хорошо работает как иконка.',
-    traits: ['Технологичность', 'Компактность', 'Сильный силуэт'],
-    Mark: ModuleMark,
+    name: 'Лигатура',
+    description: 'Два знака собраны в одну плотную конструкцию с общей опорой. Самый прямой и легко читаемый вариант для корпоративной среды.',
+    traits: ['Читаемость', 'Корпоративный характер', 'Масштабируемость'],
+    Mark: LigatureMark,
   },
   {
     code: 'C',
-    name: 'Маршрут',
-    description: 'Линейный знак напоминает схему соединений и движение сигнала. Самый технический и строгий вариант из трех.',
-    traits: ['Инфраструктура', 'Связность', 'Динамика'],
-    Mark: RouteMark,
+    name: 'Протокол',
+    description: 'Угловая модульная геометрия отсылает к цифровым интерфейсам и инженерным схемам. Самый технологичный вариант новой серии.',
+    traits: ['Современный IT', 'Модульная сетка', 'Выразительный ритм'],
+    Mark: ProtocolMark,
   },
 ]
 
 export function LogoConcepts() {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8">
       {CONCEPTS.map(({ code, name, description, traits, Mark }) => (
-        <article key={code} className="overflow-hidden rounded-[2rem] border border-border bg-card">
-          <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="flex min-h-80 items-center justify-center bg-secondary p-8 text-primary sm:p-12">
-              <Mark className="w-full max-w-sm" />
+        <article key={code} className="overflow-hidden rounded-xl border border-border bg-card">
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="flex min-h-80 items-center justify-center bg-secondary p-10 text-foreground sm:min-h-96 sm:p-16">
+              <Mark className="w-full max-w-80" />
             </div>
             <div className="flex flex-col p-6 sm:p-9 lg:p-11">
               <div className="flex items-center justify-between gap-4 border-b border-border pb-5">
                 <span className="eyebrow text-primary">Вариант {code}</span>
-                <span className="font-mono text-xs text-muted-foreground">2В / SYMBOL</span>
+                <span className="font-mono text-xs text-muted-foreground">2В / MONOGRAM</span>
               </div>
               <h2 className="mt-7 text-4xl font-semibold tracking-[-.05em] sm:text-5xl">{name}</h2>
-              <p className="mt-5 text-pretty leading-relaxed text-muted-foreground">{description}</p>
+              <p className="mt-5 max-w-lg text-pretty leading-relaxed text-muted-foreground">{description}</p>
               <ul className="mt-8 flex flex-wrap gap-2" aria-label={`Характеристики концепта «${name}»`}>
                 {traits.map((trait) => (
                   <li key={trait} className="rounded-full border border-border px-3 py-1.5 text-xs font-semibold">
@@ -80,17 +110,17 @@ export function LogoConcepts() {
           </div>
 
           <div className="grid border-t border-border sm:grid-cols-3">
-            <div className="flex min-h-36 items-center justify-between gap-5 border-b border-border p-6 text-primary sm:border-b-0 sm:border-r">
-              <span className="eyebrow text-muted-foreground">Основной</span>
+            <div className="flex min-h-36 items-center justify-between gap-5 border-b border-border p-6 text-foreground sm:border-b-0 sm:border-r">
+              <span className="eyebrow text-muted-foreground">Монохром</span>
               <Mark className="w-24" />
             </div>
             <div className="flex min-h-36 items-center justify-between gap-5 border-b border-border bg-surface p-6 text-surface-foreground sm:border-b-0 sm:border-r">
               <span className="eyebrow text-surface-foreground/45">Инверсия</span>
               <Mark className="w-24" />
             </div>
-            <div className="flex min-h-36 items-center justify-between gap-5 p-6 text-foreground">
-              <span className="eyebrow text-muted-foreground">24 px</span>
-              <Mark className="w-12" />
+            <div className="flex min-h-36 items-center justify-between gap-5 p-6 text-primary">
+              <span className="eyebrow text-muted-foreground">Малый размер</span>
+              <Mark className="w-10" />
             </div>
           </div>
         </article>

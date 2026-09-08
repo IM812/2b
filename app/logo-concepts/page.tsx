@@ -15,10 +15,10 @@ export default function LogoConceptsPage() {
           <p className="eyebrow text-primary">Айдентика / рабочий просмотр</p>
           <div className="mt-7 grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <h1 className="max-w-4xl text-balance text-5xl font-semibold leading-[.9] tracking-[-.065em] sm:text-7xl md:text-8xl">
-              Три направления знака 2В
+              Новая тройка монограмм 2В
             </h1>
             <p className="max-w-xl text-pretty text-lg leading-relaxed text-surface-foreground/60">
-              Все варианты рассчитаны на использование без словесной части — в шапке сайта, favicon, документах и интерфейсах.
+              Строгие чёрно-белые знаки с современным IT-характером. Без градиентов и декоративных эффектов — сначала силуэт, затем цвет.
             </p>
           </div>
         </div>
@@ -27,9 +27,9 @@ export default function LogoConceptsPage() {
       <section className="section-pad bg-background">
         <div className="section-shell">
           <div className="mb-10 grid gap-6 border-b border-border pb-8 sm:grid-cols-3">
-            <p className="text-sm leading-relaxed text-muted-foreground">Проверка в основном фирменном цвете</p>
-            <p className="text-sm leading-relaxed text-muted-foreground">Проверка на темном фоне</p>
-            <p className="text-sm leading-relaxed text-muted-foreground">Проверка читаемости в малом размере</p>
+            <p className="text-sm leading-relaxed text-muted-foreground">Один уверенный силуэт без эффектов</p>
+            <p className="text-sm leading-relaxed text-muted-foreground">Стабильная работа на светлом и тёмном фоне</p>
+            <p className="text-sm leading-relaxed text-muted-foreground">Читаемость в интерфейсе и favicon</p>
           </div>
           <LogoConcepts />
         </div>
