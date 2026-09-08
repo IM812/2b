@@ -4,11 +4,132 @@ import { ArrowUpRight } from 'lucide-react'
 import { ClientsIntro } from '@/components/editorial/page-intros'
 import { PROJECTS } from '@/lib/content'
 
-export const metadata: Metadata = { title: 'Клиенты и форматы работы', description: 'Опыт 2В Сервис в авиации, TravelTech и корпоративной инфраструктуре: внедрение, развитие и поддержка по SLA.', alternates: { canonical: '/clients' }, openGraph: { url: '/clients', title: 'Клиенты и форматы работы | 2В Сервис', description: 'Проектное внедрение, развитие систем и многолетнее сопровождение.' } }
-const FORMATS=[['Проект внедрения','Полный цикл с фиксированными этапами и критериями приемки.'],['Развитие системы','Регулярные релизы и адаптация решения к новым процессам.'],['Поддержка по SLA','Мониторинг, линии поддержки и управляемая эскалация.']]
+export const metadata: Metadata = {
+  title: 'Клиенты и опыт работы',
+  description:
+    'Публичный клиентский опыт 2В Сервис в авиации, транспорте, гостиничном бизнесе, медиа, спорте и онлайн-сервисах.',
+  alternates: { canonical: '/clients' },
+  openGraph: {
+    url: '/clients',
+    title: 'Клиенты и опыт работы | 2В Сервис',
+    description: 'Организации и отрасли, представленные в публичном портфеле 2В Сервис.',
+  },
+}
 
-export default function ClientsPage(){return <>
-<ClientsIntro />
-<section className="section-pad bg-background"><div className="section-shell"><div className="grid gap-8 border-b border-border pb-10 lg:grid-cols-[.8fr_1.2fr]"><div><p className="eyebrow text-primary">Форматы работы</p><h2 className="section-title mt-5">От отдельного проекта до многолетнего сопровождения</h2></div><p className="max-w-xl text-lg leading-relaxed text-muted-foreground lg:pt-8">Прозрачная модель взаимодействия зависит от задачи: проектный контур, развитие действующей системы или постоянная эксплуатация.</p></div><div className="grid gap-4 pt-10 md:grid-cols-3">{FORMATS.map(([title,text],i)=><article key={title} className={`min-h-64 rounded-[2rem] p-7 ${i===1?'bg-primary text-primary-foreground':'bg-secondary'}`}><span className="font-mono text-xs opacity-50">0{i+1}</span><h2 className="mt-16 text-3xl font-bold tracking-tight">{title}</h2><p className="mt-4 text-sm leading-relaxed opacity-65">{text}</p></article>)}</div></div></section>
-<section className="section-pad bg-surface text-surface-foreground"><div className="section-shell"><p className="eyebrow text-primary">Подтвержденные кейсы</p><div className="mt-10 flex flex-col">{PROJECTS.map((project,i)=><Link key={project.slug} href={`/projects/${project.slug}`} className="group grid gap-4 border-t border-white/15 py-8 last:border-b md:grid-cols-[4rem_.7fr_1.3fr_auto] md:items-center"><span className="font-mono text-xs text-primary">{String(i+1).padStart(2,'0')}</span><div><p className="text-xs uppercase tracking-widest text-surface-foreground/40">{project.industry}</p><p className="mt-2 font-bold">{project.clientShort}</p></div><h3 className="max-w-3xl text-balance text-[15px] font-bold md:text-[19px]">{project.title}</h3><ArrowUpRight className="size-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"/></Link>)}</div></div></section>
-</>}
+const CLIENT_GROUPS = [
+  {
+    category: 'Авиация',
+    clients: ['ПАО «Аэрофлот»', 'АО «Авиакомпания «Россия»'],
+    context: 'Корпоративные информационные системы, интеграция и техническая поддержка.',
+  },
+  {
+    category: 'Транспорт и гостиничный бизнес',
+    clients: ['АО «МКЖД»', 'Radisson Blu Шереметьево'],
+    context: 'Инфраструктурные, информационные и инженерные системы объектов.',
+  },
+  {
+    category: 'Медиа и спорт',
+    clients: ['ИД «Комсомольская правда»', 'ХК «Спартак»'],
+    context: 'ИТ-инфраструктура, сервисы для пользователей и техническое сопровождение.',
+  },
+  {
+    category: 'Онлайн-сервисы',
+    clients: ['Exat.ru'],
+    context: 'Перенос, размещение и дальнейшее сопровождение инфраструктуры публичного сервиса.',
+  },
+]
+
+const WORK_FORMATS = [
+  ['Проект под ключ', 'Обследование, проектирование, поставка, внедрение и передача документации.'],
+  ['Развитие системы', 'Планируем изменения, выпускаем доработки и адаптируем решение к новым процессам.'],
+  ['Поддержка по SLA', 'Фиксируем состав услуг, время реакции, уровни эскалации и отчетность.'],
+]
+
+const FEATURED_CASES = PROJECTS.filter((project) =>
+  ['rossiya-kasud', 'aeroflot-support', 'exat-infrastructure'].includes(project.slug),
+)
+
+export default function ClientsPage() {
+  return (
+    <>
+      <ClientsIntro />
+
+      <section className="section-pad bg-background">
+        <div className="section-shell">
+          <div className="grid gap-8 border-b border-border pb-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+            <div>
+              <p className="eyebrow text-primary">Публичный портфель</p>
+              <h2 className="section-title mt-5">Опыт в разных отраслях</h2>
+            </div>
+            <p className="max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
+              Ниже — организации и направления работ, опубликованные на текущем сайте 2В Сервис. Состав конкретного проекта раскрываем только там, где доступно описание кейса.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            {CLIENT_GROUPS.map((group, index) => (
+              <article key={group.category} data-reveal="scale" className={`motion-card rounded-[2rem] p-6 sm:p-8 ${index === 0 ? 'bg-primary text-primary-foreground' : 'bg-secondary'}`}>
+                <p className="eyebrow opacity-55">{group.category}</p>
+                <ul className="mt-10 flex flex-col gap-3" aria-label={`Клиенты: ${group.category}`}>
+                  {group.clients.map((client) => (
+                    <li key={client} className="text-balance text-2xl font-semibold tracking-[-.035em] sm:text-3xl">
+                      {client}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-8 max-w-xl text-sm leading-relaxed opacity-65">{group.context}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad bg-secondary">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
+          <div>
+            <p className="eyebrow text-primary">Формат взаимодействия</p>
+            <h2 className="section-title mt-5">Под задачу и этап развития</h2>
+          </div>
+          <div className="flex flex-col">
+            {WORK_FORMATS.map(([title, description], index) => (
+              <article key={title} className="grid gap-4 border-t border-border py-7 last:border-b sm:grid-cols-[3rem_0.7fr_1.3fr] sm:items-start">
+                <span className="font-mono text-xs text-primary">0{index + 1}</span>
+                <h3 className="text-xl font-semibold">{title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad bg-surface text-surface-foreground">
+        <div className="section-shell">
+          <div className="flex flex-col gap-5 border-b border-white/15 pb-8 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="eyebrow text-primary">Кейсы</p>
+              <h2 className="section-title mt-5">Проекты с подробным описанием</h2>
+            </div>
+            <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+              Все проекты <ArrowUpRight className="size-4" aria-hidden />
+            </Link>
+          </div>
+
+          <div className="flex flex-col">
+            {FEATURED_CASES.map((project, index) => (
+              <Link
+                key={project.slug}
+                href={`/projects/${project.slug}`}
+                className="group grid gap-4 border-b border-white/15 py-8 sm:grid-cols-[3rem_0.65fr_1.35fr_auto] sm:items-center"
+              >
+                <span className="font-mono text-xs text-primary">0{index + 1}</span>
+                <strong className="text-lg">{project.clientShort}</strong>
+                <span className="text-pretty text-sm leading-relaxed text-surface-foreground/60">{project.title}</span>
+                <ArrowUpRight className="size-5 text-primary" aria-hidden />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
