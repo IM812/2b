@@ -1,13 +1,122 @@
 import type { Metadata } from 'next'
+import { ArrowDownRight } from 'lucide-react'
 import { TechnologiesIntro } from '@/components/editorial/page-intros'
-import { TECH_AREAS, INDUSTRIES } from '@/lib/content'
 
-export const metadata: Metadata = { title: 'Технологии и ИТ-архитектура', description: 'Проектирование архитектуры, интеграция, управление данными, безопасность и эксплуатация корпоративных ИТ-систем.', alternates: { canonical: '/technologies' }, openGraph: { url: '/technologies', title: 'Технологии и ИТ-архитектура | 2В Сервис', description: 'Технологический стек, выбранный под процессы, данные и требования эксплуатации.' } }
-const LAYERS=[['Процессы','Документооборот, BPM и корпоративные порталы'],['Данные','Миграция, НСИ и контролируемый обмен'],['Интеграция','API, шины и связь с действующим ландшафтом'],['Эксплуатация','Отказоустойчивость, безопасность и поддержка']]
+export const metadata: Metadata = {
+  title: 'Технологии ИТ-инфраструктуры',
+  description:
+    'Серверы, системы хранения данных, резервное копирование, сети, СКС, виртуализация и мониторинг в проектах 2В Сервис.',
+  alternates: { canonical: '/technologies' },
+  openGraph: {
+    url: '/technologies',
+    title: 'Технологии ИТ-инфраструктуры | 2В Сервис',
+    description: 'Технологические направления, с которыми работает инженерная команда 2В Сервис.',
+  },
+}
 
-export default function TechnologiesPage(){return <>
-<TechnologiesIntro />
-<section className="section-pad bg-background"><div className="section-shell"><div className="grid gap-10 lg:grid-cols-[.65fr_1.35fr]"><div><p className="eyebrow text-primary">Архитектурные слои</p><h2 className="section-title mt-5">Каждый слой работает на общий результат</h2></div><div className="grid gap-4 sm:grid-cols-2">{LAYERS.map(([title,text],i)=><article key={title} className={`min-h-56 rounded-[2rem] p-7 ${i===0?'bg-primary text-primary-foreground':i===3?'bg-surface text-surface-foreground':'bg-secondary'}`}><span className="font-mono text-xs opacity-50">L / 0{i+1}</span><h3 className="mt-14 text-[1.55rem] font-bold tracking-tight">{title}</h3><p className="mt-3 max-w-sm text-sm leading-relaxed opacity-65">{text}</p></article>)}</div></div></div></section>
-<section className="section-pad bg-secondary"><div className="section-shell"><p className="eyebrow text-primary">Компетенции внутри слоев</p><div className="mt-10 flex flex-col">{TECH_AREAS.map((area,i)=><article key={area.title} className="grid gap-3 border-t border-border py-6 last:border-b md:grid-cols-[5rem_.8fr_1.2fr] md:items-start"><span className="font-mono text-xs text-muted-foreground">T / {String(i+1).padStart(2,'0')}</span><h2 className="text-xl font-bold tracking-tight md:text-2xl">{area.title}</h2><p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">{area.description}</p></article>)}</div></div></section>
-<section className="section-pad bg-surface text-surface-foreground"><div className="section-shell"><div className="flex flex-col gap-5 border-b border-white/15 pb-10 md:flex-row md:items-end md:justify-between"><div><p className="eyebrow text-primary">Отраслевая практика</p><h2 className="section-title mt-5">Архитектура учитывает цену остановки</h2></div><p className="max-w-md leading-relaxed text-surface-foreground/55">Технологические решения проверяем не презентацией, а условиями реальной эксплуатации.</p></div><div className="grid gap-px bg-white/15 md:grid-cols-2">{INDUSTRIES.map((industry,i)=><article key={industry.title} className="bg-surface py-9 md:p-9"><span className="font-mono text-xs text-primary">0{i+1}</span><h3 className="mt-7 text-[1.55rem] font-bold tracking-tight">{industry.title}</h3><p className="mt-4 max-w-lg leading-relaxed text-surface-foreground/55">{industry.description}</p></article>)}</div></div></section>
-</>}
+const TECHNOLOGY_GROUPS = [
+  {
+    title: 'Серверная инфраструктура',
+    description: 'Подбор, поставка, установка, настройка и модернизация серверов под требования информационных систем.',
+    scope: ['Физические серверы', 'Виртуализация', 'Миграция нагрузок', 'Администрирование'],
+  },
+  {
+    title: 'Хранение и резервное копирование',
+    description: 'Проектирование систем хранения и схем резервного копирования с учетом объема данных и допустимого времени восстановления.',
+    scope: ['СХД', 'Backup', 'Репликация', 'Контроль восстановления'],
+  },
+  {
+    title: 'Корпоративные сети',
+    description: 'Локальные и беспроводные сети для офисов, площадок и распределенной инфраструктуры.',
+    scope: ['LAN и Wi-Fi', 'Маршрутизация', 'Сетевой периметр', 'Мониторинг'],
+  },
+  {
+    title: 'ЦОД и облачные ресурсы',
+    description: 'Размещение оборудования, виртуальные ресурсы и перенос сервисов на управляемую технологическую площадку.',
+    scope: ['Colocation', 'VPS', 'Миграция', 'Отказоустойчивость'],
+  },
+  {
+    title: 'Инженерные системы',
+    description: 'Физическая основа ИТ: кабельная инфраструктура, связь, видеонаблюдение и контроль доступа.',
+    scope: ['СКС', 'IP-телефония', 'CCTV', 'СКУД'],
+  },
+  {
+    title: 'Рабочие места и ПО',
+    description: 'Стандартизация пользовательской среды, настройка оборудования и сопровождение программного обеспечения.',
+    scope: ['Компьютеры и оргтехника', 'Операционные системы', 'Корпоративное ПО', 'Поддержка пользователей'],
+  },
+]
+
+const SELECTION_CRITERIA = [
+  ['Совместимость', 'Решение должно встраиваться в действующую инфраструктуру, а не создавать изолированный контур.'],
+  ['Эксплуатация', 'Учитываем доступность специалистов, мониторинг, обновления и порядок восстановления.'],
+  ['Масштабирование', 'Закладываем рост пользователей, данных и вычислительной нагрузки без полной перестройки.'],
+  ['Стоимость владения', 'Сравниваем не только закупку, но и поддержку, лицензии, энергопотребление и дальнейшее развитие.'],
+]
+
+export default function TechnologiesPage() {
+  return (
+    <>
+      <TechnologiesIntro />
+
+      <section className="section-pad bg-background">
+        <div className="section-shell">
+          <div className="grid gap-8 border-b border-border pb-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <p className="eyebrow text-primary">Технологический контур</p>
+              <h2 className="section-title mt-5">С чем работает инженерная команда</h2>
+            </div>
+            <p className="max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
+              На сайте перечислены не бренды ради списка, а классы решений, которые мы проектируем, внедряем и поддерживаем в инфраструктуре заказчика.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {TECHNOLOGY_GROUPS.map((group, index) => (
+              <article
+                key={group.title}
+                data-reveal="scale"
+                className={`motion-card flex min-h-[25rem] flex-col rounded-[2rem] p-6 sm:p-8 ${index === 0 ? 'bg-primary text-primary-foreground' : index === 4 ? 'bg-surface text-surface-foreground' : 'bg-secondary'}`}
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <span className="font-mono text-xs opacity-55">T / {String(index + 1).padStart(2, '0')}</span>
+                  <ArrowDownRight className="size-5 opacity-55" aria-hidden />
+                </div>
+                <h2 className="mt-12 text-balance text-3xl font-semibold leading-tight tracking-[-.04em]">{group.title}</h2>
+                <p className="mt-5 text-pretty text-sm leading-relaxed opacity-65">{group.description}</p>
+                <ul className="mt-auto flex flex-wrap gap-2 pt-8" aria-label={`Состав направления «${group.title}»`}>
+                  {group.scope.map((item) => (
+                    <li key={item} className="rounded-full border border-current/20 px-3 py-1.5 text-xs font-semibold">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad bg-surface text-surface-foreground">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
+          <div>
+            <p className="eyebrow text-primary">Как выбираем</p>
+            <h2 className="section-title mt-5">Технология следует за задачей</h2>
+            <p className="mt-6 max-w-md text-pretty leading-relaxed text-surface-foreground/60">
+              Сначала определяем требования к надежности и эксплуатации, затем формируем состав решения.
+            </p>
+          </div>
+          <div className="flex flex-col">
+            {SELECTION_CRITERIA.map(([title, description], index) => (
+              <article key={title} className="grid gap-4 border-t border-white/15 py-7 last:border-b sm:grid-cols-[3rem_0.65fr_1.35fr] sm:items-start">
+                <span className="font-mono text-xs text-primary">0{index + 1}</span>
+                <h3 className="text-xl font-semibold">{title}</h3>
+                <p className="text-sm leading-relaxed text-surface-foreground/55">{description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
