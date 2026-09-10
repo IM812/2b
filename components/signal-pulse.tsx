@@ -26,9 +26,11 @@ export function SignalPulse({ className }: { className?: string; tone?: 'ink' | 
           <circle r="3" fill="white" fillOpacity=".8"><animateMotion dur="4.2s" begin="-1.4s" repeatCount="indefinite"><mpath href="#route-erp" /></animateMotion></circle>
         </g>
         <circle cx="372" cy="202" r="74" fill="var(--primary)" fillOpacity=".14" className="pulse-halo" />
-        <circle cx="372" cy="202" r="42" fill="var(--primary)" />
-        <text x="372" y="199" textAnchor="middle" fill="white" fontSize="12" fontWeight="700">2В</text>
-        <text x="372" y="216" textAnchor="middle" fill="white" fillOpacity=".65" fontSize="8">CONTROL</text>
+        <g className="control-core">
+          <circle cx="372" cy="202" r="42" fill="var(--primary)" />
+          <text x="372" y="199" textAnchor="middle" fill="white" fontSize="12" fontWeight="700">2В</text>
+          <text x="372" y="216" textAnchor="middle" fill="white" fillOpacity=".65" fontSize="8">CONTROL</text>
+        </g>
       </svg>
       {nodes.filter((node) => node.tone !== 'core').map((node) => (
         <div key={node.label} className="absolute z-10 -translate-x-1/2 -translate-y-1/2" style={{ left: `${node.x}%`, top: `${node.y}%` }}>
