@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@10.34.3",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build",
     "start": "concurrently --kill-others-on-fail --names site,telegram \"next start\" \"tsx scripts/telegram-news-worker.ts\"",
     "start:site": "next start",
