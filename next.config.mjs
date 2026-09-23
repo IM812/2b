@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    qualities: [72, 75],
+  },
   ...(process.env.BUILD_STANDALONE === '1' ? { output: 'standalone' } : {}),
   async headers() {
     return [

@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { ClientsIntro } from '@/components/editorial/page-intros'
-import { PROJECTS } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: 'Клиенты и опыт работы',
@@ -44,10 +43,6 @@ const WORK_FORMATS = [
   ['Развитие системы', 'Планируем изменения, выпускаем доработки и адаптируем решение к новым процессам.'],
   ['Поддержка по SLA', 'Фиксируем состав услуг, время реакции, уровни эскалации и отчетность.'],
 ]
-
-const FEATURED_CASES = PROJECTS.filter((project) =>
-  ['rossiya-kasud', 'aeroflot-support', 'exat-infrastructure'].includes(project.slug),
-)
 
 export default function ClientsPage() {
   return (
@@ -103,31 +98,17 @@ export default function ClientsPage() {
       </section>
 
       <section className="section-pad bg-surface text-surface-foreground">
-        <div className="section-shell">
-          <div className="flex flex-col gap-5 border-b border-white/15 pb-8 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="eyebrow text-primary">Кейсы</p>
-              <h2 className="section-title mt-5">Проекты с подробным описанием</h2>
-            </div>
-            <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
-              Все проекты <ArrowUpRight className="size-4" aria-hidden />
-            </Link>
+        <div className="section-shell flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-3xl">
+            <p className="eyebrow text-primary">Нужен похожий контур?</p>
+            <h2 className="section-title mt-5">Посмотрите, как мы разбираем реальные проекты</h2>
+            <p className="mt-6 max-w-2xl leading-relaxed text-surface-foreground/60">
+              На отдельной странице собраны задачи, архитектура, этапы запуска и результат в эксплуатации — без повторения клиентского списка.
+            </p>
           </div>
-
-          <div className="flex flex-col">
-            {FEATURED_CASES.map((project, index) => (
-              <Link
-                key={project.slug}
-                href={`/projects/${project.slug}`}
-                className="group grid gap-4 border-b border-white/15 py-8 sm:grid-cols-[3rem_0.65fr_1.35fr_auto] sm:items-center"
-              >
-                <span className="font-mono text-xs text-primary">0{index + 1}</span>
-                <strong className="text-lg">{project.clientShort}</strong>
-                <span className="text-pretty text-sm leading-relaxed text-surface-foreground/60">{project.title}</span>
-                <ArrowUpRight className="size-5 text-primary" aria-hidden />
-              </Link>
-            ))}
-          </div>
+          <Link href="/projects" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-background px-5 py-3 text-sm font-semibold text-foreground transition-transform hover:-translate-y-0.5">
+            Открыть кейсы <ArrowUpRight className="size-4" aria-hidden />
+          </Link>
         </div>
       </section>
     </>

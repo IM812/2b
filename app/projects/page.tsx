@@ -33,11 +33,11 @@ export default function ProjectsPage() {
         <div className="section-shell">
           <div className="grid gap-8 border-b border-border pb-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
             <div>
-              <p className="eyebrow text-primary">Опубликованные кейсы</p>
-              <h2 className="section-title mt-5">Что было сделано и для чего</h2>
+              <p className="eyebrow text-primary">Разборы проектов</p>
+              <h2 className="section-title mt-5">Задача, решение, результат</h2>
             </div>
             <p className="max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
-              Здесь собраны проекты, по которым можно показать контекст задачи, состав работ и итог для заказчика. Без условных рейтингов и неподтвержденных показателей.
+              Не каталог клиентов, а рабочие истории: зачем запускали проект, какой контур собрали и что осталось в эксплуатации после передачи решения.
             </p>
           </div>
 
@@ -65,9 +65,12 @@ export default function ProjectsPage() {
                   </p>
                 </div>
 
-                <div className="flex flex-1 flex-col p-6 sm:p-8 lg:p-10">
+                  <div className="flex flex-1 flex-col p-6 sm:p-8 lg:p-10">
                   <div className="flex items-start justify-between gap-5 border-b border-border pb-5">
-                    <p className="eyebrow text-primary">{project.clientShort}</p>
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-[.2em] text-muted-foreground">Кейс / {String(index + 1).padStart(2, '0')}</p>
+                      <p className="eyebrow mt-3 text-primary">{project.clientShort}</p>
+                    </div>
                     <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-background text-foreground">
                       <ArrowUpRight className="size-4" aria-hidden />
                     </span>
