@@ -52,7 +52,7 @@ export default function ProjectsPage() {
                   <div className="flex items-start justify-between gap-5 border-b border-border pb-5">
                     <div>
                       <p className="font-mono text-[10px] uppercase tracking-[.2em] text-muted-foreground">Кейс / {String(index + 1).padStart(2, '0')}</p>
-                      <p className="eyebrow mt-3 text-primary">Работающая система</p>
+                      <p className="eyebrow mt-3 text-primary">Внедрённое решение</p>
                     </div>
                     <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-background text-foreground">
                       <ArrowUpRight className="size-4" aria-hidden />
