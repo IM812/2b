@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight, Check } from 'lucide-react'
 import { ProjectsIntro } from '@/components/editorial/page-intros'
@@ -47,25 +46,9 @@ export default function ProjectsPage() {
                 key={project.slug}
                 href={`/projects/${project.slug}`}
                 data-reveal={index % 2 ? 'right' : 'left'}
-                className={`motion-card group flex min-h-full flex-col overflow-hidden rounded-[2rem] bg-secondary ${index === 0 ? 'lg:col-span-2 lg:grid lg:grid-cols-[1.08fr_0.92fr]' : ''}`}
+                className={`motion-card group flex min-h-full flex-col rounded-[2rem] border border-border bg-secondary p-6 transition-colors hover:border-primary/40 sm:p-8 lg:p-10 ${index === 0 ? 'lg:col-span-2 lg:grid lg:grid-cols-[0.72fr_1.28fr] lg:gap-12' : ''}`}
               >
-                <div className={`relative aspect-[16/10] overflow-hidden ${index === 0 ? 'lg:aspect-auto lg:min-h-[34rem]' : ''}`}>
-                  <Image
-                    src={project.image}
-                    alt={`${project.clientShort}: ${project.title}`}
-                    fill
-                    quality={72}
-                    sizes={index === 0 ? '(max-width: 1024px) 100vw, 55vw' : '(max-width: 1024px) 100vw, 45vw'}
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                    priority={index === 0}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface/75 via-transparent to-transparent" aria-hidden />
-                  <p className="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-widest text-surface-foreground/70 sm:bottom-7 sm:left-7">
-                    {project.industry}
-                  </p>
-                </div>
-
-                  <div className="flex flex-1 flex-col p-6 sm:p-8 lg:p-10">
+                  <div className="flex flex-1 flex-col">
                   <div className="flex items-start justify-between gap-5 border-b border-border pb-5">
                     <div>
                       <p className="font-mono text-[10px] uppercase tracking-[.2em] text-muted-foreground">Кейс / {String(index + 1).padStart(2, '0')}</p>
