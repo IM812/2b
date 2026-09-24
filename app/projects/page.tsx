@@ -60,7 +60,7 @@ export default function ProjectsPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface/60 via-transparent to-transparent" aria-hidden />
                   <span className="absolute bottom-4 left-4 rounded-full bg-background/85 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[.2em] text-foreground backdrop-blur-sm">
-                    {project.industry}
+                    {project.tags[0]}
                   </span>
                 </div>
                 <div className="flex flex-1 flex-col">
