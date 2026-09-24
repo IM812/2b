@@ -46,13 +46,13 @@ export default function ProjectsPage() {
                 key={project.slug}
                 href={`/projects/${project.slug}`}
                 data-reveal={index % 2 ? 'right' : 'left'}
-                className={`motion-card group flex min-h-full flex-col rounded-[2rem] border border-border bg-secondary p-6 transition-colors hover:border-primary/40 sm:p-8 lg:p-10 ${index === 0 ? 'lg:col-span-2 lg:grid lg:grid-cols-[0.72fr_1.28fr] lg:gap-12' : ''}`}
+                className={`motion-card group flex min-h-full flex-col gap-6 rounded-[2rem] border border-border bg-secondary p-4 transition-colors hover:border-primary/40 sm:p-6 lg:p-8 ${index === 0 ? 'lg:col-span-2 lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:gap-10' : ''}`}
               >
-                  <div className="flex flex-1 flex-col">
+                <div className="flex flex-1 flex-col">
                   <div className="flex items-start justify-between gap-5 border-b border-border pb-5">
                     <div>
                       <p className="font-mono text-[10px] uppercase tracking-[.2em] text-muted-foreground">Кейс / {String(index + 1).padStart(2, '0')}</p>
-                      <p className="eyebrow mt-3 text-primary">{project.clientShort}</p>
+                      <p className="eyebrow mt-3 text-primary">Внедрённое решение</p>
                     </div>
                     <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-background text-foreground">
                       <ArrowUpRight className="size-4" aria-hidden />
