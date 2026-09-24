@@ -55,6 +55,7 @@ export default function ProjectsPage() {
                     alt=""
                     fill
                     sizes={index === 0 ? '(max-width: 1024px) 100vw, 45vw' : '(max-width: 1024px) 100vw, 50vw'}
+                    priority={index === 0}
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface/60 via-transparent to-transparent" aria-hidden />
