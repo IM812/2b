@@ -13,10 +13,10 @@ export function AboutPreview() {
             <h2 className="section-title mt-5 max-w-4xl">Встраиваемся в бизнес — остаемся рядом после запуска</h2>
             <p className="text-lead mt-8 max-w-2xl text-muted-foreground">Работаем по России — от отдельного офиса до федеральной инфраструктуры, где ИТ напрямую влияет на рейсы, производство и тысячи рабочих мест.</p>
           </div>
-          <div className="rounded-[2rem] bg-secondary p-8 md:p-10">
+          <div className="rounded-[1.5rem] bg-secondary p-6 sm:rounded-[2rem] sm:p-8 md:p-10">
             <p className="eyebrow text-muted-foreground">Наш подход</p>
-            <ul className="mt-8 flex flex-col gap-6">
-              {PRINCIPLES.map((item) => <li key={item} className="flex items-center gap-4 border-b border-border pb-6 last:border-0 last:pb-0"><span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"><Check className="size-4" /></span><span className="text-lg font-semibold tracking-[-.025em]">{item}</span></li>)}
+            <ul className="mt-6 flex flex-col gap-5 sm:mt-8 sm:gap-6">
+              {PRINCIPLES.map((item) => <li key={item} className="flex items-center gap-4 border-b border-border pb-5 last:border-0 last:pb-0 sm:pb-6"><span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground sm:size-9"><Check className="size-4" /></span><span className="text-base font-semibold tracking-[-.025em] sm:text-lg">{item}</span></li>)}
             </ul>
           </div>
         </div>
