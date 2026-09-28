@@ -42,11 +42,9 @@ export function SiteFooter() {
             <br />
             Коды видов деятельности в области IT: 1.01; 2.01.
           </p>
-            <dl className="grid max-w-xl gap-x-3 gap-y-1 sm:grid-cols-[8.5rem_1fr]">
-              <dt>Юридический адрес</dt>
+            <dl className="grid max-w-xl gap-x-3 gap-y-1 sm:grid-cols-[4rem_1fr]">
+              <dt>Адрес</dt>
               <dd className="text-foreground/80">109316, г. Москва, Остаповский проезд, 22, стр. 16</dd>
-              <dt>Фактический адрес</dt>
-              <dd className="text-foreground/80">г. Москва, Пресненская набережная, 6, стр. 2, БЦ «Башня Империя»</dd>
             </dl>
           </div>
           <div className="mt-6 flex flex-col gap-3 border-t border-border pt-5 md:flex-row md:items-center md:justify-between">
