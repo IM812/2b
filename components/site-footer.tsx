@@ -35,10 +35,14 @@ export function SiteFooter() {
         <div className="mt-12 border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">
           <div className="flex flex-col gap-x-10 gap-y-4 lg:flex-row lg:justify-between">
             <p className="max-w-md">
-              <span className="font-semibold text-foreground">Акционерное общество «2В Сервис»</span>
-              <br />
-              ИНН 7722701720 · КПП 772201001 · ОГРН 1097746738253
-            </p>
+          <span className="font-semibold text-foreground">Акционерное общество «2В Сервис»</span>
+            <br />
+            ИНН 7722701720 · КПП 772201001 · ОГРН 1097746738253
+            <br />
+            Основной ОКВЭД: 62.09.
+            <br />
+            Коды видов деятельности в области IT: 1.01; 2.01.
+          </p>
             <dl className="grid max-w-xl gap-x-3 gap-y-1 sm:grid-cols-[8.5rem_1fr]">
               <dt>Юридический адрес</dt>
               <dd className="text-foreground/80">109316, г. Москва, Остаповский проезд, 22, стр. 16</dd>
