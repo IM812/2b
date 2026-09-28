@@ -28,9 +28,12 @@ export function FlagshipProjects() {
 
         <div className="mt-6 grid gap-6 md:grid-cols-[1.15fr_.85fr]">
           {PROJECTS.slice(1, 3).map((project, index) => (
-            <Link key={project.slug} data-reveal style={{ '--reveal-delay': `${index * 110}ms` } as React.CSSProperties} href={`/clients#${project.slug}`} className={`motion-card ${index === 0 ? 'bg-accent text-accent-foreground md:translate-y-10' : 'bg-white text-foreground'} group flex min-h-[19rem] min-w-0 flex-col justify-between overflow-hidden rounded-[1.75rem] p-5 sm:min-h-[25rem] sm:rounded-[2.5rem] sm:p-8 md:p-10`}>
+            <Link key={project.slug} data-reveal style={{ '--reveal-delay': `${index * 110}ms` } as React.CSSProperties} href={`/clients#${project.slug}`} className={`motion-card ${index === 0 ? 'bg-accent text-accent-foreground md:translate-y-10' : 'bg-white text-foreground'} group flex min-h-[19rem] min-w-0 flex-col justify-between gap-6 overflow-hidden rounded-[1.75rem] p-5 sm:min-h-[25rem] sm:rounded-[2.5rem] sm:p-8 md:p-10`}>
               <div className="flex justify-between"><span className="eyebrow opacity-50">0{index + 2} · {project.industry}</span><ArrowUpRight className="size-6 transition-transform" /></div>
-              <h3 className="text-pretty text-[1.2rem] font-semibold leading-[1.1] tracking-[-.035em] sm:text-[1.7rem] md:text-[2.4rem]">{project.title}</h3>
+              <div>
+                <h3 className="text-pretty text-[1.2rem] font-semibold leading-[1.1] tracking-[-.035em] sm:text-[1.7rem] md:text-[2.4rem]">{project.title}</h3>
+                <p className={`mt-4 max-w-sm text-pretty text-sm leading-relaxed sm:text-base ${index === 0 ? 'text-accent-foreground/70' : 'text-muted-foreground'}`}>{project.summary}</p>
+              </div>
             </Link>
           ))}
         </div>
