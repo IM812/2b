@@ -4,6 +4,12 @@ const nextConfig = {
     qualities: [72, 75],
   },
   ...(process.env.BUILD_STANDALONE === '1' ? { output: 'standalone' } : {}),
+  async redirects() {
+    return [
+      { source: '/projects', destination: '/clients', permanent: true },
+      { source: '/projects/:slug', destination: '/clients#:slug', permanent: true },
+    ]
+  },
   async headers() {
     return [
       {
