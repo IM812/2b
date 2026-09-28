@@ -23,12 +23,24 @@ function imageFromStyle(style?: string) {
 // Emoji/pictographic bullets Telegram authors use instead of "-" or "*" list markers.
 const BULLET_PATTERN = /^[\s\u2022\u25CF\u25AA\u25B6\u27A1\u2705\u2B50\u26A0\uFE0F\p{Extended_Pictographic}\uFE0F\u200D]+/u
 
+// After we strip URLs, "read more at <link>" teasers are left dangling with nothing
+// to point to (e.g. "Подробнее читайте на"). The page already links to the original
+// Telegram post via a separate button, so trim these leftover teaser phrases.
+const DANGLING_LINK_TEASER =
+  /([.!?])\s*(подробнее\s+)?(читайте|смотрите|узна[йю]те|подробности)(\s+(полностью|подробнее|тут|здесь|на|у нас|по ссылке|в канале|в нашем канале))*\s*[:\-—]?\s*$/giu
+const DANGLING_LINK_TEASER_ONLY =
+  /^\s*(подробнее\s+)?(читайте|смотрите|узна[йю]те|подробности)(\s+(полностью|подробнее|тут|здесь|на|у нас|по ссылке|в канале|в нашем канале))*\s*[:\-—]?\s*$/giu
+
+function stripDanglingLinkTeaser(text: string) {
+  return text.replace(DANGLING_LINK_TEASER, '$1').replace(DANGLING_LINK_TEASER_ONLY, '').trim()
+}
+
 function cleanMessageText(html: string) {
   const withBreaks = html
     .replace(/<br\s*\/?>/gi, '\n')
     .replace(/<\/p>/gi, '\n\n')
   const text = load(`<div>${withBreaks}</div>`).text()
-  return text
+  const cleaned = text
     .replace(/https?:\/\/\S+/g, '')
     .replace(/\bt\.me\/\S+/g, '')
     .replace(/#[\p{L}\p{N}_]+/gu, '')
@@ -39,6 +51,7 @@ function cleanMessageText(html: string) {
     .join('\n')
     .replace(/\n{3,}/g, '\n\n')
     .trim()
+  return stripDanglingLinkTeaser(cleaned)
 }
 
 function splitTitleAndExcerpt(text: string) {
