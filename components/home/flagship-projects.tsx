@@ -20,7 +20,7 @@ export function FlagshipProjects() {
           <Link href={`/clients#${featured.slug}`} className="motion-card group relative block min-h-[26rem] w-[86%] shrink-0 snap-center overflow-hidden rounded-[1.5rem] bg-primary p-5 text-primary-foreground">
             <div className="absolute -bottom-12 -right-3 select-none text-[11rem] font-black leading-none text-white/[.07]" aria-hidden>01</div>
             <div className="relative flex min-h-[22rem] flex-col justify-between">
-              <div className="flex items-center justify-between"><p className="eyebrow text-white/60">{featured.clientShort} · {featured.industry}</p><ArrowUpRight className="size-8 transition-transform" /></div>
+              <div className="flex items-center justify-between"><p className="eyebrow text-white/60">{featured.industry}</p><ArrowUpRight className="size-8 transition-transform" /></div>
               <div className="grid min-w-0 gap-8">
                 <h3 className="min-w-0 text-pretty text-[1.55rem] font-semibold leading-[1.02] tracking-[-.04em]">{featured.title}</h3>
                 <div className="min-w-0"><p className="eyebrow text-white/50">Результат</p><p className="mt-3 max-w-md text-sm leading-relaxed text-white/75">{featured.result}</p></div>
@@ -47,7 +47,7 @@ export function FlagshipProjects() {
         <Link data-reveal="scale" href={`/clients#${featured.slug}`} className="motion-card group relative mt-16 hidden min-h-[38rem] overflow-hidden rounded-[3rem] bg-primary p-8 text-primary-foreground sm:block md:p-14">
           <div className="absolute -bottom-20 -right-6 select-none text-[18rem] font-black leading-none text-white/[.07]" aria-hidden>01</div>
           <div className="relative flex min-h-[31rem] flex-col justify-between">
-            <div className="flex items-center justify-between"><p className="eyebrow text-white/60">{featured.clientShort} · {featured.industry}</p><ArrowUpRight className="size-8 transition-transform" /></div>
+            <div className="flex items-center justify-between"><p className="eyebrow text-white/60">{featured.industry}</p><ArrowUpRight className="size-8 transition-transform" /></div>
             <div className="grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,.7fr)] lg:items-end">
               <h3 className="min-w-0 text-pretty text-[2.4rem] font-semibold leading-[1.02] tracking-[-.04em] md:text-[5.4rem]">{featured.title}</h3>
               <div className="min-w-0 lg:border-l lg:border-white/20 lg:pl-8"><p className="eyebrow text-white/50">Результат</p><p className="mt-3 max-w-md text-sm leading-relaxed text-white/75 md:text-base">{featured.result}</p></div>
