@@ -16,13 +16,6 @@ export const metadata: Metadata = {
   },
 }
 
-const CLIENT_GROUPS = [
-  { category: 'Авиация', clients: ['ПАО «Аэрофлот»', 'АО «Авиакомпания «Россия»'] },
-  { category: 'Транспорт и гостиничный бизнес', clients: ['АО «МКЖД»', 'Radisson Blu Шереметьево'] },
-  { category: 'Медиа и спорт', clients: ['ИД «Комсомольская правда»', 'ХК «Спартак»'] },
-  { category: 'Онлайн-сервисы', clients: ['Exat.ru'] },
-]
-
 const WORK_FORMATS = [
   ['Проект под ключ', 'Обследование, проектирование, поставка, внедрение и передача документации.'],
   ['Развитие системы', 'Планируем изменения, выпускаем доработки и адаптируем решение к новым процессам.'],
@@ -33,24 +26,6 @@ export default function ClientsPage() {
   return (
     <>
       <ClientsIntro />
-
-      <section className="bg-background pb-14 pt-12 sm:pb-20 sm:pt-16">
-        <div className="section-shell">
-          <p className="eyebrow text-primary">Клиенты</p>
-          <div className="mt-6 grid gap-px overflow-hidden rounded-[1.5rem] border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-            {CLIENT_GROUPS.map((group) => (
-              <div key={group.category} data-reveal className="flex flex-col gap-4 bg-background p-6">
-                <p className="text-xs font-semibold text-muted-foreground">{group.category}</p>
-                <ul className="flex flex-col gap-2" aria-label={`Клиенты: ${group.category}`}>
-                  {group.clients.map((client) => (
-                    <li key={client} className="text-lg font-semibold leading-snug tracking-[-.02em]">{client}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="section-pad bg-secondary">
         <div className="section-shell">
