@@ -1,7 +1,7 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
+import { BrandLogo } from '@/components/brand-logo'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
@@ -28,11 +28,8 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background">
       <div className="section-shell flex h-16 items-center justify-between pt-[env(safe-area-inset-top)] md:h-18">
-        <Link href="/" className="flex items-center gap-2.5 sm:gap-3" onClick={() => setOpen(false)} aria-label="2В Сервис — на главную">
-          <span className="relative size-10 shrink-0 overflow-hidden rounded-xl bg-[var(--surface)]">
-            <Image src="/images/brand/logo-2b-service.png" alt="" fill sizes="40px" className="object-cover object-left" priority />
-          </span>
-          <span className="text-sm font-bold tracking-[-0.02em]">Сервис</span>
+        <Link href="/" className="flex items-center" onClick={() => setOpen(false)} aria-label="2В Сервис — на главную">
+          <BrandLogo withTagline className="[&_.font-mono]:hidden sm:[&_.font-mono]:block" />
         </Link>
         <nav className="hidden items-center gap-7 xl:flex" aria-label="Основная навигация">
           {NAV_ITEMS.map((item) => <Link key={item.href} href={item.href} className={cn('text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground', pathname === item.href && 'text-foreground')}>{item.label}</Link>)}

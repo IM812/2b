@@ -154,3 +154,9 @@ html[data-motion='reduced'] .route-packets { display:none; }
 .locator::after { inset:0 auto 0 50%; width:1px; height:auto; }
 .locator-pulse { box-shadow:0 0 0 1rem color-mix(in oklab,var(--primary) 10%,transparent); }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } [data-reveal] { opacity:1!important; transform:none!important; clip-path:none!important; } .network-route { stroke-dasharray:none; } .network-node,.tech-scan { opacity:1; } }
+
+.brand-orb { transform-origin: 32px 32px; transition: transform .9s cubic-bezier(.22,1,.36,1); }
+.group\/logo:hover .brand-orb, a:hover > .group\/logo .brand-orb { transform: rotate(80deg); }
+.cookie-banner { animation: cookie-in .6s cubic-bezier(.22,1,.36,1) .9s both; }
+@keyframes cookie-in { from { opacity: 0; transform: translateY(24px) scale(.98); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .brand-orb { transition: none; } .cookie-banner { animation: none; } }

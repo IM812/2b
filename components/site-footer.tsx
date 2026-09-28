@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import Link from 'next/link'
+import { BrandLogo } from '@/components/brand-logo'
 import { NAV_ITEMS } from '@/lib/nav'
 
 export function SiteFooter() {
@@ -8,14 +8,8 @@ export function SiteFooter() {
       <div className="section-shell py-10 sm:py-14">
         <div className="grid gap-10 md:grid-cols-[1.2fr_2fr]">
           <div>
-            <Link href="/" className="inline-block overflow-hidden rounded-2xl bg-[var(--surface)] p-4 sm:p-5">
-              <Image
-                src="/images/brand/logo-2b-service.png"
-                alt="2В Сервис — технологии, люди, результат"
-                width={1092}
-                height={474}
-                className="h-auto w-52 sm:w-60"
-              />
+            <Link href="/" className="inline-flex" aria-label="2В Сервис — технологии, люди, результат">
+              <BrandLogo size="lg" withTagline />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
               ИТ-аутсорсинг, инфраструктура и корпоративные системы для организаций федерального масштаба.
