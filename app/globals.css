@@ -156,8 +156,43 @@ html[data-motion='reduced'] .route-packets { display:none; }
 .locator-pulse { box-shadow:0 0 0 1rem color-mix(in oklab,var(--primary) 10%,transparent); }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } [data-reveal] { opacity:1!important; transform:none!important; clip-path:none!important; } .network-route { stroke-dasharray:none; } .network-node,.tech-scan { opacity:1; } }
 
-.brand-orb { transform-origin: 28px 28px; transition: transform .9s cubic-bezier(.22,1,.36,1); }
-.group\/logo:hover .brand-orb, a:hover > .group\/logo .brand-orb { transform: rotate(80deg); }
+.brand-ring { stroke-dasharray: 1; stroke-dashoffset: 1; animation: brand-ring-draw 1.4s cubic-bezier(.65,0,.35,1) .15s forwards; }
+.brand-orb-in { transform-origin: 44.97px 11.03px; opacity: 0; animation: brand-orb-pop .6s cubic-bezier(.34,1.56,.64,1) 1.35s forwards; }
+.brand-orb { transform-origin: 28px 28px; transition: transform 1.1s cubic-bezier(.22,1,.36,1); }
+.group\/logo:hover .brand-orb, a:hover > .group\/logo .brand-orb { transform: rotate(-270deg); }
+.brand-orb-cycle { transform-origin: 28px 28px; animation: brand-orb-cycle 9s 2.2s infinite both; }
+.brand-trail { opacity: 0; animation: brand-trail 9s 2.2s infinite both; }
+.brand-ripple { transform-origin: 44.97px 11.03px; opacity: 0; animation: brand-ripple 9s 2.2s infinite both; }
+.brand-word { fill-opacity: .5; animation: brand-word 9s 2.2s infinite both; }
+.brand-word:nth-of-type(3) { animation-delay: 5.2s; }
+.brand-word:nth-of-type(5) { animation-delay: 8.2s; }
+.brand-slash { fill-opacity: .3; }
+@keyframes brand-orb-cycle {
+  0% { transform: rotate(0deg); animation-timing-function: cubic-bezier(.65,0,.25,1); }
+  9%, 33.33% { transform: rotate(-120deg); animation-timing-function: cubic-bezier(.65,0,.25,1); }
+  42.33%, 66.67% { transform: rotate(-240deg); animation-timing-function: cubic-bezier(.65,0,.25,1); }
+  75.67%, 100% { transform: rotate(-360deg); }
+}
+@keyframes brand-trail {
+  0%, 30%, 64%, 97.5% { opacity: 0; }
+  3.5%, 36.8%, 70.2% { opacity: .75; }
+  11%, 44.3%, 77.7% { opacity: 0; }
+}
+@keyframes brand-ripple {
+  0%, 8.5%, 41.8%, 75.2% { opacity: 0; transform: scale(1); }
+  9%, 42.33%, 75.67% { opacity: .7; transform: scale(1); }
+  20%, 53.3%, 86.7% { opacity: 0; transform: scale(3.4); }
+  20.1%, 53.4%, 86.8%, 100% { opacity: 0; transform: scale(1); }
+}
+@keyframes brand-word {
+  0%, 6% { fill-opacity: .5; fill: currentColor; }
+  11%, 31% { fill-opacity: 1; fill: var(--primary); }
+  36%, 100% { fill-opacity: .5; fill: currentColor; }
+}
+@keyframes brand-ring-draw { to { stroke-dashoffset: 0; } }
+@keyframes brand-orb-pop { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: scale(1); } }
 .cookie-banner { animation: cookie-in .6s cubic-bezier(.22,1,.36,1) .9s both; }
 @keyframes cookie-in { from { opacity: 0; transform: translateY(24px) scale(.98); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .brand-orb { transition: none; } .cookie-banner { animation: none; } }
+html[data-motion-paused] .brand-orb-cycle,html[data-motion-paused] .brand-trail,html[data-motion-paused] .brand-ripple,html[data-motion-paused] .brand-word { animation-play-state: paused; }
+html[data-motion='reduced'] .brand-orb-cycle,html[data-motion='reduced'] .brand-trail,html[data-motion='reduced'] .brand-ripple,html[data-motion='reduced'] .brand-word { animation: none; }
+@media (prefers-reduced-motion: reduce) { .brand-orb-cycle,.brand-trail,.brand-ripple,.brand-word { animation: none; } .brand-orb { transition: none; } .brand-ring { animation: none; stroke-dashoffset: 0; } .brand-orb-in { animation: none; opacity: 1; } .cookie-banner { animation: none; } }
