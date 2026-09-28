@@ -27,6 +27,14 @@ export function MotionSystem() {
         return
       }
 
+      // Elements already on screen stay visible; hiding them after hydration caused a visible flicker.
+      const viewportBottom = window.innerHeight
+      document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((element) => {
+        if (element.dataset.visible === 'true') return
+        const { top, bottom } = element.getBoundingClientRect()
+        if (top < viewportBottom && bottom > 0) element.dataset.visible = 'true'
+      })
+
       root.dataset.motion = 'ready'
       observer = new IntersectionObserver(
         (entries) => {

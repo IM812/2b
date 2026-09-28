@@ -2,6 +2,15 @@ import Link from 'next/link'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { CORE_COMPETENCIES } from '@/lib/content'
 
+const HOME_TEASERS: Record<string, string> = {
+  'ИТ-аутсорсинг и инфраструктура': 'Один подрядчик вместо десятка: рабочие места, серверы, сети и дежурная смена.',
+  'Инженерные системы и связь': 'СКС, телефония, видеонаблюдение и доступ — от проекта до обслуживания.',
+  'Информационная безопасность': 'Находим уязвимые места и закрываем их без остановки работы.',
+  'Внедрение корпоративных информационных систем': 'Запускаем системы, которыми сотрудники реально пользуются.',
+  'Автоматизация документооборота и административных процессов': 'Согласования и поручения — без бумаги и потерянных писем.',
+  'Интеграция корпоративных систем': 'Данные вводятся один раз и одинаково видны во всех системах.',
+}
+
 export function Competencies() {
   return (
     <section id="capabilities" className="section-pad overflow-hidden bg-background">
@@ -22,7 +31,7 @@ export function Competencies() {
               </div>
               <div className={index === 0 ? 'mt-14 sm:mt-24 md:mt-40' : 'mt-10 sm:mt-14'}>
                 <h3 className={index === 0 ? 'max-w-xl text-[1.7rem] font-semibold leading-none tracking-[-0.045em] sm:text-[2rem] md:text-[3.45rem]' : 'text-xl font-semibold leading-tight tracking-[-0.035em] sm:text-[1.2rem]'}>{item.title}</h3>
-                <p className="mt-5 max-w-lg text-sm leading-relaxed opacity-65">{item.description}</p>
+                <p className="mt-5 max-w-lg text-sm leading-relaxed opacity-65">{HOME_TEASERS[item.title] ?? item.description}</p>
               </div>
             </article>
           ))}
