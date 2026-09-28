@@ -26,9 +26,24 @@ function EmblemParts({ id }: { id: string }) {
       </defs>
       <circle className="brand-ring" cx="28" cy="28" r="24" stroke={`url(#${id}-ring)`} strokeWidth="2" strokeLinecap="round" pathLength={1} transform="rotate(-45 28 28)" />
       <g className="brand-orb">
-        <g className="brand-orb-in">
-          <circle cx={ORB.x} cy={ORB.y} r="9" fill={`url(#${id}-glow)`} />
-          <circle cx={ORB.x} cy={ORB.y} r="3.9" fill={`url(#${id}-orb)`} />
+        <g className="brand-orb-cycle">
+          <circle
+            className="brand-trail"
+            cx="28"
+            cy="28"
+            r="24"
+            stroke="var(--primary)"
+            strokeWidth="2.6"
+            strokeLinecap="round"
+            pathLength={1}
+            strokeDasharray="0.13 1"
+            transform="rotate(-45 28 28)"
+          />
+          <circle className="brand-ripple" cx={ORB.x} cy={ORB.y} r="3.9" stroke="var(--primary)" strokeWidth="1" />
+          <g className="brand-orb-in">
+            <circle cx={ORB.x} cy={ORB.y} r="9" fill={`url(#${id}-glow)`} />
+            <circle cx={ORB.x} cy={ORB.y} r="3.9" fill={`url(#${id}-orb)`} />
+          </g>
         </g>
       </g>
       <text
@@ -89,14 +104,17 @@ export function BrandLogo({ className, size = 'sm' }: { className?: string; size
           y="42"
           dominantBaseline="central"
           fill="currentColor"
-          fillOpacity="0.55"
           fontFamily="var(--font-manrope), sans-serif"
           fontWeight="600"
           fontSize="6.2"
           textLength="138"
           lengthAdjust="spacing"
         >
-          ТЕХНОЛОГИИ / ЛЮДИ / РЕЗУЛЬТАТ
+          <tspan className="brand-word">ТЕХНОЛОГИИ</tspan>
+          <tspan className="brand-slash">{' / '}</tspan>
+          <tspan className="brand-word">ЛЮДИ</tspan>
+          <tspan className="brand-slash">{' / '}</tspan>
+          <tspan className="brand-word">РЕЗУЛЬТАТ</tspan>
         </text>
       )}
     </svg>
