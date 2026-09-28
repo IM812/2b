@@ -2,7 +2,7 @@ import 'server-only'
 import { load } from 'cheerio'
 import { unstable_cache } from 'next/cache'
 
-export const NEWS_CHANNEL = 'twoB_news'
+export const NEWS_CHANNEL = 'two_b_service'
 export const NEWS_CHANNEL_URL = `https://t.me/${NEWS_CHANNEL}`
 
 export type TelegramNews = {
