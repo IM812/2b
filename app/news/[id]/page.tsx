@@ -22,7 +22,7 @@ export default async function NewsItemPage({ params }: Props) {
   return <article className="section-pad pt-28 sm:pt-36"><div className="section-shell">
     <Link href="/news" className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground"><ArrowLeft className="size-4" /> Все новости</Link>
     <div className="mt-8 grid gap-8 lg:grid-cols-[.72fr_1.28fr]">
-      <div><time className="eyebrow text-primary" dateTime={item.date}>{new Intl.DateTimeFormat('ru-RU', { dateStyle: 'long', timeZone: 'Europe/Moscow' }).format(new Date(item.date))}</time><p className="mt-5 font-mono text-xs text-muted-foreground">Публикация #{item.id}</p></div>
+      <div><time className="eyebrow text-primary" dateTime={item.date}>{new Intl.DateTimeFormat('ru-RU', { dateStyle: 'long', timeZone: 'Europe/Moscow' }).format(new Date(item.date))}</time></div>
       <div>
         {item.image && <div className="relative mb-8 aspect-[16/10] overflow-hidden rounded-[1.5rem] bg-secondary"><Image src={item.image} alt="Иллюстрация к новости" fill unoptimized sizes="(max-width: 1024px) 100vw, 65vw" className="object-cover" /></div>}
         <h1 className="text-pretty text-3xl font-semibold leading-[1.12] tracking-[-.03em] sm:text-4xl">{item.title}</h1>

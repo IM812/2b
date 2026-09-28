@@ -31,6 +31,8 @@ function cleanMessageText(html: string) {
   return text
     .replace(/https?:\/\/\S+/g, '')
     .replace(/\bt\.me\/\S+/g, '')
+    .replace(/#[\p{L}\p{N}_]+/gu, '')
+    .replace(/[\p{Extended_Pictographic}\uFE0F\u200D]/gu, '')
     .split('\n')
     .map((line) => line.replace(BULLET_PATTERN, '').replace(/[ \t]+/g, ' ').trim())
     .filter((line, index, lines) => line || (index > 0 && lines[index - 1]))
