@@ -69,8 +69,7 @@ export default function ClientsPage() {
               <article key={project.slug} id={project.slug} data-reveal className="scroll-mt-28 rounded-[1.5rem] bg-background p-6 sm:p-8 md:p-10">
                 <div className="flex flex-col gap-3 border-b border-border pb-6 md:flex-row md:items-start md:justify-between md:gap-10">
                   <div className="max-w-3xl">
-                    <p className="text-sm font-semibold text-primary">{project.client}</p>
-                    <h3 className="mt-2 text-pretty text-2xl font-semibold leading-tight tracking-[-.03em] sm:text-3xl">{project.title}</h3>
+                    <h3 className="text-pretty text-2xl font-semibold leading-tight tracking-[-.03em] sm:text-3xl">{project.title}</h3>
                   </div>
                   <p className="shrink-0 text-sm text-muted-foreground md:text-right">{project.timeline}</p>
                 </div>
