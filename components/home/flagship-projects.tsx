@@ -12,7 +12,7 @@ export function FlagshipProjects() {
       <div className="section-shell">
         <div data-reveal="clip" className="grid gap-8 lg:grid-cols-[.55fr_1.45fr] lg:items-end">
           <div><p className="eyebrow text-accent">Избранные проекты</p><Link href="/projects" className="mt-6 inline-flex items-center gap-2 text-sm font-bold">Все проекты <ArrowRight className="size-4" /></Link></div>
-          <h2 className="section-title max-w-5xl">Не презентации<br /><span className="text-primary">Работающие системы</span></h2>
+          <h2 className="section-title max-w-5xl">Не презентации<br /><span className="text-primary">Системы в эксплуатации</span></h2>
         </div>
 
         <Link data-reveal="scale" href={`/projects/${featured.slug}`} className="motion-card group relative mt-10 block min-h-[26rem] overflow-hidden rounded-[1.5rem] bg-primary p-5 text-primary-foreground sm:mt-16 sm:min-h-[38rem] sm:rounded-[3rem] sm:p-8 md:p-14">
@@ -21,7 +21,7 @@ export function FlagshipProjects() {
             <div className="flex items-center justify-between"><p className="eyebrow text-white/60">{featured.clientShort} · {featured.industry}</p><ArrowUpRight className="size-8 transition-transform" /></div>
             <div className="grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,.7fr)] lg:items-end">
               <h3 className="min-w-0 text-pretty text-[1.55rem] font-semibold leading-[1.02] tracking-[-.04em] sm:text-[2.4rem] md:text-[5.4rem]">{featured.title}</h3>
-              <div className="min-w-0 lg:border-l lg:border-white/20 lg:pl-8"><p className="max-w-md text-sm leading-relaxed text-white/65 md:text-base">{featured.summary}</p></div>
+              <div className="min-w-0 lg:border-l lg:border-white/20 lg:pl-8"><p className="eyebrow text-white/50">Результат</p><p className="mt-3 max-w-md text-sm leading-relaxed text-white/75 md:text-base">{featured.result}</p></div>
             </div>
           </div>
         </Link>

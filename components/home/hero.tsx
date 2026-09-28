@@ -16,10 +16,10 @@ export function Hero() {
         </div>
 
         <div className="mt-7 grid items-end gap-8 sm:mt-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,.55fr)] lg:gap-12">
-          <h1 data-reveal className="relative z-10 min-w-0 max-w-[62rem] py-2 pr-3 text-[clamp(2.75rem,14vw,4rem)] font-semibold leading-[.94] tracking-[-.045em] sm:text-[clamp(4rem,8vw,5.75rem)] sm:leading-[.9] lg:text-[clamp(4.5rem,6.5vw,5.75rem)]">
-            <span className="block pl-2">Держим</span>{' '}
-            <span className="block pl-6 text-primary sm:pl-12 lg:pl-16">цифровой</span>{' '}
-            <span className="block pl-2">контур</span>
+          <h1 className="relative z-10 min-w-0 max-w-[62rem] py-2 pr-3 text-[clamp(2.75rem,14vw,4rem)] font-semibold leading-[.94] tracking-[-.045em] sm:text-[clamp(4rem,8vw,5.75rem)] sm:leading-[.9] lg:text-[clamp(4.5rem,6.5vw,5.75rem)]">
+            <span className="hero-line block pl-2">Держим</span>{' '}
+            <span className="hero-line block pl-6 text-primary sm:pl-12 lg:pl-16" style={{ '--line': 1 } as React.CSSProperties}>цифровой</span>{' '}
+            <span className="hero-line block pl-2" style={{ '--line': 2 } as React.CSSProperties}>контур</span>
           </h1>
           <div data-reveal style={{ '--reveal-delay': '140ms' } as React.CSSProperties} className="relative z-20 max-w-xl lg:pb-2">
             <p className="text-lead text-foreground/72">Берем ответственность за инфраструктуру, корпоративные системы и поддержку крупных организаций.</p>
