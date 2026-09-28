@@ -15,23 +15,52 @@ export function FlagshipProjects() {
           <h2 className="section-title max-w-5xl">Не презентации<br /><span className="text-primary">Системы в эксплуатации</span></h2>
         </div>
 
-        <Link data-reveal="scale" href={`/clients#${featured.slug}`} className="motion-card group relative mt-10 block min-h-[26rem] overflow-hidden rounded-[1.5rem] bg-primary p-5 text-primary-foreground sm:mt-16 sm:min-h-[38rem] sm:rounded-[3rem] sm:p-8 md:p-14">
-          <div className="absolute -bottom-12 -right-3 select-none text-[11rem] font-black leading-none text-white/[.07] sm:-bottom-20 sm:-right-6 sm:text-[18rem]" aria-hidden>01</div>
-          <div className="relative flex min-h-[22rem] flex-col justify-between sm:min-h-[31rem]">
+        {/* Mobile: horizontal snap-scroll slider */}
+        <div className="-mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:hidden [&::-webkit-scrollbar]:hidden">
+          <Link href={`/clients#${featured.slug}`} className="motion-card group relative block min-h-[26rem] w-[86%] shrink-0 snap-center overflow-hidden rounded-[1.5rem] bg-primary p-5 text-primary-foreground">
+            <div className="absolute -bottom-12 -right-3 select-none text-[11rem] font-black leading-none text-white/[.07]" aria-hidden>01</div>
+            <div className="relative flex min-h-[22rem] flex-col justify-between">
+              <div className="flex items-center justify-between"><p className="eyebrow text-white/60">{featured.clientShort} · {featured.industry}</p><ArrowUpRight className="size-8 transition-transform" /></div>
+              <div className="grid min-w-0 gap-8">
+                <h3 className="min-w-0 text-pretty text-[1.55rem] font-semibold leading-[1.02] tracking-[-.04em]">{featured.title}</h3>
+                <div className="min-w-0"><p className="eyebrow text-white/50">Результат</p><p className="mt-3 max-w-md text-sm leading-relaxed text-white/75">{featured.result}</p></div>
+              </div>
+            </div>
+          </Link>
+          {PROJECTS.slice(1, 3).map((project, index) => (
+            <Link key={project.slug} href={`/clients#${project.slug}`} className={`motion-card ${index === 0 ? 'bg-accent text-accent-foreground' : 'bg-white text-foreground'} group flex min-h-[19rem] w-[86%] shrink-0 snap-center flex-col justify-between gap-6 overflow-hidden rounded-[1.75rem] p-5`}>
+              <div className="flex justify-between"><span className="eyebrow opacity-50">0{index + 2} · {project.industry}</span><ArrowUpRight className="size-6 transition-transform" /></div>
+              <div>
+                <h3 className="text-pretty text-[1.2rem] font-semibold leading-[1.1] tracking-[-.035em]">{project.title}</h3>
+                <p className={`mt-4 max-w-sm text-pretty text-sm leading-relaxed ${index === 0 ? 'text-accent-foreground/70' : 'text-muted-foreground'}`}>{project.summary}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-4 flex justify-center gap-1.5 sm:hidden" aria-hidden>
+          {Array.from({ length: 3 }).map((_, i) => (
+            <span key={i} className="h-1.5 w-1.5 rounded-full bg-surface-foreground/20" />
+          ))}
+        </div>
+
+        {/* Desktop / tablet: original layout */}
+        <Link data-reveal="scale" href={`/clients#${featured.slug}`} className="motion-card group relative mt-16 hidden min-h-[38rem] overflow-hidden rounded-[3rem] bg-primary p-8 text-primary-foreground sm:block md:p-14">
+          <div className="absolute -bottom-20 -right-6 select-none text-[18rem] font-black leading-none text-white/[.07]" aria-hidden>01</div>
+          <div className="relative flex min-h-[31rem] flex-col justify-between">
             <div className="flex items-center justify-between"><p className="eyebrow text-white/60">{featured.clientShort} · {featured.industry}</p><ArrowUpRight className="size-8 transition-transform" /></div>
             <div className="grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,.7fr)] lg:items-end">
-              <h3 className="min-w-0 text-pretty text-[1.55rem] font-semibold leading-[1.02] tracking-[-.04em] sm:text-[2.4rem] md:text-[5.4rem]">{featured.title}</h3>
+              <h3 className="min-w-0 text-pretty text-[2.4rem] font-semibold leading-[1.02] tracking-[-.04em] md:text-[5.4rem]">{featured.title}</h3>
               <div className="min-w-0 lg:border-l lg:border-white/20 lg:pl-8"><p className="eyebrow text-white/50">Результат</p><p className="mt-3 max-w-md text-sm leading-relaxed text-white/75 md:text-base">{featured.result}</p></div>
             </div>
           </div>
         </Link>
 
-        <div className="mt-6 grid gap-6 md:grid-cols-[1.15fr_.85fr]">
+        <div className="mt-6 hidden gap-6 sm:grid md:grid-cols-[1.15fr_.85fr]">
           {PROJECTS.slice(1, 3).map((project, index) => (
-            <Link key={project.slug} data-reveal style={{ '--reveal-delay': `${index * 110}ms` } as React.CSSProperties} href={`/clients#${project.slug}`} className={`motion-card ${index === 0 ? 'bg-accent text-accent-foreground md:translate-y-10' : 'bg-white text-foreground'} group flex min-h-[19rem] min-w-0 flex-col justify-between gap-6 overflow-hidden rounded-[1.75rem] p-5 sm:min-h-[25rem] sm:rounded-[2.5rem] sm:p-8 md:p-10`}>
+            <Link key={project.slug} data-reveal style={{ '--reveal-delay': `${index * 110}ms` } as React.CSSProperties} href={`/clients#${project.slug}`} className={`motion-card ${index === 0 ? 'bg-accent text-accent-foreground md:translate-y-10' : 'bg-white text-foreground'} group flex min-h-[25rem] min-w-0 flex-col justify-between gap-6 overflow-hidden rounded-[2.5rem] p-8 md:p-10`}>
               <div className="flex justify-between"><span className="eyebrow opacity-50">0{index + 2} · {project.industry}</span><ArrowUpRight className="size-6 transition-transform" /></div>
               <div>
-                <h3 className="text-pretty text-[1.2rem] font-semibold leading-[1.1] tracking-[-.035em] sm:text-[1.7rem] md:text-[2.4rem]">{project.title}</h3>
+                <h3 className="text-pretty text-[1.7rem] font-semibold leading-[1.1] tracking-[-.035em] md:text-[2.4rem]">{project.title}</h3>
                 <p className={`mt-4 max-w-sm text-pretty text-sm leading-relaxed sm:text-base ${index === 0 ? 'text-accent-foreground/70' : 'text-muted-foreground'}`}>{project.summary}</p>
               </div>
             </Link>
