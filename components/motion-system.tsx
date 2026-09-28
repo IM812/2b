@@ -27,12 +27,13 @@ export function MotionSystem() {
         return
       }
 
-      // Elements already on screen stay visible; hiding them after hydration caused a visible flicker.
+      // Content is visible by default; only elements below the fold are explicitly queued (data-visible="false"),
+      // so anything the observer misses can never stay hidden.
       const viewportBottom = window.innerHeight
       document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((element) => {
         if (element.dataset.visible === 'true') return
-        const { top, bottom } = element.getBoundingClientRect()
-        if (top < viewportBottom && bottom > 0) element.dataset.visible = 'true'
+        const { top } = element.getBoundingClientRect()
+        element.dataset.visible = top < viewportBottom ? 'true' : 'false'
       })
 
       root.dataset.motion = 'ready'
@@ -45,11 +46,11 @@ export function MotionSystem() {
             observer?.unobserve(element)
           })
         },
-        { rootMargin: '0px 0px -7% 0px', threshold: 0.08 },
+        { rootMargin: '0px 0px -5% 0px', threshold: 0 },
       )
 
-      document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((element) => {
-        if (element.dataset.visible !== 'true') observer?.observe(element)
+      document.querySelectorAll<HTMLElement>('[data-reveal][data-visible="false"]').forEach((element) => {
+        observer?.observe(element)
       })
     }
 
@@ -58,7 +59,7 @@ export function MotionSystem() {
     const revealPassed = () => {
       scrollFrame = 0
       const viewportBottom = window.innerHeight
-      document.querySelectorAll<HTMLElement>('[data-reveal]:not([data-visible="true"])').forEach((element) => {
+      document.querySelectorAll<HTMLElement>('[data-reveal][data-visible="false"]').forEach((element) => {
         if (element.getBoundingClientRect().top < viewportBottom) {
           element.dataset.visible = 'true'
           observer?.unobserve(element)
