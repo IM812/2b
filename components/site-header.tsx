@@ -29,7 +29,7 @@ export function SiteHeader() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background">
       <div className="section-shell flex h-16 items-center justify-between pt-[env(safe-area-inset-top)] md:h-18">
         <Link href="/" className="flex items-center" onClick={() => setOpen(false)} aria-label="2В Сервис — на главную">
-          <BrandLogo withTagline className="[&_.font-mono]:hidden sm:[&_.font-mono]:block" />
+          <BrandLogo className="text-foreground" />
         </Link>
         <nav className="hidden items-center gap-7 xl:flex" aria-label="Основная навигация">
           {NAV_ITEMS.map((item) => <Link key={item.href} href={item.href} className={cn('text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground', pathname === item.href && 'text-foreground')}>{item.label}</Link>)}

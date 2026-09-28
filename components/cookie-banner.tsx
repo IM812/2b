@@ -5,23 +5,26 @@ import { useEffect, useState } from 'react'
 import { X } from 'lucide-react'
 import { BrandEmblem } from '@/components/brand-logo'
 
-const STORAGE_KEY = '2b-cookie-consent'
+const CONSENT_COOKIE = '2b_cookie_consent'
+const ONE_YEAR = 60 * 60 * 24 * 365
 
 type Consent = 'all' | 'necessary'
+
+const hasConsent = () => document.cookie.split('; ').some((entry) => entry.startsWith(`${CONSENT_COOKIE}=`))
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    if (!window.localStorage.getItem(STORAGE_KEY)) setVisible(true)
+    setVisible(!hasConsent())
   }, [])
 
   const save = (value: Consent) => {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ value, at: new Date().toISOString() }))
+    const secure = window.location.protocol === 'https:' ? '; SameSite=None; Secure' : '; SameSite=Lax'
+    document.cookie = `${CONSENT_COOKIE}=${value}; Max-Age=${ONE_YEAR}; Path=/${secure}`
     setVisible(false)
   }
 
-  console.log('[v0] cookie render', visible)
   if (!visible) return null
 
   return (

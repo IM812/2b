@@ -9,7 +9,7 @@ export function SiteFooter() {
         <div className="grid gap-10 md:grid-cols-[1.2fr_2fr]">
           <div>
             <Link href="/" className="inline-flex" aria-label="2В Сервис — технологии, люди, результат">
-              <BrandLogo size="lg" withTagline />
+              <BrandLogo size="lg" />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
               ИТ-аутсорсинг, инфраструктура и корпоративные системы для организаций федерального масштаба.
@@ -24,7 +24,7 @@ export function SiteFooter() {
             </div>
           </div>
           <nav className="grid grid-cols-2 gap-x-8 gap-y-4 md:grid-cols-3" aria-label="Навигация в подвале">
-            {[...NAV_ITEMS, { label: 'Контакты', href: '/contacts' }].map((item) => (
+            {NAV_ITEMS.map((item) => (
               <Link key={item.href} href={item.href} className="text-sm text-muted-foreground hover:text-foreground">
                 {item.label}
               </Link>
