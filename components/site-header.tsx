@@ -1,12 +1,12 @@
 'use client'
 
 import Link from 'next/link'
+import { BrandLogo } from '@/components/brand-logo'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { NAV_ITEMS } from '@/lib/nav'
 import { LeadFormTrigger } from '@/components/lead-form-trigger'
-import { BrandMark } from '@/components/brand-mark'
 import { cn } from '@/lib/utils'
 
 export function SiteHeader() {
@@ -28,9 +28,8 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background">
       <div className="section-shell flex h-16 items-center justify-between pt-[env(safe-area-inset-top)] md:h-18">
-        <Link href="/" className="flex items-center gap-2.5 sm:gap-3" onClick={() => setOpen(false)} aria-label="2В Сервис — на главную">
-          <BrandMark className="size-10" />
-          <span className="text-sm font-bold tracking-[-0.02em]">Сервис</span>
+        <Link href="/" className="flex items-center" onClick={() => setOpen(false)} aria-label="2В Сервис — на главную">
+          <BrandLogo className="text-foreground" />
         </Link>
         <nav className="hidden items-center gap-7 xl:flex" aria-label="Основная навигация">
           {NAV_ITEMS.map((item) => <Link key={item.href} href={item.href} className={cn('text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground', pathname === item.href && 'text-foreground')}>{item.label}</Link>)}

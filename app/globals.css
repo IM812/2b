@@ -10,6 +10,7 @@
   --secondary: oklch(0.93 0.025 250); --secondary-foreground: var(--foreground);
   --muted: oklch(0.93 0.018 250); --muted-foreground: oklch(0.48 0.035 255);
   --accent: oklch(0.67 0.2 32); --accent-foreground: oklch(1 0 0);
+  --brand-violet: oklch(0.56 0.24 292);
   --destructive: oklch(0.58 0.23 25); --border: oklch(0.86 0.025 250);
   --input: var(--border); --ring: var(--primary);
   --surface: oklch(0.16 0.055 258); --surface-foreground: oklch(0.98 0.008 247);
@@ -154,3 +155,9 @@ html[data-motion='reduced'] .route-packets { display:none; }
 .locator::after { inset:0 auto 0 50%; width:1px; height:auto; }
 .locator-pulse { box-shadow:0 0 0 1rem color-mix(in oklab,var(--primary) 10%,transparent); }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } [data-reveal] { opacity:1!important; transform:none!important; clip-path:none!important; } .network-route { stroke-dasharray:none; } .network-node,.tech-scan { opacity:1; } }
+
+.brand-orb { transform-origin: 28px 28px; transition: transform .9s cubic-bezier(.22,1,.36,1); }
+.group\/logo:hover .brand-orb, a:hover > .group\/logo .brand-orb { transform: rotate(80deg); }
+.cookie-banner { animation: cookie-in .6s cubic-bezier(.22,1,.36,1) .9s both; }
+@keyframes cookie-in { from { opacity: 0; transform: translateY(24px) scale(.98); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .brand-orb { transition: none; } .cookie-banner { animation: none; } }

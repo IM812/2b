@@ -11,6 +11,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Дополнительные компетенции', href: '/additional-competencies' },
   { label: 'Карьера', href: '/careers' },
   { label: 'Новости', href: '/news' },
+  { label: 'Контакты', href: '/contacts' },
 ]
 
 export const COMPANY_NAME = '2В Сервис'

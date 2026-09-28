@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // touch: forces a clean Turbopack restart after removing empty app/ route folders
+
   images: {
     qualities: [72, 75],
   },

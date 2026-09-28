@@ -5,6 +5,7 @@ import { SiteFooter } from '@/components/site-footer'
 import { LeadFormProvider } from '@/components/lead-form-provider'
 import { MotionSystem } from '@/components/motion-system'
 import { LeadQuiz } from '@/components/lead-quiz'
+import { CookieBanner } from '@/components/cookie-banner'
 import './globals.css'
 
 const _manrope = Manrope({
@@ -76,6 +77,7 @@ export default function RootLayout({
         <SiteFooter />
         <LeadFormProvider />
         <LeadQuiz />
+        <CookieBanner />
       </body>
     </html>
   )

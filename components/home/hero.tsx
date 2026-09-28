@@ -12,7 +12,7 @@ export function Hero() {
       <div className="section-shell relative">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-primary"><span className="signal-dot" /><p className="eyebrow">Системы в рабочем состоянии</p></div>
-          <p className="hidden font-mono text-[10px] uppercase tracking-[.18em] text-muted-foreground md:block">Москва · 55.7579° N</p>
+          <p className="hidden font-mono text-[10px] uppercase tracking-[.18em] text-muted-foreground md:block">Москва · 55.7579° N, 37.6173° E</p>
         </div>
 
         <div className="mt-7 grid items-end gap-8 sm:mt-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,.55fr)] lg:gap-12">
