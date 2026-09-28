@@ -17,8 +17,8 @@ type LeadFormProps = {
   submitLabel?: string
 }
 
-const labelClass = 'flex flex-col gap-2 text-xs font-bold uppercase tracking-widest'
-const controlClass = 'min-h-12 rounded-none border-x-0 border-t-0 border-foreground/20 bg-transparent px-0 font-sans text-base font-normal normal-case tracking-normal shadow-none focus-visible:border-primary focus-visible:ring-0'
+const labelClass = 'flex flex-col gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground'
+const controlClass = 'min-h-12 rounded-xl border border-border bg-background px-4 font-sans text-base font-normal normal-case tracking-normal text-foreground shadow-sm transition-colors focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20'
 
 export function LeadForm({ compact = false, onSuccess, source = 'form', heading, messageLabel = 'Задача', messagePlaceholder = 'Коротко опишите задачу', submitLabel = 'Отправить заявку' }: LeadFormProps) {
   const [status, setStatus] = useState<'idle' | 'pending' | 'success'>('idle')
