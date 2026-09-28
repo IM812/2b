@@ -1,12 +1,12 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { NAV_ITEMS } from '@/lib/nav'
 import { LeadFormTrigger } from '@/components/lead-form-trigger'
-import { BrandMark } from '@/components/brand-mark'
 import { cn } from '@/lib/utils'
 
 export function SiteHeader() {
@@ -29,7 +29,9 @@ export function SiteHeader() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background">
       <div className="section-shell flex h-16 items-center justify-between pt-[env(safe-area-inset-top)] md:h-18">
         <Link href="/" className="flex items-center gap-2.5 sm:gap-3" onClick={() => setOpen(false)} aria-label="2В Сервис — на главную">
-          <BrandMark className="size-10" />
+          <span className="relative size-10 shrink-0 overflow-hidden rounded-xl bg-[var(--surface)]">
+            <Image src="/images/brand/logo-2b-service.png" alt="" fill sizes="40px" className="object-cover object-left" priority />
+          </span>
           <span className="text-sm font-bold tracking-[-0.02em]">Сервис</span>
         </Link>
         <nav className="hidden items-center gap-7 xl:flex" aria-label="Основная навигация">
