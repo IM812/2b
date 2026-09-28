@@ -28,9 +28,9 @@ export default function ProjectsPage() {
     <>
       <ProjectsIntro />
 
-      <section className="section-pad bg-background">
+      <section className="pb-14 pt-10 sm:pb-20 sm:pt-12 md:pb-28 md:pt-14 lg:pb-36 lg:pt-16 bg-background">
         <div className="section-shell">
-          <div className="grid gap-8 border-b border-border pb-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div className="grid gap-8 border-b border-border pb-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
             <div>
               <p className="eyebrow text-primary">Разборы проектов</p>
               <h2 className="section-title mt-5">Задача, решение, результат</h2>
@@ -40,7 +40,7 @@ export default function ProjectsPage() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-5 lg:grid-cols-2">
+          <div className="mt-8 grid gap-5 lg:grid-cols-2">
             {PROJECTS.map((project, index) => (
               <Link
                 key={project.slug}
