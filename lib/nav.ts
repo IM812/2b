@@ -10,7 +10,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Клиенты', href: '/clients' },
   { label: 'Дополнительные компетенции', href: '/additional-competencies' },
   { label: 'Карьера', href: '/careers' },
-  { label: 'Новости', href: '/news' },
+  { label: 'Полезное', href: '/news' },
   { label: 'Контакты', href: '/contacts' },
 ]
 
