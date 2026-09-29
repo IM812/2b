@@ -42,10 +42,8 @@ prompt_value() {
 }
 
 {
-  prompt_value "TELEGRAM_BOT_TOKEN" "Telegram bot token (leads)" secret
-  prompt_value "TELEGRAM_CHAT_ID" "Telegram chat id (leads)" plain
-  prompt_value "NEWS_TELEGRAM_BOT_TOKEN" "Telegram bot token (news worker)" secret
-  prompt_value "NEWS_TELEGRAM_CHAT_ID" "Telegram chat id (news worker)" plain
+  prompt_value "TELEGRAM_BOT_TOKEN" "Telegram bot token" secret
+  prompt_value "TELEGRAM_CHAT_ID" "Telegram chat id" plain
 } > "$ENV_FILE.tmp"
 
 id "$APP_USER" >/dev/null 2>&1 || useradd --system --create-home --shell /usr/sbin/nologin "$APP_USER"
