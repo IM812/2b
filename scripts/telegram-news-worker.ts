@@ -4,10 +4,10 @@ import { dirname, resolve } from 'node:path'
 import { load } from 'cheerio'
 import { readNewsState, writeNewsState, type NewsDraft } from '../lib/news-queue'
 
-const token = process.env.NEWS_TELEGRAM_BOT_TOKEN
-const allowedChat = Number(process.env.NEWS_TELEGRAM_CHAT_ID)
+const token = process.env.NEWS_TELEGRAM_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN
+const allowedChat = Number(process.env.NEWS_TELEGRAM_CHAT_ID || process.env.TELEGRAM_CHAT_ID)
 const channel = '@twoB_news'
-if (!token || !Number.isSafeInteger(allowedChat)) throw new Error('NEWS_TELEGRAM_BOT_TOKEN and NEWS_TELEGRAM_CHAT_ID are required')
+if (!token || !Number.isSafeInteger(allowedChat)) throw new Error('TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID are required')
 const api = `https://api.telegram.org/bot${token}`
 const lockPath = resolve(process.env.NEWS_WORKER_LOCK_FILE || './data/telegram-news-worker.lock')
 
@@ -295,7 +295,7 @@ async function main() {
   await acquireWorkerLock()
   await telegram('setMyCommands', {
     commands: [
-      { command: 'news', description: 'Создать новую публикацию' },
+      { command: 'news', description: 'Создать но��ую публикацию' },
       { command: 'manage', description: 'Посмотреть и удалить новости' },
       { command: 'start', description: 'Открыть справку по боту' },
     ],
