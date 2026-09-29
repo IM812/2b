@@ -1,1 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#10182b"/><path d="M12 18h18c8 0 13 4 13 10 0 4-2 7-6 9 5 1 8 5 8 10 0 8-6 12-15 12H12V18zm12 10v7h6c3 0 5-1 5-4s-2-3-5-3h-6zm0 16v7h7c4 0 6-1 6-4s-2-3-6-3h-7z" fill="#f7f8fa"/><path d="M8 12h9v40H8z" fill="#2e63ff"/><path d="M47 12h9v40h-9z" fill="#ff6b55"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="16" fill="#10182b"/>
+  <defs>
+    <linearGradient id="ring" x1="6" y1="46" x2="59" y2="18" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2e63ff"/>
+      <stop offset="0.55" stop-color="#7c3aed" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#7c3aed" stop-opacity="0.25"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(51.4 12.6) scale(5)">
+      <stop stop-color="#2e63ff" stop-opacity="0.6"/>
+      <stop offset="0.4" stop-color="#2e63ff"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="24" fill="none" stroke="url(#ring)" stroke-width="3" stroke-linecap="round" transform="rotate(-45 32 32)"/>
+  <circle cx="51.4" cy="12.6" r="4.6" fill="url(#orb)"/>
+  <text x="32" y="34" text-anchor="middle" dominant-baseline="central" fill="#f7f8fa" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="22" letter-spacing="-1">2В</text>
+</svg>
