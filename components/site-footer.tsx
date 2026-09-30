@@ -29,6 +29,9 @@ export function SiteFooter() {
                 {item.label}
               </Link>
             ))}
+            <Link href="/details" className="text-sm text-muted-foreground hover:text-foreground">
+              Реквизиты
+            </Link>
           </nav>
         </div>
         <div className="mt-12 border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">
