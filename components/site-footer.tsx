@@ -29,9 +29,6 @@ export function SiteFooter() {
                 {item.label}
               </Link>
             ))}
-            <Link href="/details" className="text-sm text-muted-foreground hover:text-foreground">
-              Реквизиты
-            </Link>
           </nav>
         </div>
         <div className="mt-12 border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">
@@ -55,6 +52,7 @@ export function SiteFooter() {
             <div className="flex flex-wrap gap-x-4 gap-y-2">
               <Link href="/privacy" className="hover:text-foreground">Политика конфиденциальности</Link>
               <Link href="/personal-data-consent" className="hover:text-foreground">Согласие на обработку ПДн</Link>
+              <Link href="/details" className="hover:text-foreground">Реквизиты</Link>
             </div>
           </div>
         </div>
