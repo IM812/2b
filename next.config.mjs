@@ -13,6 +13,7 @@ const nextConfig = {
 
       // Legacy pages from the old site (2bservice.ru) that no longer exist —
       // redirect everything under them to the home page.
+      { source: '/company/requisites', destination: '/details', permanent: true },
       { source: '/company', destination: '/', permanent: true },
       { source: '/company/:path*', destination: '/', permanent: true },
 
